@@ -1,4 +1,6 @@
-'''
+"""
+General helper functions.
+
 .. inheritance-diagram:: qecommon_tools
    :parts: 1
 
@@ -6,7 +8,7 @@
 
 The functions and classes in this module fall into several
 general categories:
-'''
+"""
 
 from __future__ import print_function
 import ast
@@ -23,7 +25,6 @@ import subprocess as _subprocess
 import sys as _sys
 import time as _time
 
-import requests as _requests
 import wrapt as _wrapt
 
 
@@ -31,24 +32,26 @@ _logger = logging.getLogger(__name__)
 _debug = _logger.debug
 
 
-_CLASSIFICATION_ATTRIBUTE = 'classify_data'
-'''Attribute used to store classification data on functions and classes.'''
+_CLASSIFICATION_ATTRIBUTE = "classify_data"
+"""Attribute used to store classification data on functions and classes."""
 
 
 def classify(*args):
-    '''Decorator to add gloassary subject category classification meta-data to it's target.'''
+    """Add glossary subject category classification meta-data to it's target."""
+
     def classifier(target):
         setattr(target, _CLASSIFICATION_ATTRIBUTE, args)
         return target
+
     return classifier
 
 
 # classify itself deserves to be classified.
 # Since it can't be used as a regular decorator on itself, handle it here:
-classify = classify('doc', 'meta-data')(classify)
+classify = classify("doc", "meta-data")(classify)
 
 class_lookup = {}
-'''
+"""
 This dictionary is to allow code that needs to have very late binding of a class
 to look up the class here, and code that needs to control another module's use of a
 late bound class to set it in this dictionary.
@@ -66,7 +69,7 @@ default values need to be changed.
 class instead of just ``requests.Session`` when being used by testing code
 with the Locust test runner, and it uses this dictionary to accomplish this.)
 
-'''
+"""
 
 SINGLE_QUOTE = "'"
 DOUBLE_QUOTE = '"'
@@ -78,86 +81,90 @@ CHECK_UNTIL_CYCLE_SECS = 5
 
 # Python 3.6+ preserves order of keyword arguments in a constructor,
 # but Python 2.7 does not, hence we have to assign keys outside of the constructor.
-# We use an OrderedDict here to be able to scan ticket patterns in an order of our choosing,
-# as per https://jira.rax.io/browse/TRM-365 (from when this was code just in qe_coverage).
+# We use an OrderedDict here to be able to scan ticket patterns in an order of our
+# choosing, as per https://jira.rax.io/browse/TRM-365 (from when this was code just in
+# qe_coverage).
 _TICKET_INFO = OrderedDict()
-_TICKET_INFO['JIRA'] = {
-    'pattern': re.compile('^([A-Z][A-Z]+-[0-9]+)$'),
-    'url_template': 'https://jira.rax.io/browse/{}'
+_TICKET_INFO["JIRA"] = {
+    "pattern": re.compile("^([A-Z][A-Z]+-[0-9]+)$"),
+    "url_template": "https://jira.rax.io/browse/{}",
 }
-_TICKET_INFO['SNOW'] = {
-    'pattern': re.compile('(^[A-Z][A-Z]+[0-9]+)$'),
-    'url_template': 'https://rackspace.service-now.com/rm_story.do'
-                    '?sysparm_query=number={}&sysparm_view=scrum'
+_TICKET_INFO["SNOW"] = {
+    "pattern": re.compile("(^[A-Z][A-Z]+[0-9]+)$"),
+    "url_template": "https://rackspace.service-now.com/rm_story.do"
+    "?sysparm_query=number={}&sysparm_view=scrum",
 }
-_TICKET_INFO['VersionOne'] = {
-    'pattern': re.compile('(^[A-Z]-[0-9]+)$'),
-    'url_template': ''  # As of mid-2019, access to VersionOne system is not available.
+_TICKET_INFO["VersionOne"] = {
+    "pattern": re.compile("(^[A-Z]-[0-9]+)$"),
+    "url_template": "",  # As of mid-2019, access to VersionOne system is not available.
 }
 
-OBSOLETE_TICKETING_SYSTEMS = [key for key, meta_data in _TICKET_INFO.items()
-                              if not meta_data['url_template']]
-'''Systems for which we still support identifying Tickets, but no longer have access to.'''
+OBSOLETE_TICKETING_SYSTEMS = [
+    key for key, meta_data in _TICKET_INFO.items() if not meta_data["url_template"]
+]
+"""Systems for which we still support identifying Tickets, but no longer can access."""
 
 
 # Don't require user/embedder of this to use re.IGNORECASE
-HEX_DIGIT_RE = r'[\da-fA-F]'
-'''Regular expression for matching a single hex digit.'''
+HEX_DIGIT_RE = r"[\da-fA-F]"
+"""Regular expression for matching a single hex digit."""
 
 
 def re_for_hex_digits(length):
-    '''Return regular expression for matching exactly ``length`` hex digits.'''
-    return HEX_DIGIT_RE + '{' + str(length) + '}'
+    """Return regular expression for matching exactly ``length`` hex digits."""
+    return HEX_DIGIT_RE + "{" + str(length) + "}"
 
 
-UUID_BASIC_RE = '-'.join(map(re_for_hex_digits, [8, 4, 4, 4, 12]))
-'''
+UUID_BASIC_RE = "-".join(map(re_for_hex_digits, [8, 4, 4, 4, 12]))
+"""
 Regular expression (RE) for matching UUID string forms.
 
 This RE is not anchored, or delimited, for maximum reuse.
-'''
+"""
 
-UUID_ISOLATED_RE = r'\b{}\b'.format(UUID_BASIC_RE)
-'''RE for matching an UUID that is not part of a larger "word" (per RE definition of word \\w).'''
+UUID_ISOLATED_RE = r"\b{}\b".format(UUID_BASIC_RE)
+"""RE for matching an UUID that is not part of a larger "word"."""
 
 
-@classify('misc')
+@classify("misc")
 def no_op(*args, **kwargs):
-    '''A reusable no-op function.'''
+    """Reusable no-op function."""
     pass
 
 
-@classify('misc')
+@classify("misc")
 def always_true(*args, **kwargs):
-    '''Always return True; ignores any combo of positional and keyword parameters.'''
+    """Return True regardless of any provided arguments."""
     return True
 
 
-@classify('misc')
+@classify("misc")
 def always_false(*args, **kwargs):
-    '''Always return False; ignores any combo of positional and keyword parameters.'''
+    """Return False regardless of any provided arguments."""
     return False
 
 
-@classify('misc')
+@classify("misc")
 def identity(x, *args):
-    '''
+    """
+    Build simple identity function based on provided parameters.
+
     A single parameter is returned as is, multiple parameters are returned as a tuple.
 
-    From https://stackoverflow.com/questions/8748036/is-there-a-builtin-identity-function-in-python
+    From https://stackoverflow.com/questions/8748036/is-there-a-builtin-identity-function-in-python  # noqa: E501
     Not the top voted answer, but it handles both single and multiple parameters.
-    '''
+    """
     return (x,) + args if args else x
 
 
-@classify('files', 'meta-data')
-def display_name(path, package_name=''):
-    '''
+@classify("files", "meta-data")
+def display_name(path, package_name=""):
+    """
     Create a human-readable name for a given project.
 
-    Determine the display name for a project given a path and (optional) package name. If a
-    display_name.txt file is found, the first line is returned. Otherwise, return a title-cased
-    string from either the base directory or package_name (if provided).
+    Determine the display name for a project given a path and (optional) package name.
+    If a display_name.txt file is found, the first line is returned. Otherwise, return a
+    title-cased string from either the base directory or package_name (if provided).
 
     Args:
         path (str): Path for searching
@@ -165,18 +172,19 @@ def display_name(path, package_name=''):
 
     Returns:
         str: A display name for the provided path
-    '''
-    name_path = _os.path.join(path, 'display_name.txt')
+
+    """
+    name_path = _os.path.join(path, "display_name.txt")
     if _os.path.exists(name_path):
-        with open(name_path, 'r') as name_fo:
-            return name_fo.readline().rstrip('\r\n')
-    raw_name = package_name.split('.')[-1] if package_name else _os.path.basename(path)
-    return _string.capwords(raw_name.replace('_', ' '))
+        with open(name_path, "r") as name_fo:
+            return name_fo.readline().rstrip("\r\n")
+    raw_name = package_name.split(".")[-1] if package_name else _os.path.basename(path)
+    return _string.capwords(raw_name.replace("_", " "))
 
 
-@classify('misc', 'string')
+@classify("misc", "string")
 def format_if(format_str, content):
-    '''
+    """
     Return a message string with a formatted value if any content value is present.
 
     Useful for error-checking scenarios where you want a prepared error message
@@ -189,38 +197,41 @@ def format_if(format_str, content):
     Returns:
         str: either the format_str with content included if content present,
         or an empty string if no content.
-    '''
-    return format_str.format(content) if content else ''
+
+    """
+    return format_str.format(content) if content else ""
 
 
-@classify('misc')
+@classify("misc")
 def default_if_none(value, default):
-    '''
-    Return ``default if value is None else value``
+    """
+    Return ``default if value is None else value``.
 
     Use because:
       * no chance of the value stutter being mistyped, speeds up code reading time.
       * easier to read when value or default are complex expressions.
-      * can save having to create local variable(s) to shorten the  ``if .. is None ...`` form.
-    '''
+      * can save having to create local variable(s) to shorten the
+        ``if .. is None ...`` form.
+
+    """
     return default if value is None else value
 
 
-@classify('sequence')
+@classify("sequence")
 def no_nones(iterable):
-    '''Return a list of the non-None values in iterable'''
+    """Return a list of the non-None values in iterable."""
     return [x for x in iterable if x is not None]
 
 
-@classify('sequence')
+@classify("sequence")
 def truths_from(iterable):
-    '''Return a list of the truthy values in iterable'''
+    """Return a list of the truthy values in iterable."""
     return list(filter(None, iterable))
 
 
-@classify('sequence')
+@classify("sequence")
 def padded_list(iterable, size, padding=None):
-    '''
+    """
     Generate a fixed-length list from an iterable, padding as needed.
 
     Args:
@@ -230,8 +241,11 @@ def padded_list(iterable, size, padding=None):
 
     Returns:
         list: The iterable parameter converted to a list, up to size, padded as needed.
-    '''
-    return list(_itertools.islice(_itertools.chain(iterable, _itertools.repeat(padding)), size))
+
+    """
+    return list(
+        _itertools.islice(_itertools.chain(iterable, _itertools.repeat(padding)), size)
+    )
 
 
 def _python_2_or_3_base_str_type():
@@ -241,18 +255,19 @@ def _python_2_or_3_base_str_type():
         return str
 
 
-@classify('misc', 'sequence')
+@classify("misc", "sequence")
 def is_iterable(item):
-    '''
+    """
     Return True if item is iterable, False otherwise, using an iter(item) test.
 
     From the Python documentation for class :py:class:`collections.abc.Iterable`:
 
-        Checking isinstance(obj, Iterable) detects classes that are registered as Iterable
-        or that have an __iter__() method, but it does not detect classes that iterate
-        with the __getitem__() method.
-        *The only reliable way to determine whether an object is iterable is to call iter(obj)*.
-    '''
+        Checking isinstance(obj, Iterable) detects classes that are registered as
+        Iterable or that have an __iter__() method, but it does not detect classes that
+        iterate with the __getitem__() method.
+        *The only reliable way to determine whether an object is iterable is to call
+        iter(obj)*.
+    """
     try:
         iter(item)
         return True
@@ -260,13 +275,13 @@ def is_iterable(item):
         return False
 
 
-@classify('sequence')
+@classify("sequence")
 def list_from(item):
-    '''
+    """
     Generate a list from a single item or an iterable.
 
-    Any item that is "false-y", will result in an empty list. Strings and dictionaries will be
-    treated as single items, and not iterable.
+    Any item that is "false-y", will result in an empty list. Strings and dictionaries
+    will be treated as single items, and not iterable.
 
     Args:
         item: A single item or an iterable.
@@ -287,17 +302,20 @@ def list_from(item):
         ['abcd', 1234]
         >>> list_from({'abcd', 1234})
         ['abcd', 1234]
-    '''
+
+    """
     if not item:
         return []
-    if isinstance(item, (_python_2_or_3_base_str_type(), dict)) or not is_iterable(item):
+    if isinstance(item, (_python_2_or_3_base_str_type(), dict)) or not is_iterable(
+        item
+    ):
         return [item]
     return list(item)
 
 
-@classify('sequence', 'string')
-def string_to_list(source, sep=',', maxsplit=-1, chars=None):
-    '''``.split()`` a string into a list and ``.strip()`` each piece.
+@classify("sequence", "string")
+def string_to_list(source, sep=",", maxsplit=-1, chars=None):
+    """``.split()`` a string into a list and ``.strip()`` each piece.
 
     For handling lists of things, from config files, etc.
 
@@ -306,86 +324,93 @@ def string_to_list(source, sep=',', maxsplit=-1, chars=None):
         sep (str, optional): The ``.split`` ``sep`` (separator) to use.
         maxsplit (int, optional): The ``.split`` ``maxsplit`` parameter to use.
         chars (str, optional): The ``.strip`` ``chars`` parameter to use.
-    '''
+
+    """
     return [item.strip(chars) for item in source.split(sep, maxsplit)]
 
 
-@classify('exit')
+@classify("exit")
 def cleanup_and_exit(dir_name=None, status=0, message=None):
-    '''
+    """
     Cleanup a directory tree that was created and exit.
 
     Args:
         dir_name (string): Full path to a directory to remove (optional)
         status (int): Exit code to use for exit (optional)
         message (string): Message to print to standard error (optional)
-    '''
+
+    """
     if dir_name:
         _shutil.rmtree(dir_name)
     exit(status=status, message=message)
 
 
-@classify('exit', 'running commands')
+@classify("exit", "running commands")
 def safe_run(commands, cwd=None):
-    '''
+    """
     Run the given list of commands, only return if no error.
 
     If there is an error in attempting or actually running the commands,
     error messages are printed to stdout and ``sys.exit()`` will be called.
-    '''
+    """
 
     try:
         status = _subprocess.call(commands, cwd=cwd)
     except OSError as e:
-        print('')
-        print('Error when trying to execute: "{}"'.format(' '.join(commands)))
-        print('')
+        print("")
+        print('Error when trying to execute: "{}"'.format(" ".join(commands)))
+        print("")
         print(e)
         _sys.exit(-1)
 
     if status:
-        print('')
-        print('Error {} from running: "{}"'.format(status, ' '.join(commands)))
-        print('')
+        print("")
+        print('Error {} from running: "{}"'.format(status, " ".join(commands)))
+        print("")
         _sys.exit(status)
 
 
-@classify('exit')
+@classify("exit")  # noqa: A001
 def exit(status=0, message=None):
-    '''
+    """
     Exit the program and optionally print a message to standard error.
 
     Args:
         status (int): Exit code to use for exit (optional)
         message (string): Message to print to standard error (optional)
-    '''
+
+    """
     if message:
         print(message, file=_sys.stderr)
     _sys.exit(status)
 
 
-@classify('exit')
-def error_if(check, status=None, message=''):
-    '''
+@classify("exit")
+def error_if(check, status=None, message=""):
+    """
     Exit the program if a provided check is true.
 
-    Exit the program if the check is true. If a status is provided, that code is used for the
-    exit code; otherwise the value from the check is used. An optional message for standard
-    error can also be provided.
+    Exit the program if the check is true. If a status is provided, that code is used
+    for the exit code; otherwise the value from the check is used. An optional message
+    for standard error can also be provided.
 
     Args:
-        check: Anything with truthiness that can determine if the program should exit or not
+        check: Anything with truthiness that can check if the program should exit or not
         status (int): Exit code to use for exit (optional)
         message (string): Message to print to standard error if check is True (optional)
-    '''
+
+    """
     if check:
         exit(status=status or check, message=message.format(check))
 
 
-@classify('dict', 'filter')
+@classify("dict", "filter")
 def filter_dict(a_dict, keep_key=always_true, keep_value=always_true):
-    '''
-    Return a new dict based on keeping only those keys _and_ values whose function returns True.
+    """
+    Filter a dictionary based on truthiness.
+
+    Return a new dict based on keeping only those keys _and_ values whose function
+    returns True.
 
     Args:
         a_dict (dict): A dictionary to filter values from.
@@ -394,13 +419,14 @@ def filter_dict(a_dict, keep_key=always_true, keep_value=always_true):
 
     Returns:
         dict: A new dictionary with only the desired key, value pairs.
-    '''
+
+    """
     return {k: v for k, v in a_dict.items() if keep_key(k) and keep_value(v)}
 
 
-@classify('dict', 'filter')
+@classify("dict", "filter")
 def dict_strip_value(a_dict, value=None):
-    '''
+    """
     Return a new dict based on stripping out any key with the given value.
 
     Note:
@@ -413,29 +439,31 @@ def dict_strip_value(a_dict, value=None):
 
     Returns:
         dict: A new dictionary without key/value pairs for the given value.
-    '''
+
+    """
     return filter_dict(a_dict, keep_value=lambda v: v != value)
 
 
-@classify('dict', 'filter')
+@classify("dict", "filter")
 def dict_transform(a_dict, key_transform=identity, value_transform=identity):
-    '''
+    """
     Return a new dict based on transforming the keys and/or values of ``a_dict``.
 
     Args:
         a_dict (dict): the source dictionary to process
-        key_transform (function): Takes an existing key and returns a new key to use.
-        value_transform (function): Take an existing value and returns a new value to use.
+        key_transform (function): Takes a key and returns a new key to use.
+        value_transform (function): Takes a value and returns a new value to use.
 
     Returns:
         dict: A new dictionary with keys and values as transformed.
-    '''
+
+    """
     return {key_transform(k): value_transform(v) for k, v in a_dict.items()}
 
 
-@classify('dict', 'filter')
+@classify("dict", "filter")
 def dict_from(iterable, key_transform=identity, value_transform=identity):
-    '''
+    """
     Build a new dict based on turning values from an iterable into key/value pairs.
 
     Example:
@@ -449,63 +477,75 @@ def dict_from(iterable, key_transform=identity, value_transform=identity):
 
     Args:
         iterable (iterable): the source for the dictionary to be created
-        key_transform (function): Takes an existing key and returns a new key to use.
-        value_transform (function): Take an existing value and returns a new value to use.
+        key_transform (function): Takes a key and returns a new key to use.
+        value_transform (function): Take a value and returns a new value to use.
 
     Returns:
         dict: A new dictionary with key and values as transformed.
-    '''
+
+    """
     return {key_transform(x): value_transform(x) for x in iterable}
 
 
-@classify('misc', 'ticketing system')
+@classify("misc", "ticketing system")
 def ticketing_system_for(ticket):
-    '''Returns the Ticketing System/Type for the given ticket, or the empty string.'''
+    """Return the Ticketing System/Type for the given ticket, or the empty string."""
     for ticket_system, info in _TICKET_INFO.items():
-        if info['pattern'].match(ticket):
+        if info["pattern"].match(ticket):
             return ticket_system
-    return ''
+    return ""
 
 
-@classify('misc', 'ticketing system')
+@classify("misc", "ticketing system")
 def url_for_ticket(ticketing_system, ticket):
-    '''
+    """
     Return a URL for the given ticketing_system, ticket pair.
 
     Does NOT validate that ticket string "looks" like a ticket for the ticketing system.
 
     Raises if ticketing_system is not a supported system.
-    '''
-    return must_get_key(_TICKET_INFO, ticketing_system)['url_template'].format(ticket)
+    """
+    return must_get_key(_TICKET_INFO, ticketing_system)["url_template"].format(ticket)
 
 
-@classify('misc', 'ticketing system')
+@classify("misc", "ticketing system")
 def url_if_ticket(ticket):
-    '''Return URL for ticket based on auto-detecting its ticketing system, else an empty string.'''
+    """
+    Return a Ticket URL if a ticket is found.
+
+    Args:
+        ticket (string): Possible ticket ID
+
+    Returns:
+        string: Either a URL if a string is found, otherwise an empty string.
+
+    """
 
     ticket_system = ticketing_system_for(ticket)
     if ticket_system:
         return url_for_ticket(ticket_system, ticket)
-    return ''
+    return ""
 
 
-@classify('random', 'string')
-def generate_random_string(prefix='', suffix='', size=8, choose_from=None):
-    '''
+@classify("random", "string")
+def generate_random_string(prefix="", suffix="", size=8, choose_from=None):
+    """
     Generate a random string of the specified size.
 
     Args:
-        prefix (str): The string to prepend to the beginning of the random string. (optional)
-        suffix (str): The string to append to the end of the random string. (optional)
-        size (int): The number of characters the random string should have. (defaults to 8)
+        prefix (str, optional): String to prepend to the beginning of the random string.
+        suffix (str, optional): String to append to the end of the random string.
+        size (int, optional): Number of characters the random string should have.
+            (defaults to 8)
         choose_from (str): A string containing the characters from which the randomness
-            will be chosen. If not provided, it will choose from lowercase letters and digits.
+            will be chosen. If not provided, it will choose from lowercase letters and
+            digits.
 
     Returns:
         str: A randomly generated string.
 
     Raises:
-        AssertionError: if the specified length is incompatible with prefix/suffix length
+        AssertionError: if the given length is incompatible with prefix/suffix length
 
     Examples:
         >>> generate_random_string()
@@ -518,18 +558,19 @@ def generate_random_string(prefix='', suffix='', size=8, choose_from=None):
         '8sdfjs7eh9-test'
         >>> generate_random_string(choose_from="aeiou")
         'uiiaueea'
-    '''
+
+    """
     choose_from = default_if_none(choose_from, _string.ascii_lowercase + _string.digits)
     rand_string_length = size - len(prefix) - len(suffix)
     message = '"size" of {} too short with prefix {} and suffix {}!'
     assert rand_string_length > 0, message.format(size, prefix, suffix)
-    rand_string = ''.join(random.choice(choose_from) for _ in range(rand_string_length))
-    return '{}{}{}'.format(prefix, rand_string, suffix)
+    rand_string = "".join(random.choice(choose_from) for _ in range(rand_string_length))
+    return "{}{}{}".format(prefix, rand_string, suffix)
 
 
-@classify('sequence')
+@classify("sequence")
 def index_or_default(a_list, value, default=-1):
-    '''
+    """
     Return the index of a value from a list, or a default if not found.
 
     Args:
@@ -539,22 +580,32 @@ def index_or_default(a_list, value, default=-1):
 
     Returns:
         int,any: an index value (int) for the list item, or default value (any)
-    '''
+
+    """
     return a_list.index(value) if value in a_list else default
 
 
-@classify('exit', 'environment')
+@classify("exit", "environment")
 def must_be_in_virtual_environment(
-        exit_code=1,
-        message='Must be running in a Python virtual environment, aborting!'):
-    '''Exit with the given code and message if not running in a Python virtual environment'''
-    if 'VIRTUAL_ENV' not in _os.environ:
+    exit_code=1, message="Must be running in a Python virtual environment, aborting!"
+):
+    """
+    Ensure the current process is running in a virtual environment.
+
+    Args:
+        exit_code (int, optional): Exit code to use if not running in a virtual
+            environment.
+        message (string, optional): Message to print if not running in a virtual
+            environment.
+
+    """
+    if "VIRTUAL_ENV" not in _os.environ:
         exit(exit_code, message)
 
 
-@classify('dict')
+@classify("dict")
 def must_get_key(a_dict, key):
-    '''
+    """
     Either return the value for the key, or raise an exception.
 
     The exception will indicate what the valid keys are.
@@ -570,17 +621,18 @@ def must_get_key(a_dict, key):
 
     Raises:
         KeyError: if the given key is not present in the dictionary.
-    '''
+
+    """
     if key not in a_dict:
         raise KeyError(
-            '{} is not one of: {}'.format(key, ', '.join(sorted(map(str, a_dict))))
+            "{} is not one of: {}".format(key, ", ".join(sorted(map(str, a_dict))))
         )
     return a_dict[key]
 
 
-@classify('dict')
+@classify("dict")
 def must_get_keys(a_dict, *keys):
-    '''
+    """
     Either return the value found for the keys provided, or raise an exception.
 
     Args:
@@ -592,47 +644,52 @@ def must_get_keys(a_dict, *keys):
 
     Raises:
         KeyError: if any of the given keys are not present in the dictionary.
-    '''
+
+    """
     for key in keys:
         a_dict = must_get_key(a_dict, key)
     return a_dict
 
 
-@classify('environment')
+@classify("environment")
 def var_from_env(var_name):
-    '''
-    Get an environment variable and raise an error if it is not set or has an empty value.
+    """
+    Try to get a value from an environment variable.
+
+    Get an environment variable and raise an error if not set / has an empty value.
 
     Returns:
         str: The value of the environment variable.
 
     Raises:
         ValueError: if the variable name is not set or has an empty value.
-    '''
+
+    """
     envvar = _os.environ.get(var_name)
     if not envvar:
         raise ValueError('"{}" variable not found!'.format(var_name))
     return envvar
 
 
-@classify('files')
+@classify("files")
 def get_file_contents(*paths):
-    '''
+    """
     Get the contents of a file as a Python string.
 
     Args:
-        *paths: The path or paths that lead to the file whose contents are to be retrieved.
+        *paths: All paths that lead to the file whole contents are to be retrieved.
 
     Returns:
         str: The contents of the file.
-    '''
-    with open(_os.path.join(_os.path.join(*paths)), 'r') as f:
+
+    """
+    with open(_os.path.join(_os.path.join(*paths)), "r") as f:
         return f.read()
 
 
-@classify('files', 'meta-data')
+@classify("files", "meta-data")
 def get_file_docstring(file_path):
-    '''
+    """
     Get the full docstring of a given python file.
 
     Args:
@@ -641,14 +698,15 @@ def get_file_docstring(file_path):
 
     Returns:
         str: The python file's docstring.
-    '''
+
+    """
     tree = ast.parse(get_file_contents(file_path))
     return ast.get_docstring(tree)
 
 
-@classify('files', 'filter')
+@classify("files", "filter")
 def filter_lines(line_filter, lines, return_type=None):
-    '''
+    """
     Filter the given lines based on the given filter function.
 
     This function by default will return the same type that it is given.
@@ -669,24 +727,26 @@ def filter_lines(line_filter, lines, return_type=None):
 
     Returns:
         Union[str, List[str]]: The filtered lines.
-    '''
+
+    """
     if return_type is None:
         return_type = type(lines)
 
     if isinstance(lines, _python_2_or_3_base_str_type()):
-        lines = lines.split('\n')
+        lines = lines.split("\n")
 
     filtered_lines = list(filter(line_filter, lines))
-    return filtered_lines if return_type is list else '\n'.join(filtered_lines)
+    return filtered_lines if return_type is list else "\n".join(filtered_lines)
 
 
-@classify('misc')
+@classify("misc")
 def fib_or_max(fib_number_index, max_number=None):
-    '''The nth Fibonacci number or max_number, which ever is smaller.
+    """
+    Get the nth Fibonacci number or max_number, which ever is smaller.
 
     This can be used for retrying failed operations with progressively longer
     gaps between retries, cap'd at the max_number paraemter if given.
-    '''
+    """
     current, next_ = 0, 1
     for _ in range(fib_number_index):
         current, next_ = next_, current + next_
@@ -698,21 +758,28 @@ def fib_or_max(fib_number_index, max_number=None):
 DEFAULT_MAX_RETRY_SLEEP = 30
 
 
-@classify('looping', 'exceptions')
-def retry_on_exceptions(max_retry_count, exceptions, max_retry_sleep=DEFAULT_MAX_RETRY_SLEEP):
-    '''
-    A wrapper to retry a function max_retry_count times if any of the given exceptions are raised.
+@classify("looping", "exceptions")
+def retry_on_exceptions(
+    max_retry_count, exceptions, max_retry_sleep=DEFAULT_MAX_RETRY_SLEEP
+):
+    """
+    Retry a function based on provided parameters.
 
-    In the event the exception/exceptions are raised, this code will sleep for ever increasing
-    amounts of time (using the fibonacci sequence) but capping at max_retry_sleep seconds.
+    A wrapper to retry a function max_retry_count times if any of the given exceptions
+    are raised.
+
+    In the event the exception/exceptions are raised, this code will sleep for ever
+    increasing amounts of time (using the fibonacci sequence) but capping at
+    max_retry_sleep seconds.
 
     Args:
         max_retry_count (int): The maximum number of retries, must be > 0..
-        exceptions (exception or tuple of exceptions): The exceptions to catch and retry on.
-        max_retry_sleep (int, float): The maximum amount of time to sleep between retries.
-    '''
-    assert exceptions, 'No exception(s) given'
-    assert max_retry_count > 0, 'max_retry_count must be greater than 0'
+        exceptions (exception or tuple of exceptions): The exceptions to catch and
+            retry on.
+        max_retry_sleep (int, float): The maximum time to sleep between retries.
+    """
+    assert exceptions, "No exception(s) given"
+    assert max_retry_count > 0, "max_retry_count must be greater than 0"
 
     @_wrapt.decorator
     def wrapper(wrapped, instance, args, kwargs):
@@ -725,17 +792,19 @@ def retry_on_exceptions(max_retry_count, exceptions, max_retry_sleep=DEFAULT_MAX
                 _debug('Retry on exception: "{}" encountered during call'.format(error))
                 error_count += 1
                 retry_sleep = fib_or_max(error_count, max_number=max_retry_sleep)
-                _debug('...trying again after a sleep of {}'.format(retry_sleep))
+                _debug("...trying again after a sleep of {}".format(retry_sleep))
                 _time.sleep(retry_sleep)
-        _debug('Retry on exception: Max Retry Count of {} Exceeded'.format(max_retry_count))
+        _debug(
+            "Retry on exception: Max Retry Count of {} Exceeded".format(max_retry_count)
+        )
         raise error
 
     return wrapper
 
 
-@classify('looping', 'exceptions', 'class')
+@classify("looping", "exceptions", "class")
 class IncompleteAtTimeoutException(Exception):
-    '''
+    """
     Exception for check_until results that timeout still pending validation.
 
     Args:
@@ -747,7 +816,7 @@ class IncompleteAtTimeoutException(Exception):
         call_result (any): the final result of the call, which failed validation.
         timeout (int,float): the timeout at which the result was still failing.
 
-    '''
+    """
 
     def __init__(self, msg, call_result=None, timeout=None):
         self.call_result = call_result
@@ -755,7 +824,7 @@ class IncompleteAtTimeoutException(Exception):
         super(IncompleteAtTimeoutException, self).__init__(msg)
 
 
-@classify('looping')
+@classify("looping")
 def check_until(
     function_call,
     is_complete_validator,
@@ -765,35 +834,40 @@ def check_until(
     fn_args=None,
     fn_kwargs=None,
 ):
-    '''
+    """
     Periodically call a function until its result validates or the timeout is exceeded.
 
     Args:
         function_call (function): The function to be called
-        is_complete_validator (function): a fn that will accept the output from function_call
-            and return False if the call should continue repeating (still pending result),
-            or True if the checked result is complete and may be returned.
-        timeout (int): maximum number of seconds to "check until" before raising an exception.
-        cycle_secs (int): how long to wait (in seconds) in between calls to function_call.
+        is_complete_validator (function): a fn that will accept the output from
+            function_call and return False if the call should continue repeating (still
+            pending result), or True if the checked result is complete and may be
+            returned.
+        timeout (int): maximum number of seconds to "check until" before raising an
+            exception.
+        cycle_secs (int): how long to wait (in seconds) in between calls to
+            function_call.
         logger (logging.logger, optional): a logging instance to be used for debug info,
             or ``None`` to suppress logging by this function.
-        fn_args (tuple, optional): tuple of positional args to be provided to function_call
+        fn_args (tuple, optional): tuple of positional args to be provided to
+            function_call
         fn_kwargs (dict, optional): keyword args to be provided to function_call
 
     Returns:
-        any: the result of function_call when the is_complete_validator returns any True value.
+        any: the result of function_call when the is_complete_validator returns any True
+            value.
 
     Raises:
-        qecommon_tools.IncompleteAtTimeoutException: if function_call's result never satisfies
-            the is_complete_validator before timeout is reached.
+        qecommon_tools.IncompleteAtTimeoutException: if function_call's result never
+            satisfies the is_complete_validator before timeout is reached.
 
-    '''
+    """
     fn_args = fn_args or ()
     fn_kwargs = fn_kwargs or {}
     debug = logger.debug if logger else no_op
 
     check_start = _time.time()
-    debug('***logging response content of final call of loop only***')
+    debug("***logging response content of final call of loop only***")
 
     result = function_call(*fn_args, **fn_kwargs)
     end_time = _time.time() + timeout
@@ -801,27 +875,29 @@ def check_until(
         result = function_call(*fn_args, **fn_kwargs)
         if is_complete_validator(result):
             time_elapsed = round(_time.time() - check_start, 2)
-            debug('Final response achieved in {} seconds'.format(time_elapsed))
+            debug("Final response achieved in {} seconds".format(time_elapsed))
             return result
         _time.sleep(cycle_secs)
     # If a result wasn't returned from within the while loop,
     # we have reached timeout without a valid result.
-    msg = 'Response was still pending at timeout.'
+    msg = "Response was still pending at timeout."
     debug(msg)
     raise IncompleteAtTimeoutException(msg, call_result=result, timeout=timeout)
 
 
-@classify('sequence')
-def only_item_of(item_sequence, label=''):
-    '''Assert item_sequence has only one item, and return that item.'''
+@classify("sequence")
+def only_item_of(item_sequence, label=""):
+    """Assert item_sequence has only one item, and return that item."""
     label = label or item_sequence.__class__.__name__
-    assert len(item_sequence) == 1, '{} was not of length 1: "{}"'.format(label, item_sequence)
+    assert len(item_sequence) == 1, '{} was not of length 1: "{}"'.format(
+        label, item_sequence
+    )
     return item_sequence[0]
 
 
-@classify('sequence', 'class')
+@classify("sequence", "class")
 class NotEmptyList(list):
-    '''
+    """
     A list that fails to iterate if it is empty.
 
     Iterating on this list will fail if the list is empty.
@@ -830,39 +906,41 @@ class NotEmptyList(list):
     thus any checks/tests/etc in a loop body would not run.
     In a testing context, the loop would "succeed" by not doing anything
     (it would fail to have checked anything) and that would be a false-positive.
-    '''
+    """
 
     @staticmethod
     def error_on_empty():
-        '''Is called to return the error message when the NotEmptyList is empty.'''
-        return 'list is empty!'
+        """Is called to return the error message when the NotEmptyList is empty."""
+        return "list is empty!"
 
     def __iter__(self):
-        '''
+        """
         Iterate only if not empty.
 
         Any loops that check items in the list could fail to fail for empty
         lists becuase the loop body would never execute.
         Help our clients by asserting if the list is empty so they don't have to.
-        '''
+        """
         assert self, self.error_on_empty()
         return super(NotEmptyList, self).__iter__()
 
 
-@classify('sequence', 'class')
+@classify("sequence", "class")
 class CommonAttributeList(list):
-    '''
+    """
     A list for similar objects that can be operated on as a group.
 
     Accessing an attribute on this list instead
     returns a list of that attribute's value from each member.
     (unless the attribute is defined here or in the base class)
-    If any member of this list does not have that attribute, ``AttributeError`` is raised.
+    If any member of this list does not have that attribute, ``AttributeError`` is
+    raised.
 
     Setting an attribute on this list instead sets the attribute on each member.
-    '''
+    """
 
     def __getattr__(self, name):
+        """Get the named attribute from all items in the list."""
         try:
             return [getattr(x, name) for x in self]
         except AttributeError:
@@ -870,53 +948,60 @@ class CommonAttributeList(list):
             raise AttributeError(message.format(name))
 
     def __setattr__(self, name, value):
-        '''On each item, set the give attribute to the given value'''
+        """On each item, set the give attribute to the given value."""
         for item in self:
             setattr(item, name, value)
 
     def update_all(self, **kwargs):
-        '''On each item, set each key as an attribute to the corresponding value from kwargs.'''
+        """Update all attributes based on the provided kwargs."""
         for key, value in kwargs.items():
             setattr(self, key, value)
 
 
-@classify('requests', 'class')
+@classify("requests", "class")
 class ResponseInfo(object):
+    """
+    Keep track of needed info about test operation responses (or any info really).
 
-    def __init__(self, response=None, description=None, response_callback=None,
-                 response_data_extract=None, **kwargs):
-        '''
-        Keep track of needed info about test operation responses (or any info really).
+    Originally created to augment/track info about ``requests'`` responses, it's not
+    limited or bounded by that use case.
+    Please read ``response`` more generally as any kind of object useful for catpuring
+    some kind of response from the system under test.
+    In addition, arbitrary other attributes can be set on this object.
+    To make that easier, ``kwargs`` is processed as attribute / value pairs to be set on
+    the object, for whatever attributes make sense for your application.
 
-        Originally created to augment/track info about ``requests'`` responses, it's not limited
-        or bounded by that use case.
-        Please read ``response`` more generally as any kind of object
-        useful for catpuring some kind of response from the system under test.
-        In addition, arbitrary other attributes can be set on this object.
-        To make that easier, ``kwargs`` is processed as attribute / value pairs to be set on the
-        object, for whatever attributes make sense for your application.
+    Sometimes this object is keeping track of a response that is needed,
+    but isn't available yet.
+    In these cases, ``response_callback`` can be set to a parameter-less function that
+    can be called to obtain the response when the ``response_data`` property is used.
 
-        Sometimes this object is keeping track of a response that is needed,
-        but isn't available yet.
-        In these cases, ``response_callback`` can be set to a parameter-less function that
-        can be called to obtain the response when the ``response_data`` property is used.
+    For ease of use, when the data is buried in the response or otherwise needs to be
+    decoded, ``response_data_extract`` can be used. It should take one parameter (the
+    response) and return the desired data from it. This function should not have any
+    side-effects. ``response_data_extract`` is also used by the ``response_data``
+    property, see that property documentation for details.
 
-        For ease of use, when the data is buried in the response or otherwise needs to be decoded,
-        ``response_data_extract`` can be used. It should take one parameter (the response) and
-        return the desired data from it. This function should not have any side-effects.
-        ``response_data_extract`` is also used by the ``response_data`` property,
-        see that property documentation for details.
+    Args:
+        response (any, optional): Whatever kind of response object needs tracking.
+        description (str, optional): Description of this particular response.
+        response_callback (function w/no parameters, optional):
+            A callback to use in place of the ``response`` field.
+        response_data_extract (function w/1 parameter, optional):
+            A callback used to extract wanted data from the response.
+        kwargs (dict, optional): any additional attributes to set on this object,
+            based on the name/value pairs in kwargs.
 
-        Args:
-            response (any, optional): Whatever kind of response object you need to track.
-            description (str, optional): Description (if any) of this particular response.
-            response_callback (function w/no parameters, optional):
-                A callback to use in place of the ``response`` field.
-            response_data_extract (function w/1 parameter, optional):
-                A callback used to extract wanted data from the response.
-            kwargs (dict, optional): any additional attributes to set on this object,
-                                     based on the name/value pairs in kwargs.
-        '''
+    """
+
+    def __init__(
+        self,
+        response=None,
+        description=None,
+        response_callback=None,
+        response_data_extract=None,
+        **kwargs
+    ):
 
         super(ResponseInfo, self).__init__()
 
@@ -928,17 +1013,18 @@ class ResponseInfo(object):
             setattr(self, key, value)
 
     def run_response_callback(self):
-        '''Run the ``response_callback``, if any, and set ``response`` to the result.
+        """Run the ``response_callback``, if any, and set ``response`` to the result.
 
         Set ``response_callback`` to None so iit isn't run more than once.
-        '''
+        """
         if self.response_callback:
             self.response = self.response_callback()
             self.response_callback = None
 
     @property
     def response_data(self):
-        '''Property that returns the data from a response:
+        """
+        Property that returns the data from a response.
 
         1. If ``response_callback`` is set, that is used to obtain the response,
            otherwise the ``response`` attribute is used.
@@ -951,21 +1037,23 @@ class ResponseInfo(object):
            Otherwise the result of step 1 is returned as is.
            Note that in this step the ``.response`` attribute is not changed,
            the ``response_data_extract`` callback is expected to have no side-effects.
-        '''
+        """
         self.run_response_callback()
         if self.response_data_extract:
             return self.response_data_extract(self.response)
         return self.response
 
 
-@classify('requests', 'class')
+@classify("requests", "class")
 class ResponseList(NotEmptyList, CommonAttributeList):
-    '''
+    """
     A list specialized for testing, w/ResponseInfo object items.
 
     To best understand this class, it is important to have
-    a strong understanding of :py:class:`CommonAttributeList` and :py:class:`ResponseInfo`.
-    The common workflow for ``ResponseList`` relies greatly on those other connected pieces.
+    a strong understanding of :py:class:`CommonAttributeList` and
+    :py:class:`ResponseInfo`.
+    The common workflow for ``ResponseList`` relies greatly on those other connected
+    pieces.
 
     For example, you might utilize this class in a ways such as this::
 
@@ -978,14 +1066,15 @@ class ResponseList(NotEmptyList, CommonAttributeList):
         >>>
         >>>
         >>> responses.set(
-        ...     ResponseInfo(response=client.get_thing(param), description=f"Getting {param}...")
+        ...     ResponseInfo(response=client.get_thing(param),
+                             description=f"Getting {param}...")
         ...     for param in my_params
         ... )
-    '''
+    """
 
-    def set(self, resp):
-        '''
-        Clear and set the contents of this list to single object or an iterator of objects.
+    def set(self, resp):  # noqa: A003
+        """
+        Clear and set the contents of this list to single object / iterator of objects.
 
         Generators will be converted into a list to allow access more than once.
 
@@ -995,108 +1084,148 @@ class ResponseList(NotEmptyList, CommonAttributeList):
         >>> x = CommonAttributeList()
         >>> ...
         >>> x.set(transform(thing, doo_dad) for thing in x)
-        '''
+        """
         self[:] = list_from(resp)
 
     @property
     def single_item(self):
-        '''Property - Assert this list has one item, and return that item.'''
+        """Property - Assert this list has one item, and return that item."""
         return only_item_of(self)
 
     def build_and_set(self, *args, **kwargs):
-        '''Create ResponseInfo object with args & kwargs, then ``.set`` it on this ResponseList.'''
+        """
+        Create object and then set it on the list.
+
+        Create ResponseInfo object with args & kwargs, then ``.set`` it on this
+        ResponseList.
+        """
         self.set(ResponseInfo(*args, **kwargs))
 
     def run_response_callbacks(self):
-        '''Call ``run_response_callback`` on each item of this ReponseList.'''
+        """Call ``run_response_callback`` on each item of this ReponseList."""
         for resp_info in self:
             resp_info.run_response_callback()
 
 
-@classify('doc')
+@classify("doc")
 def first_line_of_doc_string(thing):
-    '''
+    """
     Get the first non-empty line of the doc string for thing, if there is one.
 
     If thing is a class and has no doc string,
     return the first line of the __init__ method doc string if there is one.
-    '''
+    """
 
-    doc_string = getattr(thing, '__doc__', None)
+    doc_string = getattr(thing, "__doc__", None)
     if doc_string is None:
-        __init__method = getattr(thing, '__init__', None)
+        __init__method = getattr(thing, "__init__", None)
         if __init__method:
             return first_line_of_doc_string(__init__method)
-        return ''
+        return ""
     doc_string_lines = list(filter(None, doc_string.splitlines()))
     return doc_string_lines[0].strip()
 
 
-@classify('doc')
+@classify("doc")
 def build_classification_rst_string(from_dict, for_module, category_name_mappings):
-    '''
+    """
     Create rST for all the items in from_dict that are part of for_module.
 
     Example:
-        __doc__ += build_classification_rst_string(globals(), __name__, <category mappings dict>)
+        __doc__ += build_classification_rst_string(globals(), __name__, <category
+                   mappings dict>)
 
         The ``for_module`` parameter is needed because often ``globals()``
-        contains symbols imported from other modules which should not be documented here.
+        contains symbols imported from other modules not be documented here.
 
     Args:
         from_dict (dict): A dictionary of name to function/class mappings,
             such as from locals() or globals()
         for_module (str): The module for which rST documentation is desired.
-        category_name_mappings (str): Map from the short hand names used in the :py:func:`classify`
-            decorator to the desired category table label.
+        category_name_mappings (str): Map from the short hand names used in the
+            :py:func:`classify` decorator to the desired category table label.
 
     Returns:
         str: multiline rST string.
-    '''
+
+    """
     classification_mapping = defaultdict(list)
     for name, item in sorted(from_dict.items()):
-        if getattr(item, '__module__', None) != for_module:
+        if getattr(item, "__module__", None) != for_module:
             continue
         classify_data = getattr(item, _CLASSIFICATION_ATTRIBUTE, None)
         if classify_data is None:
             continue
-        # The built-in csv module doesn't expose any way to quote CSV data without writing
-        # it to a file, and certainly not in rST's csv table format, so we protect the CSV
-        # here with a simple quote-mark replacement if/until a better csv option comes along.
+        # The built-in csv module doesn't expose any way to quote CSV data without
+        # writing it to a file, and certainly not in rST's csv table format, so we
+        # protect the CSV here with a simple quote-mark replacement if/until a better
+        # csv option comes along.
         csv_line = '   :py:func:`{}`, "{}"'.format(
-            name, first_line_of_doc_string(item).replace(DOUBLE_QUOTE, SINGLE_QUOTE))
+            name, first_line_of_doc_string(item).replace(DOUBLE_QUOTE, SINGLE_QUOTE)
+        )
         for group in classify_data:
             classification_mapping[group].append(csv_line)
     if not classification_mapping:
-        return '<NO classifications were found>'
-    result = '\n'
+        return "<NO classifications were found>"
+    result = "\n\n"
     for category, items in sorted(classification_mapping.items()):
-        result += '.. csv-table:: {}\n'.format(category_name_mappings[category])
-        result += '   :widths: auto\n'
-        result += '\n'
-        result += '\n'.join(items)
-        result += '\n\n'
+        result += ".. csv-table:: {}\n".format(category_name_mappings[category])
+        result += "   :widths: auto\n"
+        result += "\n"
+        result += "\n".join(items)
+        result += "\n\n"
 
-    result += '\n---------\n\n'
+    result += "\n---------\n\n"
     return result
 
 
-__doc__ += build_classification_rst_string(globals(), __name__, {
-    'class': 'Classes Defined in this Module',
-    'dict': 'Dictionary related functions',
-    'doc': 'Documentation support',
-    'environment': 'Environment related functions',
-    'exceptions': 'Exceptions and exception handling',
-    'exit': 'Exitting the process',
-    'files': 'File and file contents related functions',
-    'filter': 'Filtering and Transforming functions',
-    'looping': 'Looping / Retry related items',
-    'meta-data': 'Meta-data related functions',
-    'misc': 'Miscellaneous functions',
-    'random': 'Random data related functions',
-    'requests': 'Classes/functions for working with the ``requests`` library',
-    'running commands': 'Subprocesses/Commands related functions',
-    'sequence': 'Sequences/Lists helper classes and functions',
-    'string': 'String related functions',
-    'ticketing system': 'Ticketing System related functions',
-})
+# Define this here because it is needed by the other scripts.
+def execute_command_list(commands_to_run, verbose=True):
+    """
+    Execute each command in the list.
+
+    If any command fails, print a helpful message and exit with that status.
+    """
+    for command in commands_to_run:
+        readable_command = " ".join(command)
+        try:
+            if verbose:
+                print(readable_command)
+            _subprocess.check_call(command)
+        except _subprocess.CalledProcessError as e:
+            print(
+                '"{}" - returned status code "{}"'.format(
+                    readable_command, e.returncode
+                )
+            )
+            exit(e.returncode)
+        except FileNotFoundError as f:
+            print(
+                '"{}" - No such file/program: "{}"'.format(readable_command, f.filename)
+            )
+            exit(2)
+
+
+__doc__ += build_classification_rst_string(
+    globals(),
+    __name__,
+    {
+        "class": "Classes Defined in this Module",
+        "dict": "Dictionary related functions",
+        "doc": "Documentation support",
+        "environment": "Environment related functions",
+        "exceptions": "Exceptions and exception handling",
+        "exit": "Exitting the process",
+        "files": "File and file contents related functions",
+        "filter": "Filtering and Transforming functions",
+        "looping": "Looping / Retry related items",
+        "meta-data": "Meta-data related functions",
+        "misc": "Miscellaneous functions",
+        "random": "Random data related functions",
+        "requests": "Classes/functions for working with the ``requests`` library",
+        "running commands": "Subprocesses/Commands related functions",
+        "sequence": "Sequences/Lists helper classes and functions",
+        "string": "String related functions",
+        "ticketing system": "Ticketing System related functions",
+    },
+)

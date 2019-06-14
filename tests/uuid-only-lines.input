@@ -1,0 +1,57 @@
+# This is a test with lines from an actual log file.
+# To keep this file manageable size, only lines with UUIDs on them were culled from the log.
+#
+curl -X POST -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" -d '{"fqdn": "b848b78d-6baf-4639-9484-b53fb870e662-dcx-qe.com", "email": "dcxq@rackspace.com", "ttl": 300, "comment": "A DCX QE Test Zone."}' "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones"
+-->Response headers: {'Content-Type': 'application/json', 'Content-Length': '864', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:48 GMT', 'x-amzn-RequestId': '7c816ac3-7b35-11e9-bc7d-1deeec75d1e1', 'x-amz-apigw-id': 'Z_ztPELeoAMFlmw=', 'X-Amzn-Trace-Id': 'Root=1-5ce2ffee-9766b8a893a58ed34780303a;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'tv98ahVn-Jw3nTyJ1vC-jHaUI4QPnq5gpk1kK4xkaRKVIz428ykQKA=='}
+  "id": "c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62",
+  "fqdn": "b848b78d-6baf-4639-9484-b53fb870e662-dcx-qe.com",
+      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62",
+      "id": "c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62"
+      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62/records",
+Scheduling cleanup for zone_id: c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62
+Extracted zone id: c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62
+curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones/c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62"
+-->Response headers: {'Content-Type': 'application/json', 'Content-Length': '864', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:50 GMT', 'x-amzn-RequestId': '7db0c27c-7b35-11e9-b994-c1a3cd12da60', 'x-amz-apigw-id': 'Z_ztjHgOoAMFlFw=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff0-524b8fd6ebecfe54cc8f7912;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'JYzaILCHJFZs0NL_w0qfCY6gzcKcwmGK1-gp2Q975Nm9yJaUawz-JQ=='}
+  "id": "c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62",
+  "fqdn": "b848b78d-6baf-4639-9484-b53fb870e662-dcx-qe.com",
+      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62",
+      "id": "c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62"
+      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62/records",
+Getting self link: https://dns.api.rackspacecloud.com/v2/5845807/zones/c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62
+curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://dns.api.rackspacecloud.com/v2/5845807/zones/c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62"
+Checking for zone id: c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62
+curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones/c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62"
+-->Response headers: {'Content-Type': 'application/json', 'Content-Length': '864', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:50 GMT', 'x-amzn-RequestId': '7f10a097-7b35-11e9-a0a2-03add33baadc', 'x-amz-apigw-id': 'Z_zt6FWlIAMFV1A=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff2-b07ad1005510d290fd0127e0;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'BhDMq94ZyKng_BdDjB2m7v7tEvJTJtjbVBHTYXvsfj6YEoWDiAzs_Q=='}
+  "id": "c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62",
+  "fqdn": "b848b78d-6baf-4639-9484-b53fb870e662-dcx-qe.com",
+      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62",
+      "id": "c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62"
+      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62/records",
+			Url: https://dns.api.rackspacecloud.com/v2/5845807/zones/c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62
+cleaning up zone_id: c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62
+curl -X DELETE -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones/c299d6f9-0eb4-4e0e-b3a1-535c8d86dc62"
+-->Response headers: {'Content-Type': 'application/json', 'Content-Length': '0', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:52 GMT', 'x-amzn-RequestId': '7f44a8c2-7b35-11e9-9f71-55874f2710bc', 'x-amz-apigw-id': 'Z_zt-GE6IAMFszw=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff3-a120e0fcc2d41c3d2e3d7bbc;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': '82pAkY7ybLPbLhuXT7iqvSmiETVmS_oehWs31HHjzXkvrTN6VPLASQ=='}
+curl -X POST -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" -d '{"fqdn": "5ba53dc3-c98f-4845-a9f0-2085b65e3381-dcx-qe.com", "email": "dcxq@rackspace.com", "ttl": 300, "comment": "A DCX QE Test Zone."}' "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones"
+-->Response headers: {'Content-Type': 'application/json', 'Content-Length': '864', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:53 GMT', 'x-amzn-RequestId': '806ab30b-7b35-11e9-86e1-f5a41d9c641f', 'x-amz-apigw-id': 'Z_zuRFavoAMFQRw=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff4-4b8f418ef52340fceaba77d9;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': '8Vnu0cIUJlti4oiW-euKSCiaw78iaCsGc_fiYaEGKfiCLLmBusQVoA=='}
+  "id": "b2a996ba-4d0c-4241-87ef-abf4d9256d97",
+  "fqdn": "5ba53dc3-c98f-4845-a9f0-2085b65e3381-dcx-qe.com",
+      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/b2a996ba-4d0c-4241-87ef-abf4d9256d97",
+      "id": "b2a996ba-4d0c-4241-87ef-abf4d9256d97"
+      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/b2a996ba-4d0c-4241-87ef-abf4d9256d97/records",
+Scheduling cleanup for zone_id: b2a996ba-4d0c-4241-87ef-abf4d9256d97
+Extracted zone id: b2a996ba-4d0c-4241-87ef-abf4d9256d97
+curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones/b2a996ba-4d0c-4241-87ef-abf4d9256d97"
+-->Response headers: {'Content-Type': 'application/json', 'Content-Length': '864', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:53 GMT', 'x-amzn-RequestId': '80ae4aeb-7b35-11e9-b9d4-5b1af216fdac', 'x-amz-apigw-id': 'Z_zuVEg0oAMF_Lg=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff5-d8576cc5316ddfea1c5a4d7a;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'eHU4NrF65NkVOtzGnkUUdtpizxJ6R6i00b2w1ySJWme3TanynFN77g=='}
+  "id": "b2a996ba-4d0c-4241-87ef-abf4d9256d97",
+  "fqdn": "5ba53dc3-c98f-4845-a9f0-2085b65e3381-dcx-qe.com",
+      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/b2a996ba-4d0c-4241-87ef-abf4d9256d97",
+      "id": "b2a996ba-4d0c-4241-87ef-abf4d9256d97"
+      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/b2a996ba-4d0c-4241-87ef-abf4d9256d97/records",
+Getting records link: https://dns.api.rackspacecloud.com/v2/5845807/zones/b2a996ba-4d0c-4241-87ef-abf4d9256d97/records
+curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://dns.api.rackspacecloud.com/v2/5845807/zones/b2a996ba-4d0c-4241-87ef-abf4d9256d97/records"
+curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones/b2a996ba-4d0c-4241-87ef-abf4d9256d97/records"
+-->Response headers: {'Content-Type': 'application/json', 'Content-Length': '32', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:55 GMT', 'x-amzn-RequestId': '80efe81e-7b35-11e9-a443-1b20cb06ee7f', 'x-amz-apigw-id': 'Z_zuaFZEIAMF-gw=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff5-ebac09591cb2a6e95731ff55;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'dciZEOMSAJReyzysfyWlpZnxEh-3A2wscGoFmbh2w_4uMvX7f9ufxg=='}
+			Url: https://dns.api.rackspacecloud.com/v2/5845807/zones/b2a996ba-4d0c-4241-87ef-abf4d9256d97/records
+cleaning up zone_id: b2a996ba-4d0c-4241-87ef-abf4d9256d97
+curl -X DELETE -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones/b2a996ba-4d0c-4241-87ef-abf4d9256d97"
+-->Response headers: {'Content-Type': 'application/json', 'Content-Length': '0', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:55 GMT', 'x-amzn-RequestId': '81c7d15c-7b35-11e9-b51a-53b3307f184b', 'x-amz-apigw-id': 'Z_zuoF0coAMF_iQ=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff7-9052f4d3701f9e13e6c024ad;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'iMG8QdOXgwlYPPpMZR27SLeC-cJmD7uHW2oJ1jh4woq8gUrFzVuo8A=='}

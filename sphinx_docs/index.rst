@@ -13,6 +13,7 @@ For users of this package, the nitty gritty coding and configuration details.
 
 .. toctree::
    :maxdepth: 4
+   :caption: Library
 
    qecommon_tools
 
@@ -34,8 +35,10 @@ Maintainer's Documentation
 ==========================
 
 .. toctree::
+   :caption: Maintainers
 
-    MAINTAINER
+   MAINTAINER
+   CONTRIBUTING
 
 
 

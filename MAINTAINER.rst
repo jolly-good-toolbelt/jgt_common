@@ -17,9 +17,9 @@ Top-level scripts:
 ``bin/`` scripts:
 -----------------
 
-    * ``build-docs.py`` - build the documentation. Open ``docs/index.html`` to
+    * ``build_docs.py`` - build the documentation. Open ``docs/index.html`` to
       read the local docs.
-    * ``build-and-push-docs.py`` - build the documentation then push to github
+    * ``build_and_push_docs.py`` - build the documentation then push to github
       pages for this repo.
 
 

@@ -19,7 +19,7 @@ requests.
 Getting Started
 ---------------
 
-After cloning this repo, simply run ``env_setup.sh``
+After cloning this repo, simply run ``env_setup.py``
 to set up your virtual environment
 and prepare your pre-commit hooks.
 

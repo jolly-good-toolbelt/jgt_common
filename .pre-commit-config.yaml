@@ -4,8 +4,8 @@ repos:
       hooks:
           - id: black
             language_version: python3
-    - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v2.2.3
+    - repo: https://gitlab.com/pycqa/flake8
+      rev: 3.7.8
       hooks:
           - id: flake8
             exclude: ^build/*
@@ -16,3 +16,4 @@ repos:
                 - flake8-tuple
                 - flake8-quotes
                 - pep8-naming
+                - pydocstyle<4.0.0

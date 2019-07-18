@@ -1,57 +1,57 @@
 # This is a test with lines from an actual log file.
 # To keep this file manageable size, only lines with UUIDs on them were culled from the log.
 #
-curl -X POST -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" -d '{"fqdn": ",,UUID-001,,-dcx-qe.com", "email": "dcxq@rackspace.com", "ttl": 300, "comment": "A DCX QE Test Zone."}' "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones"
+curl -X POST -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" -d '{"fqdn": ",,UUID-001,,-example.com", "email": "test_email@example.com", "ttl": 300, "comment": "A Test Zone."}' "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones"
 -->Response headers: {'Content-Type': 'application/json', 'Content-Length': '864', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:48 GMT', 'x-amzn-RequestId': ',,UUID-002,,', 'x-amz-apigw-id': 'Z_ztPELeoAMFlmw=', 'X-Amzn-Trace-Id': 'Root=1-5ce2ffee-9766b8a893a58ed34780303a;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'tv98ahVn-Jw3nTyJ1vC-jHaUI4QPnq5gpk1kK4xkaRKVIz428ykQKA=='}
   "id": ",,UUID-003,,",
-  "fqdn": ",,UUID-001,,-dcx-qe.com",
-      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-003,,",
+  "fqdn": ",,UUID-001,,-example.com",
+      "href": "https://dns.api.example.com/v2/5845807/zones/,,UUID-003,,",
       "id": ",,UUID-003,,"
-      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-003,,/records",
+      "href": "https://dns.api.example.com/v2/5845807/zones/,,UUID-003,,/records",
 Scheduling cleanup for zone_id: ,,UUID-003,,
 Extracted zone id: ,,UUID-003,,
 curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones/,,UUID-003,,"
 -->Response headers: {'Content-Type': 'application/json', 'Content-Length': '864', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:50 GMT', 'x-amzn-RequestId': ',,UUID-004,,', 'x-amz-apigw-id': 'Z_ztjHgOoAMFlFw=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff0-524b8fd6ebecfe54cc8f7912;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'JYzaILCHJFZs0NL_w0qfCY6gzcKcwmGK1-gp2Q975Nm9yJaUawz-JQ=='}
   "id": ",,UUID-003,,",
-  "fqdn": ",,UUID-001,,-dcx-qe.com",
-      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-003,,",
+  "fqdn": ",,UUID-001,,-example.com",
+      "href": "https://dns.api.example.com/v2/5845807/zones/,,UUID-003,,",
       "id": ",,UUID-003,,"
-      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-003,,/records",
-Getting self link: https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-003,,
-curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-003,,"
+      "href": "https://dns.api.example.com/v2/5845807/zones/,,UUID-003,,/records",
+Getting self link: https://dns.api.example.com/v2/5845807/zones/,,UUID-003,,
+curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://dns.api.example.com/v2/5845807/zones/,,UUID-003,,"
 Checking for zone id: ,,UUID-003,,
 curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones/,,UUID-003,,"
 -->Response headers: {'Content-Type': 'application/json', 'Content-Length': '864', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:50 GMT', 'x-amzn-RequestId': ',,UUID-005,,', 'x-amz-apigw-id': 'Z_zt6FWlIAMFV1A=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff2-b07ad1005510d290fd0127e0;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'BhDMq94ZyKng_BdDjB2m7v7tEvJTJtjbVBHTYXvsfj6YEoWDiAzs_Q=='}
   "id": ",,UUID-003,,",
-  "fqdn": ",,UUID-001,,-dcx-qe.com",
-      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-003,,",
+  "fqdn": ",,UUID-001,,-example.com",
+      "href": "https://dns.api.example.com/v2/5845807/zones/,,UUID-003,,",
       "id": ",,UUID-003,,"
-      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-003,,/records",
-			Url: https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-003,,
+      "href": "https://dns.api.example.com/v2/5845807/zones/,,UUID-003,,/records",
+			Url: https://dns.api.example.com/v2/5845807/zones/,,UUID-003,,
 cleaning up zone_id: ,,UUID-003,,
 curl -X DELETE -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones/,,UUID-003,,"
 -->Response headers: {'Content-Type': 'application/json', 'Content-Length': '0', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:52 GMT', 'x-amzn-RequestId': ',,UUID-006,,', 'x-amz-apigw-id': 'Z_zt-GE6IAMFszw=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff3-a120e0fcc2d41c3d2e3d7bbc;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': '82pAkY7ybLPbLhuXT7iqvSmiETVmS_oehWs31HHjzXkvrTN6VPLASQ=='}
-curl -X POST -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" -d '{"fqdn": ",,UUID-007,,-dcx-qe.com", "email": "dcxq@rackspace.com", "ttl": 300, "comment": "A DCX QE Test Zone."}' "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones"
+curl -X POST -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" -d '{"fqdn": ",,UUID-007,,-example.com", "email": "test_email@example.com", "ttl": 300, "comment": "A Test Zone."}' "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones"
 -->Response headers: {'Content-Type': 'application/json', 'Content-Length': '864', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:53 GMT', 'x-amzn-RequestId': ',,UUID-008,,', 'x-amz-apigw-id': 'Z_zuRFavoAMFQRw=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff4-4b8f418ef52340fceaba77d9;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': '8Vnu0cIUJlti4oiW-euKSCiaw78iaCsGc_fiYaEGKfiCLLmBusQVoA=='}
   "id": ",,UUID-009,,",
-  "fqdn": ",,UUID-007,,-dcx-qe.com",
-      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-009,,",
+  "fqdn": ",,UUID-007,,-example.com",
+      "href": "https://dns.api.example.com/v2/5845807/zones/,,UUID-009,,",
       "id": ",,UUID-009,,"
-      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-009,,/records",
+      "href": "https://dns.api.example.com/v2/5845807/zones/,,UUID-009,,/records",
 Scheduling cleanup for zone_id: ,,UUID-009,,
 Extracted zone id: ,,UUID-009,,
 curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones/,,UUID-009,,"
 -->Response headers: {'Content-Type': 'application/json', 'Content-Length': '864', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:53 GMT', 'x-amzn-RequestId': ',,UUID-010,,', 'x-amz-apigw-id': 'Z_zuVEg0oAMF_Lg=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff5-d8576cc5316ddfea1c5a4d7a;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'eHU4NrF65NkVOtzGnkUUdtpizxJ6R6i00b2w1ySJWme3TanynFN77g=='}
   "id": ",,UUID-009,,",
-  "fqdn": ",,UUID-007,,-dcx-qe.com",
-      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-009,,",
+  "fqdn": ",,UUID-007,,-example.com",
+      "href": "https://dns.api.example.com/v2/5845807/zones/,,UUID-009,,",
       "id": ",,UUID-009,,"
-      "href": "https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-009,,/records",
-Getting records link: https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-009,,/records
-curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-009,,/records"
+      "href": "https://dns.api.example.com/v2/5845807/zones/,,UUID-009,,/records",
+Getting records link: https://dns.api.example.com/v2/5845807/zones/,,UUID-009,,/records
+curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://dns.api.example.com/v2/5845807/zones/,,UUID-009,,/records"
 curl -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones/,,UUID-009,,/records"
 -->Response headers: {'Content-Type': 'application/json', 'Content-Length': '32', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:55 GMT', 'x-amzn-RequestId': ',,UUID-011,,', 'x-amz-apigw-id': 'Z_zuaFZEIAMF-gw=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff5-ebac09591cb2a6e95731ff55;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'dciZEOMSAJReyzysfyWlpZnxEh-3A2wscGoFmbh2w_4uMvX7f9ufxg=='}
-			Url: https://dns.api.rackspacecloud.com/v2/5845807/zones/,,UUID-009,,/records
+			Url: https://dns.api.example.com/v2/5845807/zones/,,UUID-009,,/records
 cleaning up zone_id: ,,UUID-009,,
 curl -X DELETE -H "Content-Type: application/json" -H "X-Auth-Token: $TOKEN" "https://vm2o2n6eo1.execute-api.us-east-1.amazonaws.com/dev/v2/5845807/zones/,,UUID-009,,"
 -->Response headers: {'Content-Type': 'application/json', 'Content-Length': '0', 'Connection': 'keep-alive', 'Date': 'Mon, 20 May 2019 19:28:55 GMT', 'x-amzn-RequestId': ',,UUID-012,,', 'x-amz-apigw-id': 'Z_zuoF0coAMF_iQ=', 'X-Amzn-Trace-Id': 'Root=1-5ce2fff7-9052f4d3701f9e13e6c024ad;Sampled=0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 8b7beb93f2db696fb271fa045b9246bc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'iMG8QdOXgwlYPPpMZR27SLeC-cJmD7uHW2oJ1jh4woq8gUrFzVuo8A=='}

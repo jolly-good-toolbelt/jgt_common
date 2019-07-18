@@ -57,7 +57,7 @@ def main():
         "--force",
         "--module-first",
     ]
-    print("Building qecommon_tools API docs")
+    print("Building API docs")
     subprocess.check_call(sphinx_apidoc_cmd + ["qecommon_tools"], cwd=BASE_DIR)
 
     # Copy over all the top level rST files so we don't

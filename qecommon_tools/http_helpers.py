@@ -442,7 +442,6 @@ def call_with_custom_logger(call, curl_logger):
     yield custom_call
 
     if hasattr(curl_logger, "done"):
-        # This is a temporary workaround pending QET-129.
         curl_logger.done()
 
 

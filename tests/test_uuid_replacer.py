@@ -1,8 +1,8 @@
-"""Unit tests for the qecommon_tools.uuid_replacer."""
+"""Unit tests for the jgt_common.uuid_replacer."""
 import os
 
-from qecommon_tools import get_file_contents
-from qecommon_tools.uuid_replacer import uuid_replace
+from jgt_common import get_file_contents
+from jgt_common.uuid_replacer import uuid_replace
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 INPUT_FILE = os.path.join(HERE, "uuid-only-lines.input")

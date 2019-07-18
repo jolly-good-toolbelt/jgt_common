@@ -1,4 +1,4 @@
-"""Unit tests for the qecommon_tools tools."""
+"""Unit tests for the jgt_common tools."""
 
 from itertools import product, cycle
 import tempfile
@@ -10,7 +10,7 @@ import shutil
 import string
 
 import pytest
-import qecommon_tools
+import jgt_common
 
 
 TEST_MESSAGE = "Test Message"
@@ -66,13 +66,13 @@ def test_display_name_without_name_file(temp_dir, package_name_and_expected):
     package_name, expected = package_name_and_expected
     target_dir = path.join(temp_dir, "test_directory")
     mkdir(target_dir)
-    display_name = qecommon_tools.display_name(target_dir, package_name)
+    display_name = jgt_common.display_name(target_dir, package_name)
     assert display_name == expected
 
 
 @pytest.mark.parametrize("package_name", PACKAGE_NAMES.keys())
 def test_display_name_with_name_file(temp_dir_with_name_file, package_name):
-    display_name = qecommon_tools.display_name(temp_dir_with_name_file, package_name)
+    display_name = jgt_common.display_name(temp_dir_with_name_file, package_name)
     assert display_name == TEST_MESSAGE
 
 
@@ -84,7 +84,7 @@ DIST_STRIP_CASES = [
 
 @pytest.mark.parametrize("dict_to_strip,value_to_strip", DIST_STRIP_CASES)
 def test_dict_strip_valid_values_remain(dict_to_strip, value_to_strip):
-    stripped_dictionary = qecommon_tools.dict_strip_value(
+    stripped_dictionary = jgt_common.dict_strip_value(
         dict_to_strip, value=value_to_strip
     )
     for valid_value in [x for x in DICT_STRIP_VALUES if x != value_to_strip]:
@@ -93,7 +93,7 @@ def test_dict_strip_valid_values_remain(dict_to_strip, value_to_strip):
 
 @pytest.mark.parametrize("dict_to_strip,value_to_strip", DIST_STRIP_CASES)
 def test_dict_strip_stripped_values_are_gone(dict_to_strip, value_to_strip):
-    stripped_dictionary = qecommon_tools.dict_strip_value(
+    stripped_dictionary = jgt_common.dict_strip_value(
         dict_to_strip, value=value_to_strip
     )
     assert value_to_strip not in stripped_dictionary.values()
@@ -101,14 +101,14 @@ def test_dict_strip_stripped_values_are_gone(dict_to_strip, value_to_strip):
 
 @pytest.mark.parametrize("dict_to_filter,value_to_keep", DIST_STRIP_CASES)
 def test_filter_dict_keep_value(dict_to_filter, value_to_keep):
-    new_dict = qecommon_tools.filter_dict(
+    new_dict = jgt_common.filter_dict(
         dict_to_filter, keep_value=lambda x: x == value_to_keep
     )
     assert all(map(lambda x: x == value_to_keep, new_dict.values()))
 
 
 def test_filter_dict_noop(unique_dict):
-    new_dict = qecommon_tools.filter_dict(unique_dict)
+    new_dict = jgt_common.filter_dict(unique_dict)
     assert new_dict == unique_dict
     assert new_dict is not unique_dict
 
@@ -116,7 +116,7 @@ def test_filter_dict_noop(unique_dict):
 def test_filter_dict_keep_key(unique_dict):
     all_keys = list(unique_dict.keys())
     for key_to_keep in all_keys:
-        new_dict = qecommon_tools.filter_dict(
+        new_dict = jgt_common.filter_dict(
             unique_dict, keep_key=lambda x: x == key_to_keep
         )
         assert len(new_dict) == 1
@@ -124,45 +124,39 @@ def test_filter_dict_keep_key(unique_dict):
 
 
 def test_filter_dict_keep_nothing_by_key(unique_dict):
-    new_dict = qecommon_tools.filter_dict(
-        unique_dict, keep_key=qecommon_tools.always_false
-    )
+    new_dict = jgt_common.filter_dict(unique_dict, keep_key=jgt_common.always_false)
     assert new_dict == {}
 
 
 def test_filter_dict_keep_nothing_by_value(unique_dict):
-    new_dict = qecommon_tools.filter_dict(
-        unique_dict, keep_value=qecommon_tools.always_false
-    )
+    new_dict = jgt_common.filter_dict(unique_dict, keep_value=jgt_common.always_false)
     assert new_dict == {}
 
 
 def test_filter_dict_keep_nothing_by_key_and_value(unique_dict):
-    new_dict = qecommon_tools.filter_dict(
+    new_dict = jgt_common.filter_dict(
         unique_dict,
-        keep_key=qecommon_tools.always_false,
-        keep_value=qecommon_tools.always_false,
+        keep_key=jgt_common.always_false,
+        keep_value=jgt_common.always_false,
     )
     assert new_dict == {}
 
 
 def test_dict_transform_noop(unique_dict):
-    new_dict = qecommon_tools.dict_transform(unique_dict)
+    new_dict = jgt_common.dict_transform(unique_dict)
     assert new_dict == unique_dict
 
 
 def test_dict_transform_monokey(unique_dict):
     new_key = uuid4()
-    new_dict = qecommon_tools.dict_transform(
-        unique_dict, key_transform=lambda x: new_key
-    )
+    new_dict = jgt_common.dict_transform(unique_dict, key_transform=lambda x: new_key)
     assert len(new_dict) == 1
     assert new_key in new_dict
 
 
 def test_dict_transform_monovalue(unique_dict):
     new_value = uuid4()
-    new_dict = qecommon_tools.dict_transform(
+    new_dict = jgt_common.dict_transform(
         unique_dict, value_transform=lambda x: new_value
     )
     assert len(new_dict) == len(unique_dict)
@@ -170,7 +164,7 @@ def test_dict_transform_monovalue(unique_dict):
 
 
 def test_dict_from(unique_list):
-    new_dict = qecommon_tools.dict_from(
+    new_dict = jgt_common.dict_from(
         unique_list, value_transform=lambda x: "My value is {}".format(x)
     )
     assert len(new_dict) == len(unique_list)
@@ -183,23 +177,19 @@ PADDED_LIST_CASES = list(product([0, 5, 15], [None, "TEST"]))
 
 @pytest.mark.parametrize("target_length,padding", PADDED_LIST_CASES)
 def test_padding_length(list_for_padding, target_length, padding):
-    padded = qecommon_tools.padded_list(
-        list_for_padding, target_length, padding=padding
-    )
+    padded = jgt_common.padded_list(list_for_padding, target_length, padding=padding)
     assert len(padded) == target_length
 
 
 @pytest.mark.parametrize("target_length,padding", PADDED_LIST_CASES)
 def test_padding_value(list_for_padding, target_length, padding):
-    padded = qecommon_tools.padded_list(
-        list_for_padding, target_length, padding=padding
-    )
+    padded = jgt_common.padded_list(list_for_padding, target_length, padding=padding)
     assert padded.count(padding) == max(target_length - len(list_for_padding), 0)
 
 
 def _cleanup_and_exit(dir_path=None):
     with pytest.raises(SystemExit) as pytest_wrapped_e:
-        qecommon_tools.cleanup_and_exit(dir_name=dir_path)
+        jgt_common.cleanup_and_exit(dir_name=dir_path)
     assert pytest_wrapped_e.value.code == 0
 
 
@@ -214,15 +204,15 @@ def test_cleanup_and_exit_with_dir():
 
 
 def test_index_or_default_value_in_list():
-    assert qecommon_tools.index_or_default([1, 2, 3], 2) == 1
+    assert jgt_common.index_or_default([1, 2, 3], 2) == 1
 
 
 def test_index_or_default_value_not_present():
-    assert qecommon_tools.index_or_default([1, 2, 3], 5) == -1
+    assert jgt_common.index_or_default([1, 2, 3], 5) == -1
 
 
 def test_index_or_default_custom_default():
-    assert qecommon_tools.index_or_default([1, 2, 3], 5, default=99) == 99
+    assert jgt_common.index_or_default([1, 2, 3], 5, default=99) == 99
 
 
 def test_no_virtual_env(monkeypatch):
@@ -230,7 +220,7 @@ def test_no_virtual_env(monkeypatch):
     monkeypatch.delenv("VIRTUAL_ENV", raising=False)
     arbitrary_exit_code = 45
     with pytest.raises(SystemExit) as pytest_wrapped_e:
-        qecommon_tools.must_be_in_virtual_environment(exit_code=arbitrary_exit_code)
+        jgt_common.must_be_in_virtual_environment(exit_code=arbitrary_exit_code)
     assert pytest_wrapped_e.value.code == arbitrary_exit_code
 
 
@@ -239,12 +229,12 @@ def test_virtual_env(monkeypatch):
     monkeypatch.setenv("VIRTUAL_ENV", "arbitrary_value")
     arbitrary_exit_code = 45
     # If this next function call exits, pytest will report an error:
-    qecommon_tools.must_be_in_virtual_environment(exit_code=arbitrary_exit_code)
+    jgt_common.must_be_in_virtual_environment(exit_code=arbitrary_exit_code)
 
 
 def test_safe_run_passing():
     # This should not raise any exceptions (pytest will fail the test if it does)
-    qecommon_tools.safe_run(["ls"])
+    jgt_common.safe_run(["ls"])
 
 
 @pytest.mark.parametrize(
@@ -259,7 +249,7 @@ def test_safe_run_passing():
 )
 def test_safe_run_with_fail(command, expected_exit_codes):
     with pytest.raises(SystemExit) as pytest_wrapped_e:
-        qecommon_tools.safe_run(command.split())
+        jgt_common.safe_run(command.split())
     assert pytest_wrapped_e.value.code in expected_exit_codes
 
 
@@ -269,14 +259,14 @@ TEST_EXIT_CODES = [-1, 0, 1]
 @pytest.mark.parametrize("exit_code", TEST_EXIT_CODES)
 def test_exit_without_message(capsys, exit_code):
     with pytest.raises(SystemExit) as pytest_wrapped_e:
-        qecommon_tools.exit(status=exit_code)
+        jgt_common.exit(status=exit_code)
     assert pytest_wrapped_e.value.code == exit_code
 
 
 @pytest.mark.parametrize("exit_code", TEST_EXIT_CODES)
 def test_exit_with_message(capsys, exit_code):
     with pytest.raises(SystemExit) as pytest_wrapped_e:
-        qecommon_tools.exit(status=exit_code, message=TEST_MESSAGE)
+        jgt_common.exit(status=exit_code, message=TEST_MESSAGE)
     assert pytest_wrapped_e.value.code == exit_code
     out, err = capsys.readouterr()
     assert TEST_MESSAGE in err
@@ -287,7 +277,7 @@ WITHOUT_CHECK_VALUES = list(product([None, "", 0], TEST_EXIT_CODES, ["", TEST_ME
 
 @pytest.mark.parametrize("check,exit_code,message", WITHOUT_CHECK_VALUES)
 def test_error_if_without_check(check, exit_code, message):
-    qecommon_tools.error_if(check, status=exit_code, message=message)
+    jgt_common.error_if(check, status=exit_code, message=message)
 
 
 WITH_CHECK_VALUES = list(product(["Error", 1, -1], TEST_EXIT_CODES, ["", TEST_MESSAGE]))
@@ -296,7 +286,7 @@ WITH_CHECK_VALUES = list(product(["Error", 1, -1], TEST_EXIT_CODES, ["", TEST_ME
 @pytest.mark.parametrize("check,exit_code,message", WITH_CHECK_VALUES)
 def test_error_if_with_check(capsys, check, exit_code, message):
     with pytest.raises(SystemExit) as pytest_wrapped_e:
-        qecommon_tools.error_if(check, status=exit_code, message=message)
+        jgt_common.error_if(check, status=exit_code, message=message)
     out, err = capsys.readouterr()
     assert message in err
     assert pytest_wrapped_e.value.code == exit_code or check
@@ -308,42 +298,42 @@ RANDOM_STRING_DEFAULT_CHOOSE_FROM = string.ascii_lowercase + string.digits
 
 def test_random_string_length():
     non_default_size = RANDOM_STRING_DEFAULT_SIZE + 5
-    text = qecommon_tools.generate_random_string(size=non_default_size)
+    text = jgt_common.generate_random_string(size=non_default_size)
     assert len(text) == non_default_size
 
 
 def test_random_string_prefix():
     prefix = "test-"
-    text = qecommon_tools.generate_random_string(prefix=prefix)
+    text = jgt_common.generate_random_string(prefix=prefix)
     assert text.startswith(prefix)
 
 
 def test_random_string_suffix():
     suffix = "-test"
-    text = qecommon_tools.generate_random_string(suffix=suffix)
+    text = jgt_common.generate_random_string(suffix=suffix)
     assert text.endswith(suffix)
 
 
 def test_random_string_choose_from():
     # Using only symbols to avoid any overlap with the default choose_from
     non_default_choose_from = "(_)+-*&$#@"
-    text = qecommon_tools.generate_random_string(choose_from=non_default_choose_from)
+    text = jgt_common.generate_random_string(choose_from=non_default_choose_from)
     assert set(text) <= set(non_default_choose_from)
 
 
 def test_random_string_default_size():
-    text = qecommon_tools.generate_random_string()
+    text = jgt_common.generate_random_string()
     assert len(text) == RANDOM_STRING_DEFAULT_SIZE
 
 
 def test_random_string_default_choose_from():
-    text = qecommon_tools.generate_random_string()
+    text = jgt_common.generate_random_string()
     assert set(text) <= set(RANDOM_STRING_DEFAULT_CHOOSE_FROM)
 
 
 def test_string_size_failure():
     with pytest.raises(AssertionError):
-        qecommon_tools.generate_random_string(
+        jgt_common.generate_random_string(
             prefix="this-is-a-long-prefix-", suffix="-this-is-a-long-suffix", size=3
         )
 
@@ -357,29 +347,29 @@ def _sorted_key_names(dict_):
 
 def test_valid_key():
     key = random.choice(list(KEY_TEST_DICT.keys()))
-    value = qecommon_tools.must_get_key(KEY_TEST_DICT, key)
+    value = jgt_common.must_get_key(KEY_TEST_DICT, key)
     assert value == KEY_TEST_DICT[key]
 
 
 def test_invalid_key():
-    key = qecommon_tools.generate_random_string()
+    key = jgt_common.generate_random_string()
     expected_msg = "{} is not one of: {}".format(key, _sorted_key_names(KEY_TEST_DICT))
     with pytest.raises(KeyError, match=expected_msg):
-        qecommon_tools.must_get_key(KEY_TEST_DICT, key)
+        jgt_common.must_get_key(KEY_TEST_DICT, key)
 
 
 def test_valid_keys():
-    value = qecommon_tools.must_get_keys(KEY_TEST_DICT, "nested", "a")
+    value = jgt_common.must_get_keys(KEY_TEST_DICT, "nested", "a")
     assert value == KEY_TEST_DICT["nested"]["a"]
 
 
 def test_invalid_keys():
-    key = qecommon_tools.generate_random_string()
+    key = jgt_common.generate_random_string()
     expected_msg = "{} is not one of: {}".format(
         key, _sorted_key_names(KEY_TEST_DICT["nested"])
     )
     with pytest.raises(KeyError, match=expected_msg):
-        qecommon_tools.must_get_keys(KEY_TEST_DICT, "nested", key)
+        jgt_common.must_get_keys(KEY_TEST_DICT, "nested", key)
 
 
 FORMAT_STR = "Test format string: {}"
@@ -387,24 +377,24 @@ FORMAT_STR = "Test format string: {}"
 
 def test_format_if_with_content():
     value = "test value"
-    assert qecommon_tools.format_if(FORMAT_STR, value) == FORMAT_STR.format(value)
+    assert jgt_common.format_if(FORMAT_STR, value) == FORMAT_STR.format(value)
 
 
 def test_format_if_no_content():
     value = None
-    assert qecommon_tools.format_if(FORMAT_STR, value) == ""
+    assert jgt_common.format_if(FORMAT_STR, value) == ""
 
 
 def test_default_if_none_with_content():
     # Pick a falsey value to make sure only None is being checked for.
     falsey_value = ""
     truthy_value = 57
-    assert qecommon_tools.default_if_none(falsey_value, truthy_value) == falsey_value
+    assert jgt_common.default_if_none(falsey_value, truthy_value) == falsey_value
 
 
 def test_default_if_none_with_none():
     arbitrary_default = 57  # Anything except None
-    assert qecommon_tools.default_if_none(None, arbitrary_default) == arbitrary_default
+    assert jgt_common.default_if_none(None, arbitrary_default) == arbitrary_default
 
 
 FALSEY_VALUES = [None, "", [], {}, False, 0]
@@ -429,31 +419,30 @@ ITERABLE_VALUES = [
 
 @pytest.mark.parametrize("falsey_items", FALSEY_VALUES)
 def test_list_from_empty_values(falsey_items):
-    assert qecommon_tools.list_from(falsey_items) == []
+    assert jgt_common.list_from(falsey_items) == []
 
 
 @pytest.mark.parametrize("single_items", SINGLE_ITEM_VALUES)
 def test_list_from_single_items(single_items):
-    assert len(qecommon_tools.list_from(single_items)) == 1
+    assert len(jgt_common.list_from(single_items)) == 1
 
 
 @pytest.mark.parametrize("iterable_items", ITERABLE_VALUES)
 def test_list_from_iterable(iterable_items):
-    results = qecommon_tools.list_from(iterable_items)
+    results = jgt_common.list_from(iterable_items)
     assert len(results) > 1
     for item in iterable_items:
         assert item in results
 
 
 def test_no_nones():
-    assert None not in qecommon_tools.no_nones(FALSEY_VALUES)
+    assert None not in jgt_common.no_nones(FALSEY_VALUES)
 
 
 def test_truths_from():
-    assert qecommon_tools.truths_from(FALSEY_VALUES) == []
+    assert jgt_common.truths_from(FALSEY_VALUES) == []
     assert (
-        qecommon_tools.truths_from(FALSEY_VALUES + SINGLE_ITEM_VALUES)
-        == SINGLE_ITEM_VALUES
+        jgt_common.truths_from(FALSEY_VALUES + SINGLE_ITEM_VALUES) == SINGLE_ITEM_VALUES
     )
 
 
@@ -461,11 +450,11 @@ def test_get_file_contents(temp_dir):
     file_path = path.join(temp_dir, "test.txt")
     with open(file_path, "w") as f:
         f.write(TEST_MESSAGE)
-    assert qecommon_tools.get_file_contents(file_path) == TEST_MESSAGE
+    assert jgt_common.get_file_contents(file_path) == TEST_MESSAGE
 
 
 def test_get_file_docstring():
-    assert qecommon_tools.get_file_docstring(__file__) == __doc__
+    assert jgt_common.get_file_docstring(__file__) == __doc__
 
 
 def _is_vowel(value):
@@ -485,7 +474,7 @@ FILTER_LINES_DATA = [
     "input_,expected_output,line_filter,return_type", FILTER_LINES_DATA
 )
 def test_filter_lines_given_str(input_, expected_output, line_filter, return_type):
-    output = qecommon_tools.filter_lines(line_filter, input_, return_type)
+    output = jgt_common.filter_lines(line_filter, input_, return_type)
     assert output == expected_output
 
 
@@ -512,22 +501,19 @@ STRING_TO_LIST_DATA = {
 @pytest.mark.parametrize("source,test_data", STRING_TO_LIST_DATA.items())
 def test_string_to_list(source, test_data):
     assert (
-        qecommon_tools.string_to_list(source, **test_data["kwargs"])
-        == test_data["results"]
+        jgt_common.string_to_list(source, **test_data["kwargs"]) == test_data["results"]
     )
 
 
 def test_fib_or_max():
     # All numbers chosen here are arbitrary
-    assert qecommon_tools.fib_or_max(0, 30) == 0
-    assert qecommon_tools.fib_or_max(6, 30) == 8
-    assert qecommon_tools.fib_or_max(1000, 30) == 30
+    assert jgt_common.fib_or_max(0, 30) == 0
+    assert jgt_common.fib_or_max(6, 30) == 8
+    assert jgt_common.fib_or_max(1000, 30) == 30
 
 
 def make_retry_helper(retry_count, exceptions_to_catch, max_retry_sleep):
-    @qecommon_tools.retry_on_exceptions(
-        retry_count, exceptions_to_catch, max_retry_sleep
-    )
+    @jgt_common.retry_on_exceptions(retry_count, exceptions_to_catch, max_retry_sleep)
     def function_that_might_throw(exception, counter_list_hack):
         counter_list_hack[0] += 1
         if exception:
@@ -588,7 +574,7 @@ def is_final_number(n):
 
 def test_check_until_pass():
     assert (
-        qecommon_tools.check_until(
+        jgt_common.check_until(
             cycle_func,
             is_final_number,
             timeout=CHECK_UNTIL_TIMEOUT,
@@ -599,10 +585,10 @@ def test_check_until_pass():
 
 
 def test_check_until_never():
-    with pytest.raises(qecommon_tools.IncompleteAtTimeoutException) as e:
-        qecommon_tools.check_until(
+    with pytest.raises(jgt_common.IncompleteAtTimeoutException) as e:
+        jgt_common.check_until(
             cycle_func,
-            qecommon_tools.always_false,
+            jgt_common.always_false,
             timeout=CHECK_UNTIL_TIMEOUT,
             cycle_secs=CHECK_UNTIL_CYCLE_SECS,
         )
@@ -614,16 +600,16 @@ def test_only_item_of():
     bad_lists = [[], list(range(100))]
     for bad_list in bad_lists:
         with pytest.raises(AssertionError):
-            qecommon_tools.only_item_of(bad_list)
+            jgt_common.only_item_of(bad_list)
 
-    assert qecommon_tools.only_item_of([1]) == 1
+    assert jgt_common.only_item_of([1]) == 1
 
 
 def test_simple_responseinfo_data():
-    response = qecommon_tools.generate_random_string()
-    description = qecommon_tools.generate_random_string()
-    extra_field = qecommon_tools.generate_random_string()
-    a_response = qecommon_tools.ResponseInfo(
+    response = jgt_common.generate_random_string()
+    description = jgt_common.generate_random_string()
+    extra_field = jgt_common.generate_random_string()
+    a_response = jgt_common.ResponseInfo(
         response=response, description=description, extra_field=extra_field
     )
     assert a_response.response == response
@@ -651,7 +637,7 @@ def random_string():
     ARBITRARY_CALLBACK_VALUE
     """
     # making the value larger ensures it won't collide.
-    return qecommon_tools.generate_random_string(size=len(ARBITRARY_CALLBACK_VALUE) + 1)
+    return jgt_common.generate_random_string(size=len(ARBITRARY_CALLBACK_VALUE) + 1)
 
 
 def arbitrary_callback():
@@ -660,7 +646,7 @@ def arbitrary_callback():
 
 
 def test_callback_response_data(random_string):
-    a_response = qecommon_tools.ResponseInfo(
+    a_response = jgt_common.ResponseInfo(
         response=random_string, response_callback=arbitrary_callback
     )
     assert a_response.response_data == ARBITRARY_CALLBACK_VALUE
@@ -670,7 +656,7 @@ def test_callback_response_data(random_string):
 
 
 def test_callback_response_data_callback_only_called_once():
-    a_response = qecommon_tools.ResponseInfo(response_callback=arbitrary_callback)
+    a_response = jgt_common.ResponseInfo(response_callback=arbitrary_callback)
 
     arbitrary_callback_counter[0] = 0
     a_response.run_response_callback()
@@ -685,14 +671,14 @@ def test_callback_response_data_callback_only_called_once():
 
 def test_extract_response_data():
     arbitrary_string = "arbitrary_string".lower()
-    a_response = qecommon_tools.ResponseInfo(
+    a_response = jgt_common.ResponseInfo(
         response=arbitrary_string, response_data_extract=str.swapcase
     )
     assert a_response.response_data == arbitrary_string.swapcase()
 
 
 def test_extract_and_callback_response_data(random_string):
-    a_response = qecommon_tools.ResponseInfo(
+    a_response = jgt_common.ResponseInfo(
         response=random_string,
         response_callback=arbitrary_callback,
         response_data_extract=str.swapcase,
@@ -702,13 +688,13 @@ def test_extract_and_callback_response_data(random_string):
 
 def test_empty_notemptylist_errors_out():
     with pytest.raises(AssertionError):
-        for item in qecommon_tools.NotEmptyList():
+        for item in jgt_common.NotEmptyList():
             pass
 
 
 def test_mundane_notemptylist():
     arbitrary_list_len = random.randint(1, 10)  # Anything > 0 is fine.
-    my_list = qecommon_tools.NotEmptyList()
+    my_list = jgt_common.NotEmptyList()
     my_list.extend(range(arbitrary_list_len))
     for item in my_list:
         pass  # make sure no exception thrown.
@@ -717,19 +703,19 @@ def test_mundane_notemptylist():
 
 def test_commonattributelist_attr_access():
     arbitrary_list_len = random.randint(1, 10)  # Anything > 0 is fine.
-    my_list = qecommon_tools.CommonAttributeList()
+    my_list = jgt_common.CommonAttributeList()
     for x in range(arbitrary_list_len):
-        my_list.append(qecommon_tools.ResponseInfo(data=x))
+        my_list.append(jgt_common.ResponseInfo(data=x))
     assert my_list.data == list(range(arbitrary_list_len))
 
 
 def test_commonattributelist_attr_set(random_string):
     arbitrary_list_len = random.randint(1, 10)  # Anything > 0 is fine.
-    my_list = qecommon_tools.CommonAttributeList()
+    my_list = jgt_common.CommonAttributeList()
 
     # First set up different data for each item
     for x in range(arbitrary_list_len):
-        my_list.append(qecommon_tools.ResponseInfo(data=x))
+        my_list.append(jgt_common.ResponseInfo(data=x))
 
     # overwrite data with the same value.
     my_list.data = random_string
@@ -740,11 +726,11 @@ def test_commonattributelist_attr_set(random_string):
 
 def test_commonattributelist_update_all(random_string):
     arbitrary_list_len = random.randint(1, 10)  # Anything > 0 is fine.
-    my_list = qecommon_tools.CommonAttributeList()
+    my_list = jgt_common.CommonAttributeList()
 
     # First set up different data for each item
     for x in range(arbitrary_list_len):
-        my_list.append(qecommon_tools.ResponseInfo(data=x))
+        my_list.append(jgt_common.ResponseInfo(data=x))
 
     my_list.update_all(data=random_string, data2=random_string + random_string)
 
@@ -755,7 +741,7 @@ def test_commonattributelist_update_all(random_string):
 
 def test_responselist_set():
     arbitrary_list_len = random.randint(1, 10)  # Anything > 0 is fine.
-    my_list = qecommon_tools.ResponseList()
+    my_list = jgt_common.ResponseList()
     my_list.extend(range(arbitrary_list_len))
     assert len(my_list) == arbitrary_list_len
     my_list.set([])
@@ -766,7 +752,7 @@ def test_responselist_set():
 
 
 def test_responselist_single_item():
-    my_list = qecommon_tools.ResponseList()
+    my_list = jgt_common.ResponseList()
     with pytest.raises(AssertionError):
         my_list.single_item
 
@@ -779,20 +765,20 @@ def test_responselist_single_item():
 
 
 def test_response_list_build_and_set(random_string):
-    response_list = qecommon_tools.ResponseList()
+    response_list = jgt_common.ResponseList()
 
     assert len(response_list) == 0
     response_list.build_and_set(response=random_string)
     assert len(response_list) == 1
-    assert isinstance(response_list.single_item, qecommon_tools.ResponseInfo)
+    assert isinstance(response_list.single_item, jgt_common.ResponseInfo)
 
 
 def test_response_list_run_response_callbacks():
     arbitrary_list_len = random.randint(1, 10)  # Anything > 0 is fine.
-    response_list = qecommon_tools.ResponseList()
+    response_list = jgt_common.ResponseList()
 
     response_list.extend(
-        qecommon_tools.ResponseInfo(response_callback=arbitrary_callback)
+        jgt_common.ResponseInfo(response_callback=arbitrary_callback)
         for x in range(arbitrary_list_len)
     )
     arbitrary_callback_counter[0] = 0
@@ -817,24 +803,24 @@ TICKET_DATA = (
 
 @pytest.mark.parametrize("ticket_id,system", TICKET_DATA)
 def test_ticketing_system_identification(ticket_id, system):
-    assert qecommon_tools.ticketing_system_for(ticket_id) == system
+    assert jgt_common.ticketing_system_for(ticket_id) == system
 
 
 @pytest.mark.parametrize("ticket_id,system", TICKET_DATA)
 def test_ticketing_system_urls(ticket_id, system):
-    url = qecommon_tools.url_if_ticket(ticket_id)
-    if system and system not in qecommon_tools.OBSOLETE_TICKETING_SYSTEMS:
+    url = jgt_common.url_if_ticket(ticket_id)
+    if system and system not in jgt_common.OBSOLETE_TICKETING_SYSTEMS:
         assert ticket_id in url
     else:
         assert url == ""
 
 
-UUID_BASIC_MATCHER = re.compile(qecommon_tools.UUID_BASIC_RE)
+UUID_BASIC_MATCHER = re.compile(jgt_common.UUID_BASIC_RE)
 
 
 def uuids_with_extra_text():
     target_uuid = str(uuid4())
-    extra_text = qecommon_tools.generate_random_string()
+    extra_text = jgt_common.generate_random_string()
     return [
         extra_text + target_uuid,
         extra_text + target_uuid + extra_text,
@@ -867,12 +853,12 @@ def test_uuid_basic_negative(broken_uuid):
     assert len(UUID_BASIC_MATCHER.findall(broken_uuid)) == 0
 
 
-UUID_ISOLATED_MATCHER = re.compile(qecommon_tools.UUID_ISOLATED_RE)
+UUID_ISOLATED_MATCHER = re.compile(jgt_common.UUID_ISOLATED_RE)
 
 
 def uuids_with_isolated_extra_text():
     target_uuid = str(uuid4())
-    extra_text = qecommon_tools.generate_random_string()
+    extra_text = jgt_common.generate_random_string()
     return [
         target_uuid,
         "/" + target_uuid,

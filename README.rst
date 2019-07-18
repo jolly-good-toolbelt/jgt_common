@@ -11,7 +11,7 @@ Just install via ``pip``:
 
 .. code::
 
-   pip install qecommon_tools
+   pip install jgt_common
 
 Usage
 =====

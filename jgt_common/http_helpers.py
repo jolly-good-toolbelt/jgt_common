@@ -6,7 +6,7 @@ import json
 
 import requests
 
-from qecommon_tools import build_classification_rst_string, classify, no_op
+from . import build_classification_rst_string, classify, no_op
 
 
 MAX_CALL_FAILURES = 5

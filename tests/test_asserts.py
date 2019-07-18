@@ -1,11 +1,11 @@
 """
-Unit tests for the qecommon_tools assert helpers.
+Unit tests for the jgt_common assert helpers.
 
 These are simple functions being tested, so the tests are pretty simple too.
 """
 
 import pytest
-from qecommon_tools import assert_
+from jgt_common import assert_
 
 
 def test_equality_asserts():

@@ -58,7 +58,7 @@ def main():
         "--module-first",
     ]
     print("Building API docs")
-    subprocess.check_call(sphinx_apidoc_cmd + ["qecommon_tools"], cwd=BASE_DIR)
+    subprocess.check_call(sphinx_apidoc_cmd + ["jgt_common"], cwd=BASE_DIR)
 
     # Copy over all the top level rST files so we don't
     # have to keep a duplicate list here.

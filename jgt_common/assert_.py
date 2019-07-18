@@ -1,5 +1,5 @@
 """Convenience functions for doing asserts with helpful names and helpful messages."""
-from qecommon_tools import format_if as _format_if
+from . import format_if as _format_if
 
 try:
     from math import isclose as _isclose

@@ -5,7 +5,7 @@ import os
 import re
 import sys
 
-from qecommon_tools import UUID_ISOLATED_RE
+from . import UUID_ISOLATED_RE
 
 
 UUID_ISOLATED_MATCHER = re.compile(UUID_ISOLATED_RE)

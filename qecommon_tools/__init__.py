@@ -12,13 +12,12 @@ general categories:
 
 from __future__ import print_function
 import ast
-from collections import OrderedDict
 from collections import defaultdict
 import itertools as _itertools
 import logging
 import os as _os
+import pkg_resources
 import random
-import re
 import shutil as _shutil
 import string as _string
 import subprocess as _subprocess
@@ -79,28 +78,13 @@ CHECK_UNTIL_TIMEOUT = 300
 CHECK_UNTIL_CYCLE_SECS = 5
 
 
-# Python 3.6+ preserves order of keyword arguments in a constructor,
-# but Python 2.7 does not, hence we have to assign keys outside of the constructor.
-# We use an OrderedDict here to be able to scan ticket patterns in an order of our
-# choosing, as per https://jira.rax.io/browse/TRM-365 (from when this was code just in
-# qe_coverage).
-_TICKET_INFO = OrderedDict()
-_TICKET_INFO["JIRA"] = {
-    "pattern": re.compile("^([A-Z][A-Z]+-[0-9]+)$"),
-    "url_template": "https://jira.rax.io/browse/{}",
-}
-_TICKET_INFO["SNOW"] = {
-    "pattern": re.compile("(^[A-Z][A-Z]+[0-9]+)$"),
-    "url_template": "https://rackspace.service-now.com/rm_story.do"
-    "?sysparm_query=number={}&sysparm_view=scrum",
-}
-_TICKET_INFO["VersionOne"] = {
-    "pattern": re.compile("(^[A-Z]-[0-9]+)$"),
-    "url_template": "",  # As of mid-2019, access to VersionOne system is not available.
-}
+_TICKET_INFO = defaultdict(dict)
+for data in pkg_resources.iter_entry_points("tag_to_url"):
+    _TICKET_INFO[data.name].update(data.load())
+
 
 OBSOLETE_TICKETING_SYSTEMS = [
-    key for key, meta_data in _TICKET_INFO.items() if not meta_data["url_template"]
+    key for key, meta_data in _TICKET_INFO.items() if not meta_data.get("url_template")
 ]
 """Systems for which we still support identifying Tickets, but no longer can access."""
 
@@ -505,7 +489,8 @@ def url_for_ticket(ticketing_system, ticket):
 
     Raises if ticketing_system is not a supported system.
     """
-    return must_get_key(_TICKET_INFO, ticketing_system)["url_template"].format(ticket)
+    system_dict = must_get_key(_TICKET_INFO, ticketing_system)
+    return system_dict.get("url_template", "").format(ticket)
 
 
 @classify("misc", "ticketing system")

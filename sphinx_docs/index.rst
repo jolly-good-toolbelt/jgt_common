@@ -6,8 +6,8 @@ Beyond The Quick Start
 
 .. _api-documentation:
 
-qecommon_tools - How To Use It - Module Documentation
------------------------------------------------------
+jgt_common - How To Use It - Module Documentation
+-------------------------------------------------
 
 For users of this package, the nitty gritty coding and configuration details.
 
@@ -15,14 +15,14 @@ For users of this package, the nitty gritty coding and configuration details.
    :maxdepth: 4
    :caption: Library
 
-   qecommon_tools
+   jgt_common
 
 .. _cli-docs:
 
 Command-Line/Utility Documentation
 ==================================
 
-``qecommon_tools`` supplies command-line utilities:
+``jgt_common`` supplies command-line utilities:
 
 - ``uuid-replacer``: Take a given file and replace all found UUIDs
   with easy-to-read placeholders and a glossary.
@@ -38,7 +38,7 @@ Maintainer's Documentation
    :caption: Maintainers
 
    MAINTAINER
-   CONTRIBUTING
+   CONTRIBUTORS
 
 
 

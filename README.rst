@@ -1,8 +1,8 @@
-QE Common Tools
-===============
+JGT Common Tools
+================
 
 A collection of tools that are shared
-across multiple organizations with Rackspace
+across multiple projects within Jolly Good Toolbelt
 
 Installation
 ============
@@ -11,7 +11,7 @@ Just install via ``pip``:
 
 .. code::
 
-   pip install qecommon_tools
+   pip install jgt_common
 
 Usage
 =====

@@ -31,9 +31,11 @@ release = version
 ######################################################
 
 # General information about your project.
-project = "QE Common Tools - A library of shared helpers"
-copyright = "2018, Rackspace Quality Engineering"  # noqa
-author = "QE Engineering"
+project = "JGT Common Tools - A library of shared helpers"
+copyright = (  # noqa: A001
+    "2018, Doug Philips, Lewis Franklin, Ryan Casperson, Brad Brown, & Shawn Dutton"
+)
+author = "Doug Philips, Lewis Franklin, Ryan Casperson, Brad Brown & Shawn Dutton"
 
 ######################################################
 # BELOW HERE YOU SHOULD BE ABLE TO LEAVE AS-IS.
@@ -106,5 +108,5 @@ if not base_url:
         owner_name = os.path.splitext(
             os.environ.get("GIT_ORIGIN_URL", "").split(":")[1]
         )[0]
-        base_url = f"https://github.rackspace.com/{owner_name}/tree/{commit_id}"
+        base_url = f"https://github.com/{owner_name}/tree/{commit_id}"
 html_context = {"build_id": commit_id, "build_url": base_url}

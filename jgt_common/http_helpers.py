@@ -6,7 +6,7 @@ import json
 
 import requests
 
-from qecommon_tools import build_classification_rst_string, classify, no_op
+from . import build_classification_rst_string, classify, no_op
 
 
 MAX_CALL_FAILURES = 5
@@ -442,7 +442,6 @@ def call_with_custom_logger(call, curl_logger):
     yield custom_call
 
     if hasattr(curl_logger, "done"):
-        # This is a temporary workaround pending QET-129.
         curl_logger.done()
 
 

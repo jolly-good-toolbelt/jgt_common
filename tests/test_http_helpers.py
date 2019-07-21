@@ -1,8 +1,8 @@
-"""Unit tests for the qecommon_tools.http_helpers."""
+"""Unit tests for the jgt_common.http_helpers."""
 import json
 
 import pytest
-from qecommon_tools import assert_, http_helpers, generate_random_string, always_true
+from jgt_common import assert_, http_helpers, generate_random_string, always_true
 import requests
 import requests_mock
 

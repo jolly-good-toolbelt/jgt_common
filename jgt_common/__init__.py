@@ -1,7 +1,7 @@
 """
 General helper functions.
 
-.. inheritance-diagram:: qecommon_tools
+.. inheritance-diagram:: jgt_common
    :parts: 1
 
 ----
@@ -843,7 +843,7 @@ def check_until(
             value.
 
     Raises:
-        qecommon_tools.IncompleteAtTimeoutException: if function_call's result never
+        jgt_common.IncompleteAtTimeoutException: if function_call's result never
             satisfies the is_complete_validator before timeout is reached.
 
     """

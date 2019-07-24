@@ -1,9 +1,13 @@
 [tool.poetry]
 name = "jgt_common"
-version = "1.0.0"
+version = "1.0.1"
 description = "A library for helper functions across Jolly Good Toolbelt designed for larger consumption"
 authors = ["Doug Philips <dgou@mac.com>", "Lewis Franklin <github@brolewis.com>", "Ryan Casperson <casperson.ryan@gmail.com>", "Brad Brown <brad@bradsbrown.com>", "Shawn Dutton <Shawndutton1@gmail.com>"]
 license = "MIT"
+readme = "README.rst"
+homepage = "https://jolly-good-toolbelt.github.io/jgt_common/"
+documentation = "https://jolly-good-toolbelt.github.io/jgt_common/"
+repository = "https://github.com/jolly-good-toolbelt/jgt_common"
 
 [tool.poetry.dependencies]
 python = "^3.6"

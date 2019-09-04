@@ -16,6 +16,8 @@ from collections import defaultdict
 import itertools as _itertools
 import logging
 import os as _os
+from math import nan
+
 import pkg_resources
 import random
 import shutil as _shutil
@@ -1162,6 +1164,20 @@ def build_classification_rst_string(from_dict, for_module, category_name_mapping
 
     result += "\n---------\n\n"
     return result
+
+
+@classify("misc")
+def percent_diff(a, b, precision=2):
+    """Get percentage difference, out to ``precision`` places."""
+    if a == b:
+        return 0
+    elif a == 0 or b == 0:
+        return nan
+    # It is debatable whether this is the correct choice for determining
+    # relative difference. min(), max(), and the mean all have a case to be made for
+    # them, both with and without abs(). See, e.g.:
+    # https://en.wikipedia.org/wiki/Relative_change_and_difference#Definitions
+    return round(abs((a - b) / max(abs(a), abs(b))) * 100, precision)
 
 
 # Define this here because it is needed by the other scripts.

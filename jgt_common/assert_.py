@@ -1,6 +1,6 @@
 """Convenience functions for doing asserts with helpful names and helpful messages."""
+from jgt_common import percent_diff
 from . import format_if as _format_if
-from math import inf
 
 try:
     from math import isclose as _isclose
@@ -13,16 +13,6 @@ except ImportError:
 def _msg_concat(prefix, body):
     """Join with a space if prefix isn't empty."""
     return "{} {}".format(prefix, body) if prefix else body
-
-
-def _percent_diff(a, b, precision=2):
-    """Get percentage difference, out to ``precision`` places."""
-    if a == b:
-        return 0
-    try:
-        return round(abs((a - b) / max(abs(a), abs(b))) * 100, precision)
-    except ZeroDivisionError:
-        return inf
 
 
 def not_eq(expected, actual, msg=""):
@@ -104,7 +94,7 @@ def is_close(a, b, msg="", **isclose_kwargs):
             a,
             b,
             abs(a - b),
-            _percent_diff(a, b),
+            percent_diff(a, b),
             _format_if(": kwargs: {}", isclose_kwargs),
         ),
     )

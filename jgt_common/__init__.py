@@ -852,16 +852,16 @@ def check_until(
     debug = logger.debug if logger else no_op
 
     check_start = _time.time()
-    debug("***logging response content of final call of loop only***")
-
-    result = function_call(*fn_args, **fn_kwargs)
     end_time = _time.time() + timeout
-    while _time.time() < end_time:
+
+    while True:
         result = function_call(*fn_args, **fn_kwargs)
         if is_complete_validator(result):
             time_elapsed = round(_time.time() - check_start, 2)
             debug("Final response achieved in {} seconds".format(time_elapsed))
             return result
+        if _time.time() > end_time:
+            break
         _time.sleep(cycle_secs)
     # If a result wasn't returned from within the while loop,
     # we have reached timeout without a valid result.

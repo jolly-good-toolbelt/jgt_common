@@ -572,6 +572,23 @@ def is_final_number(n):
     return n == CYCLE_ITEMS[-1]
 
 
+def test_check_until_function_call_is_only_invoked_once_if_first_call_succeeds():
+    call_log = []
+    arbitrary_but_non_trivial_timeout = 10
+    arbitrary_but_non_trivial_cycle_secs = 1
+    arbitrary_fn_args = (1,)
+    jgt_common.check_until(
+        call_log.append,
+        lambda *args: True,
+        fn_args=arbitrary_fn_args,
+        timeout=arbitrary_but_non_trivial_timeout,
+        cycle_secs=arbitrary_but_non_trivial_cycle_secs,
+    )
+    assert (
+        len(call_log) == 1
+    ), "check_until invoked function_call the wrong number of times!"
+
+
 def test_check_until_pass():
     assert (
         jgt_common.check_until(

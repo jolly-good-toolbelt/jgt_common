@@ -1,4 +1,5 @@
 """Convenience functions for doing asserts with helpful names and helpful messages."""
+from jgt_common import percent_diff
 from . import format_if as _format_if
 
 try:
@@ -88,8 +89,13 @@ def is_close(a, b, msg="", **isclose_kwargs):
     """Assert that math.isclose returns True based on the given values."""
     assert _isclose(a, b, **isclose_kwargs), _msg_concat(
         msg,
-        "Expected '{}' to be close to '{}'{}".format(
-            a, b, _format_if(": kwargs: {}", isclose_kwargs)
+        "Expected '{}' to be close to '{}', "
+        "but they differ by '{}', a difference of '{}%'.{}".format(
+            a,
+            b,
+            abs(a - b),
+            percent_diff(a, b),
+            _format_if(": kwargs: {}", isclose_kwargs),
         ),
     )
 

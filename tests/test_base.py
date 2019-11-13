@@ -2,6 +2,7 @@
 
 from itertools import product, cycle
 import tempfile
+from math import nan
 from uuid import uuid4
 from os import path, mkdir
 import random
@@ -899,3 +900,25 @@ def test_uuid_isolated_positive(uuid_with_isolated_extra_text):
 @pytest.mark.parametrize("uuid_with_extra_text", uuids_with_extra_text())
 def test_uuid_isolated_negative(uuid_with_extra_text):
     assert len(UUID_ISOLATED_MATCHER.findall(uuid_with_extra_text)) == 0
+
+
+@pytest.mark.parametrize("bad_arg", ["4", object(), None])
+def test_percent_diff_bad_input(bad_arg):
+    with pytest.raises(TypeError):
+        assert jgt_common.percent_diff(bad_arg, 1) == 1.0
+
+
+@pytest.mark.parametrize(
+    "precision,expected",
+    [(1, 15.1), (2, 15.05), (3, 15.051), (4, 15.0513), (5, 15.05132)],
+)
+def test_percent_diff(precision, expected):
+    assert jgt_common.percent_diff(21.443, 25.2423, precision) == expected
+
+
+def test_percent_diff_no_diff():
+    assert jgt_common.percent_diff(1, 1) == 0.0
+
+
+def test_percent_diff_zero_arg():
+    assert jgt_common.percent_diff(0, 1) is nan

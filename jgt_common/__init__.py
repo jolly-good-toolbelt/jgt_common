@@ -987,7 +987,7 @@ class ResponseInfo(object):
         description=None,
         response_callback=None,
         response_data_extract=None,
-        **kwargs
+        **kwargs,
     ):
 
         super(ResponseInfo, self).__init__()
@@ -1092,6 +1092,90 @@ class ResponseList(NotEmptyList, CommonAttributeList):
         """Call ``run_response_callback`` on each item of this ReponseList."""
         for resp_info in self:
             resp_info.run_response_callback()
+
+
+@classify("misc", "class")
+class Flag(object):
+    """
+    A settable, nameable Boolean flag.
+
+    Instances can be used in a boolean context (if/while/etc.)
+
+    Call the instance to set a new value, returning the previous value.
+
+    ``.value`` to access the value.
+    ``.name`` to access the name.
+
+    Motivation:
+    Importing a boolean value from another module makes a new binding;
+    changing the imported binding does not change the imported-from-modules value.
+    Additionally, this gives you a nice named value for str() and repr(),
+    and a clean way to handle assigning new values and toggling existing values.
+
+    Typical use might be: (imports elided)
+    ```
+    limit_thing = Flag(initial_value=False, name="Limit size of thing")
+    ```
+
+    Command line code:
+    ```
+    limit_thing(args.limit_thing)
+    ```
+
+    Off in some module:
+    ```
+    def do_thing():
+        ...
+        loop_size = LIMITED_SIZE if limit_thing else MAX_SIZE
+        ...
+
+    For where you want an external semantic control over code
+    without having to expose implementation details of that code
+    to the control point;
+    keeping the determination of, say, "running smoke tests,"
+    or "running in a deployment pipeline," or "running in a PR checker,"
+    separate from how the code will react to that condition.
+    ```
+
+
+    """
+
+    def __init__(self, initial_value=False, name="Flag"):
+        self._value = bool(initial_value)
+        self._name = name
+
+    def __call__(self, new_value):  # noqa: D102
+        old_value, self._value = self._value, bool(new_value)
+        return old_value
+
+    def toggle(self):
+        """Flip to the opposite value, return the old value."""
+        return self(not self)
+
+    @property
+    def value(self):  # noqa: D102
+        return self._value
+
+    @property
+    def name(self):  # noqa: D102
+        return self._name
+
+    def __str__(self):  # noqa: D105
+        return f"{self.name}->{self.value}"
+
+    def __repr__(self):  # noqa: D105
+        return (
+            f"<{self.__class__.__name__}"
+            f"(initial_value={self.value}, name={self.name!r})>"
+        )
+
+    def __bool__(self):
+        """
+        Instances are useable in boolean contexts.
+
+        See https://docs.python.org/3/reference/datamodel.html#object.__bool__
+        """
+        return self.value
 
 
 @classify("doc")

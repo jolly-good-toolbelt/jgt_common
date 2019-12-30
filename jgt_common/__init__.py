@@ -872,6 +872,86 @@ def check_until(
     raise IncompleteAtTimeoutException(msg, call_result=result, timeout=timeout)
 
 
+@classify("misc", "exceptions")
+def assert_if_values(format_if_format, error_fun=lambda x: "\n".join(truths_from(x))):
+    """
+    Assert if any truthy values are returned (or yielded) from the decorated function.
+
+    Any values that the decorated function yields/returns are passed to ``error_fun``.
+    ``format_if_format``, and the result of the ``error_fun`` call,
+    are passed to ``format_if``.
+    The result of the ``format_if`` call is used for an assertion.
+
+    Args:
+        format_if_format (str): the first parameter to format_if.
+        error_fun (callable): called on the results of the decorated function,
+            return value will be passed as the 2nd parameter to format_if.
+            The default function will only process truthy values.
+            That can be changed by passing in your own custom ``error_run``
+
+    Returns:
+        None - If no values are returned, or yielded,
+        or the result of ``error_fun`` is falsey, return None.
+
+    Raises:
+        AssertionError - as described above.
+
+    This decorator is meant to simplify code that otherwise has to manually keep
+    track of a list of things to complain about::
+
+        errors = []
+        for thing in things:
+           if bad(thing):
+               errors.append(description_of(thing))
+        err_msg = format_if("blah blah blah: {}", "".join(errors))
+        assert not err_msg, err_msg
+
+    into simpler code::
+
+        @assert_if_values("blah blah blah: {}")
+        ...
+            for thing in things:
+                if bad(thing):
+                    yield description_of(thing)
+
+    """
+
+    @_wrapt.decorator
+    def helper(wrapped, instance, args, kwargs):
+        err_msg = format_if(format_if_format, error_fun(wrapped(*args, **kwargs)))
+        assert not err_msg, err_msg
+
+    return helper
+
+
+# NOTE: Not using wrapt. as wrapt would add another level of nesting / complexity..
+#       The intent is dynamic run-time wrapping, not static decorating of, a function.
+#       If that changes, then this could change to use wrapt later without changing
+#       the users of this function.
+
+
+@classify("misc", "sequence")
+def accumulator_for(fun):
+    """
+    Accumulate the results of calling fun into a list, and return that list.
+
+    Note: If you use this is a straight-up decorator,
+    then all invocations of the function will accumulate into one list.
+    The intention is that you use this as an on-the-spot wrapper,
+    for things such as ``check_until``,
+    where you want each caller to have it's own accumulating list.
+    One use case would be using ``check_until``
+    where "until" is, say, "the last <n> results match".
+    """
+    results_list = []
+
+    def wrapped_fun(*args, **kwargs):
+        results_list.append(fun(*args, **kwargs))
+        return results_list
+
+    return wrapped_fun
+
+
 @classify("sequence")
 def only_item_of(item_sequence, label=""):
     """Assert item_sequence has only one item, and return that item."""

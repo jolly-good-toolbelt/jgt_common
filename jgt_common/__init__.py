@@ -1112,32 +1112,27 @@ class Flag(object):
     Additionally, this gives you a nice named value for str() and repr(),
     and a clean way to handle assigning new values and toggling existing values.
 
-    Typical use might be: (imports elided)
-    ```
-    limit_thing = Flag(initial_value=False, name="Limit size of thing")
-    ```
+    Typical use might be::
 
-    Command line code:
-    ```
-    limit_thing(args.limit_thing)
-    ```
+        limit_thing = Flag(initial_value=False, name="Limit size of thing")
 
-    Off in some module:
-    ```
-    def do_thing():
-        ...
-        loop_size = LIMITED_SIZE if limit_thing else MAX_SIZE
-        ...
+    In the Command line processing code::
 
-    For where you want an external semantic control over code
+        limit_thing(args.limit_thing)
+
+    Off in some module::
+
+        def do_thing():
+            ...
+            loop_size = LIMITED_SIZE if limit_thing else MAX_SIZE
+            ...
+
+    Use an instance of this class where you want semantic control over code
     without having to expose implementation details of that code
     to the control point;
     keeping the determination of, say, "running smoke tests,"
     or "running in a deployment pipeline," or "running in a PR checker,"
     separate from how the code will react to that condition.
-    ```
-
-
     """
 
     def __init__(self, initial_value=False, name="Flag"):

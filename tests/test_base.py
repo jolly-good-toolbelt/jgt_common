@@ -922,3 +922,25 @@ def test_percent_diff_no_diff():
 
 def test_percent_diff_zero_arg():
     assert jgt_common.percent_diff(0, 1) is nan
+
+
+@pytest.mark.parametrize(
+    "value,name",
+    [
+        (True, "I am True"),
+        (False, "False is my value"),
+        (1, "1 is not False"),  # Arbitrary truthy value '1'
+        ("", "Empty string is not True"),  # Arbitrary falsey value ""
+    ],
+)
+def test_flag_basics(value, name):
+    flag = jgt_common.Flag(initial_value=value, name=name)
+    original_bool_ness = bool(value)
+    assert bool(flag) is original_bool_ness
+    assert flag.value is bool(value)
+    assert flag.name == name
+
+    # Now see if toggle returns the original value...
+    assert flag.toggle() is original_bool_ness
+    # and sets the current value to it's opposite
+    assert bool(flag) is not original_bool_ness

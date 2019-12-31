@@ -887,14 +887,14 @@ def assert_if_values(format_if_format, error_fun=lambda x: "\n".join(truths_from
         error_fun (callable): called on the results of the decorated function,
             return value will be passed as the 2nd parameter to format_if.
             The default function will only process truthy values.
-            That can be changed by passing in your own custom ``error_run``
+            That can be changed by passing in your own custom ``error_fun``
 
     Returns:
         None - If no values are returned, or yielded,
         or the result of ``error_fun`` is falsey, return None.
 
     Raises:
-        AssertionError - as described above.
+        AssertionError: as described above.
 
     This decorator is meant to simplify code that otherwise has to manually keep
     track of a list of things to complain about::

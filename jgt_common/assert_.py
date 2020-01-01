@@ -5,55 +5,46 @@
 # In the spirit of DRY, please see that module for details.
 
 
+from inspect import getmodule as _getmodule
+from inspect import getmembers as _getmembers
 from inspect import isfunction as _isfunction
 
-import wrapt as _wrapt
+from wrapt import decorator as _decorator
 
 from . import check as _check
 
-_check_module_name = _check.__name__
-
-_glbls = globals()
-
-
 # Used internally, but there is no reason to prevent it from being used externally.
-@_wrapt.decorator
+@_decorator
 def assert_if_truthy(wrapped, instance, args, kwargs):
     """Assert if the decorated function returns a truthy value (error indicator)."""
     result = wrapped(*args, **kwargs)
     assert not result, result
 
 
-def _pretty_assert_for(fun):
+def _make_asserter(member):
     """
-    Make fun an asserting function _and_ take ownership of the wrapper.
+    Make fun part of member an asserting function _and_ take ownership of the wrapper.
 
     wrapt preserves a little _too_ much and we want the wrapped function
     to have a more accurate doc string and a module attribute that shows it belongs
     to us instead of ``check``, which could be confusing.
     """
+    name, fun = member
     new_fun = assert_if_truthy(fun)
     new_fun.__doc__ = new_fun.__doc__.replace("Check", "Assert")
     new_fun.__module__ = __name__
-    return new_fun
+    return (name, new_fun)
 
 
-for _thing_name in dir(_check):
-    # If the check module ever defines __all__ we should use that here,
-    # for now use the standard python convention...
-    if _thing_name.startswith("_"):
-        continue
+def _is_exported_name(name):
+    """Is ``name`` something that check wants exported."""
+    # If ``check`` ever switches to using the ``__all__`` mechanism, update this code:
+    return not name.startswith("_")
 
-    _thing = getattr(_check, _thing_name)
 
-    # The check module should be clean and only import things with
-    # the underscore prefix, but we're being extra careful here:
-    if getattr(_thing, "__module__", None) != _check_module_name:
-        continue
+def _should_be_wrapped(member):
+    name, obj = member
+    return _is_exported_name(name) and _isfunction(obj) and _getmodule(obj) == _check
 
-    # Only wrapping functions for now because it's not obvious what wrapping
-    # classes or other callables might mean.
-    if not _isfunction(_thing):
-        continue
 
-    _glbls[_thing_name] = _pretty_assert_for(_thing)
+globals().update(map(_make_asserter, filter(_should_be_wrapped, _getmembers(_check))))

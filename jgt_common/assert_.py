@@ -5,28 +5,35 @@
 # In the spirit of DRY, please see that module for details.
 
 
+from functools import wraps as _wraps
 from inspect import getmodule as _getmodule
 from inspect import getmembers as _getmembers
 from inspect import isfunction as _isfunction
 
-from wrapt import decorator as _decorator
-
 from . import check as _check
 
+
 # Used internally, but there is no reason to prevent it from being used externally.
-@_decorator
-def assert_if_truthy(wrapped, instance, args, kwargs):
-    """Assert if the decorated function returns a truthy value (error indicator)."""
-    result = wrapped(*args, **kwargs)
-    assert not result, result
+def assert_if_truthy(fun):
+    """(Decorator) Assert if fun returns a truthy value (error indicator)."""
+
+    # NOTE: Not using ``wrapt`` because it forwards attributes
+    #       from the wrapping function to the wrapped function,
+    #       which will break the code in _make_asserter.
+    @_wraps(fun)
+    def wrapper(*args, **kwargs):
+        result = fun(*args, **kwargs)
+        assert not result, result
+
+    return wrapper
 
 
 def _make_asserter(member):
     """
     Make fun part of member an asserting function _and_ take ownership of the wrapper.
 
-    wrapt preserves a little _too_ much and we want the wrapped function
-    to have a more accurate doc string and a module attribute that shows it belongs
+    The wrapped function should have a correct doc string,
+    and a module attribute that shows it belongs
     to us instead of ``check``, which could be confusing.
     """
     name, fun = member

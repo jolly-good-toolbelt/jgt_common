@@ -924,25 +924,40 @@ def assert_if_values(format_if_format, error_fun=lambda x: "\n".join(truths_from
     return helper
 
 
-# NOTE: Not using wrapt. as wrapt would add another level of nesting / complexity..
-#       The intent is dynamic run-time wrapping, not static decorating of, a function.
-#       If that changes, then this could change to use wrapt later without changing
-#       the users of this function.
-
-
 @classify("misc", "sequence")
 def accumulator_for(fun):
     """
-    Accumulate the results of calling fun into a list, and return that list.
+    Accumulate the results of calling fun into a unique list, returning that list.
 
-    Note: If you use this is a straight-up decorator,
-    then all invocations of the function will accumulate into one list.
-    The intention is that you use this as an on-the-spot wrapper,
-    for things such as ``check_until``,
-    where you want each caller to have it's own accumulating list.
-    One use case would be using ``check_until``
-    where "until" is, say, "the last <n> results match".
+    Everytime the decorated function is called, its results are appended
+    to a list, and that list is returned instead.
+    Each invocation of this function results in a wrapper that uses its own
+    unique list.
+
+    NOTE: If you use this is as a decorator on a function definition,
+    ALL invocations of the function will accumulate into a single list.
+    This is probably not what you want.
+
+    The intent is to use this decorator "as needed"::
+
+        def get_thing_when_stable():
+            '''
+            Get a thing when the API returns a stable result.
+
+            A stable result is when 3 consecutive payloads match.
+            If no stable result is achieved, an IncompleteAtTimeoutException exception
+            is raised.
+            '''
+            results = check_until(accumulator_for(api_get_thing), last_3_payloads_equal)
+            return get_thing_from_payload(results[-1])
+
     """
+    # NOTE: Not using wrapt; it would add another level of nesting / complexity,
+    #       for dynamic run-time wrapping of a function.
+    #       If we find that this is used for decorating function defintiions,
+    #       this decision about using wrapt can be changed without affecting
+    #       the users of this function.
+
     results_list = []
 
     def wrapped_fun(*args, **kwargs):

@@ -1,132 +1,59 @@
 """Convenience functions for doing asserts with helpful names and helpful messages."""
-from jgt_common import percent_diff
-from . import format_if as _format_if
 
-try:
-    from math import isclose as _isclose
-except ImportError:
-    # noqa E501 From: https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python/5595453
-    def _isclose(a, b, rel_tol=1e-09, abs_tol=0.0):
-        return abs(a - b) <= max(rel_tol * max(abs(a), abs(b)), abs_tol)
+# NOTE TO IMPLEMENTORS:
+# This module depends on the contracts described in our sibling module ``check``.
+# In the spirit of DRY, please see that module for details.
 
 
-def _msg_concat(prefix, body):
-    """Join with a space if prefix isn't empty."""
-    return "{} {}".format(prefix, body) if prefix else body
+from inspect import isfunction as _isfunction
+
+import wrapt as _wrapt
+
+from . import check as _check
+
+_check_module_name = _check.__name__
+
+_glbls = globals()
 
 
-def not_eq(expected, actual, msg=""):
-    """Assert the values to not be equal."""
-    assert expected != actual, _msg_concat(
-        msg, "Expected '{}' to be not equal to actual '{}'".format(expected, actual)
-    )
+# Used internally, but there is no reason to prevent it from being used externally.
+@_wrapt.decorator
+def assert_if_truthy(wrapped, instance, args, kwargs):
+    """Assert if the decorated function returns a truthy value (error indicator)."""
+    result = wrapped(*args, **kwargs)
+    assert not result, result
 
 
-def eq(expected, actual, msg=""):
-    """Assert the values are equal."""
-    assert expected == actual, _msg_concat(
-        msg, "Expected '{}' == actual '{}'".format(expected, actual)
-    )
-
-
-def less(a, b, msg=""):
-    """Assert that a < b."""
-    assert a < b, _msg_concat(msg, "Expected '{}' < '{}'".format(a, b))
-
-
-def less_equal(a, b, msg=""):
-    """Assert that a <= b."""
-    assert a <= b, _msg_concat(msg, "Expected '{}' <= '{}'".format(a, b))
-
-
-def greater(a, b, msg=""):
-    """Assert that a > b."""
-    assert a > b, _msg_concat(msg, "Expected '{}' > '{}'".format(a, b))
-
-
-def greater_equal(a, b, msg=""):
-    """Assert that a >= b."""
-    assert a >= b, _msg_concat(msg, "Expected '{}' >= '{}'".format(a, b))
-
-
-def is_in(value, sequence, msg=""):
-    """Assert that value is in the sequence."""
-    assert value in sequence, _msg_concat(
-        msg, "Expected: '{}' to be in '{}'".format(value, sequence)
-    )
-
-
-def any_in(a_sequence, b_sequence, msg=""):
-    """Assert at least one member of a_sequence is in b_sequence."""
-    assert any(a in b_sequence for a in a_sequence), _msg_concat(
-        msg, "None of: '{}' found in '{}'".format(a_sequence, b_sequence)
-    )
-
-
-def not_in(item, sequence, msg=""):
-    """Assert item is not in sequence."""
-    assert item not in sequence, _msg_concat(
-        msg, "Did NOT Expect: '{}' to be in '{}'".format(item, sequence)
-    )
-
-
-def is_not_none(a, msg=""):
-    """Assert a is not None."""
-    assert a is not None, _msg_concat(msg, "'{}' should not be None".format(a))
-
-
-def is_not_empty(sequence, msg=""):
+def _pretty_assert_for(fun):
     """
-    Semantically more helpful than just ``assert sequence``.
+    Make fun an asserting function _and_ take ownership of the wrapper.
 
-    Sequences and containers in python are False when empty, and True when not empty.
-    This helper reads better in the test code and in the error message.
+    wrapt preserves a little _too_ much and we want the wrapped function
+    to have a more accurate doc string and a module attribute that shows it belongs
+    to us instead of ``check``, which could be confusing.
     """
-    assert sequence, _msg_concat(msg, "'{}' - should not be empty".format(sequence))
+    new_fun = assert_if_truthy(fun)
+    new_fun.__doc__ = new_fun.__doc__.replace("Check", "Assert")
+    new_fun.__module__ = __name__
+    return new_fun
 
 
-def is_close(a, b, msg="", **isclose_kwargs):
-    """Assert that math.isclose returns True based on the given values."""
-    assert _isclose(a, b, **isclose_kwargs), _msg_concat(
-        msg,
-        "Expected '{}' to be close to '{}', "
-        "but they differ by '{}', a difference of '{}%'.{}".format(
-            a,
-            b,
-            abs(a - b),
-            percent_diff(a, b),
-            _format_if(": kwargs: {}", isclose_kwargs),
-        ),
-    )
+for _thing_name in dir(_check):
+    # If the check module ever defines __all__ we should use that here,
+    # for now use the standard python convention...
+    if _thing_name.startswith("_"):
+        continue
 
+    _thing = getattr(_check, _thing_name)
 
-def almost_equal(actual, expected, places=2, msg=""):
-    """Assert that actual and expected are within `places` equal."""
-    # Set relative tolerance to 0 because we don't want that messing up the places check
-    relative_tolerance = 0
-    absolute_tolerance = 10.0 ** (-places)
-    assert _isclose(
-        expected, actual, rel_tol=relative_tolerance, abs_tol=absolute_tolerance
-    ), _msg_concat(
-        msg, "Expected '{}' to be almost equal to '{}'".format(actual, expected)
-    )
+    # The check module should be clean and only import things with
+    # the underscore prefix, but we're being extra careful here:
+    if getattr(_thing, "__module__", None) != _check_module_name:
+        continue
 
+    # Only wrapping functions for now because it's not obvious what wrapping
+    # classes or other callables might mean.
+    if not _isfunction(_thing):
+        continue
 
-def is_singleton_list(sequence, item_description="something", msg=""):
-    """Make sure the sequence has exactly one item (of item_description)."""
-    assert len(sequence) == 1, _msg_concat(
-        msg,
-        "Expected to find a one item list of {} but found '{}' instead".format(
-            item_description, sequence
-        ),
-    )
-
-
-def is_instance(value, of_type, msg=""):
-    """Assert value is instance of of_type."""
-    assert isinstance(value, of_type), _msg_concat(
-        msg,
-        "Got value '{}' of type '{}' when expecting something of type {}".format(
-            value, type(value), of_type
-        ),
-    )
+    _glbls[_thing_name] = _pretty_assert_for(_thing)

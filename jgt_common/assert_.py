@@ -38,7 +38,8 @@ def _make_asserter(member):
     """
     name, fun = member
     new_fun = assert_if_truthy(fun)
-    new_fun.__doc__ = new_fun.__doc__.replace("Check", "Assert")
+    if new_fun.__doc__:
+        new_fun.__doc__ = new_fun.__doc__.replace("Check", "Assert")
     new_fun.__module__ = __name__
     return (name, new_fun)
 

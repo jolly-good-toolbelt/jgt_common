@@ -399,16 +399,7 @@ def test_default_if_none_with_none():
 
 
 FALSEY_VALUES = [None, "", [], {}, False, 0]
-SINGLE_ITEM_VALUES = [
-    1,
-    11111,
-    "1",
-    "ABCDEFG",
-    u"ABCDEFG",
-    [[]],
-    {"A": 1, "B": 2},
-    True,
-]
+SINGLE_ITEM_VALUES = [1, 11111, "1", "ABCDEFG", "ABCDEFG", [[]], {"A": 1, "B": 2}, True]
 ITERABLE_VALUES = [
     [1, 2, 3],
     list("abcde"),
@@ -944,3 +935,44 @@ def test_flag_basics(value, name):
     assert flag.toggle() is original_bool_ness
     # and sets the current value to it's opposite
     assert bool(flag) is not original_bool_ness
+
+
+def test_accumulator_for():
+    def helper():
+        return "Arbitrary value"
+
+    helper_a = jgt_common.accumulator_for(helper)
+    helper_b = jgt_common.accumulator_for(helper)
+
+    # arbitrary values, but they should be different:
+    call_a_count = 5
+    call_b_count = call_a_count + 3
+
+    for x in range(call_a_count):
+        a_list = helper_a()
+
+    for x in range(call_b_count):
+        b_list = helper_b()
+
+    assert a_list is not b_list, "Accumulators should be different lists"
+    assert len(a_list) != len(b_list), "Accumulators mixed up"
+    assert len(a_list) == call_a_count, "Accumulator failure for a"
+    assert len(b_list) == call_b_count, "Accumulator failure for b"
+
+
+def test_assert_if_values():
+    @jgt_common.assert_if_values("Got some odd values:\n{}")
+    def assert_all_odd_values(sequence):
+        for item in sequence:
+            if item % 2:
+                yield f"{item} is odd!"
+
+    with pytest.raises(AssertionError):
+        # Pick an arbitrary range size, long enough to have some odd values in it
+        assert_all_odd_values(range(10))
+
+    # a few arbitrary non-odd values:
+    assert_all_odd_values([0, 2, 100, 200])
+
+    # No values, no problem.
+    assert_all_odd_values([])

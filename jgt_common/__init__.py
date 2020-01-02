@@ -954,7 +954,7 @@ def accumulator_for(fun):
     """
     # NOTE: Not using wrapt; it would add another level of nesting / complexity,
     #       for dynamic run-time wrapping of a function.
-    #       If we find that this is used for decorating function defintiions,
+    #       If we find that this is used for decorating function definitions,
     #       this decision about using wrapt can be changed without affecting
     #       the users of this function.
 

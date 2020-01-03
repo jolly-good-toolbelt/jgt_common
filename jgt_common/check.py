@@ -25,7 +25,7 @@ can be exploited for use with ``format_if`` or ``assert`` or ...
 #   is tested via the ``assert_`` module's tests.
 #   New functions added here should have new assertion tests in tests/test_asserts.py
 
-from jgt_common import percent_diff
+from . import percent_diff
 from . import format_if as _format_if
 
 try:

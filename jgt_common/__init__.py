@@ -357,7 +357,7 @@ def safe_run(commands, cwd=None):
 
 
 @classify("exit")  # noqa: A001
-def exit(status=0, message=None):
+def exit(status=0, message=None):  # noqa: A001
     """
     Exit the program and optionally print a message to standard error.
 

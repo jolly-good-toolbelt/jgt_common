@@ -10,7 +10,7 @@ Terminology:
 
 Purpose:
 
-   These helpers are meant to used for "spot" parallelism,
+   These helpers are meant to be used for "spot" parallelism,
    not for whole application parallelism. In places where the code needs to do
    a whole bunch of slow things that could be done in parallel (API calls, etc)
    and then "goes synchronous again."  (Testing is one such use case.)

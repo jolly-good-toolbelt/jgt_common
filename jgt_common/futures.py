@@ -48,7 +48,7 @@ def set_thread_pool_size(max_workers):
 
 # Implemenation note:
 # This function is _not_ memoized:
-# If no executor is ever created, the shutdown function need do nothing.
+# If no executor is ever created, the shutdown function doesn't need to do anything.
 # If the only way to get at the executor was via this function,
 # then shutdown might create an executor just to shut it down.
 def get_executor():

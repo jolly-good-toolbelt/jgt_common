@@ -59,7 +59,7 @@ def get_executor():
         ThreadPoolExecutor: the shared thread pool executor.
 
     Raises:
-        TypeError: if set_thread_pool_size() was not called first.
+        TypeError: if ``set_thread_pool_size()`` was not called first.
 
     """
 
@@ -81,7 +81,7 @@ def shutdown_executor():
 
 def run_each(iterable, func):
     """
-    Call func on each item in iterable, using a future.
+    Call ``func`` on each item in ``iterable``, using a future.
 
     The returned fdict's futures (keys of the fdict) may or may not be completed
     by the time this function returns. It is up to the caller to decide how to harvest
@@ -104,7 +104,7 @@ def run_each(iterable, func):
 
 
 def set_response_when_completed(fdict):
-    """Set '.response' on each value from fdict to the future's result."""
+    """Set ``.response`` on each value from ``fdict`` to its future's result."""
 
     for future in as_completed(fdict):
         fdict[future].response = future.result()
@@ -112,10 +112,10 @@ def set_response_when_completed(fdict):
 
 def set_response_on_each(iterable, func):
     """
-    Shorthand for set_response_when_completed(run_each(iterable, func)).
+    Shorthand for ``set_response_when_completed(run_each(iterable, func))``.
 
-    This was a common enough pattern to warrant a helper for clarity and brevity,
-    and is primarily for those using jgt_common's ResponseList and ResponseInfo objects.
+    This is primarily for those using jgt_common's ``ResponseList`` and
+    ``ResponseInfo`` objects.
 
     Example:
         Instead of writing::
@@ -123,7 +123,7 @@ def set_response_on_each(iterable, func):
             for item in work_list:
                 item.response = client.do_work(item.input)
 
-        New code that parallelizes that work::
+        Parallelize that work::
 
             set_response_on_each(work_list, lambda item: client.do_work(item.input))
 
@@ -133,7 +133,7 @@ def set_response_on_each(iterable, func):
 
 
 def set_when_completed(field, fdict):
-    """Set the given `field` on each value from fdict to that future's result."""
+    """Set the given ``field`` on each value from ``fdict`` to its future's result."""
 
     for future in as_completed(fdict):
         setattr(fdict[future], field, future.result())
@@ -141,18 +141,24 @@ def set_when_completed(field, fdict):
 
 def set_each(iterable, field, func):
     """
-    Set `field` on each item of iterable to the value of func, when it completes.
+    Set ``field`` on each item from ``iterable`` to the value of ``func(item)``.
 
-    Shorthand for set_when_completed(field, run_each(iterable, func)).
+    Shorthand for ``set_when_completed(field, run_each(iterable, func))``.
 
-    A more general form of set_response_on_each.
+    A more general form of ``set_response_on_each``.
     """
 
     set_when_completed(field, run_each(iterable, func))
 
 
 def as_completed_result(futures):
-    """Yield future.result() from futures, as each future completes."""
+    """
+    Yield each futures ``.result()`` as each future in ``futures`` completes.
+
+    Because iterating over a dictionary iterates over it's keys,
+    ``futures`` can be an fdict, or a list of futures, ... any other
+    iterable of futures.
+    """
 
     for future in as_completed(futures):
         yield future.result()
@@ -160,11 +166,9 @@ def as_completed_result(futures):
 
 def result_from_each(iterable, func):
     """
-    Shorthand for as_completed_result(run_each(iterable, func)).
+    Shorthand for ``as_completed_result(run_each(iterable, func))``.
 
-    This was a common enough pattern to warrant a helper for clarity and brevity.
-
-    When you want all the results from calling func on the items from the iterable,
+    When you want all the results from calling ``func`` on the items from ``iterable``,
     but you don't need to know which result came from which item or in which order.
     """
 
@@ -173,10 +177,10 @@ def result_from_each(iterable, func):
 
 def as_completed_item_result(fdict):
     """
-    Yield (item, future.result()) from fdict, as each future completes.
+    Yield ``(item, future.result())`` from ``fdict``, as each future completes.
 
-    The values in the tuples are returnd in that order to allow this function
-    to be used to create a dict mapping an item to its result::
+    The order of values in the tuples allow this function
+    to be used to create a dict mapping from an item to its result::
 
         futures = run_each(iterable, func)
         results_map = dict(as_completed_item_result(futures))

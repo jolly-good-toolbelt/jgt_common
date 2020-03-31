@@ -12,7 +12,7 @@ Purpose:
 
    These helpers are meant to be used for "spot" parallelism,
    not for whole application parallelism. In places where the code needs to do
-   a whole bunch of slow things that could be done in parallel (API calls, etc)
+   a whole bunch of slow things that can be done in parallel (API calls, etc)
    and then "goes synchronous again."  (Testing is one such use case.)
 
 
@@ -21,12 +21,12 @@ Archicture:
    One executor thread pool is used by all of these functions.
    To support the use of these functions in a "library" kind of way,
    configuring the size of the thread pool and shutting it down (if ever used)
-   and done by calling separate functions. This is so an application can use
+   are done by calling separate functions. This is so an application can use
    configuration data for the set up without having to spread knowledge of that
    configuration data to any function(s) that want to use these functions.
 
    The executor thread pool defined here is mainly meant for use by the other
-   functions defined here, but users of this module are free to use themselves
+   functions defined here, but users of this module are free to use it themselves
    directly as needed.
 
 """
@@ -83,6 +83,13 @@ def run_each(iterable, func):
     """
     Call func on each item in iterable, using a future.
 
+    The returned fdict's futures (keys of the fdict) may or may not be completed
+    by the time this function returns. It is up to the caller to decide how to harvest
+    the results from the futures.
+
+    Can be used directly, but is mostly used under the covers
+    by the other functions in this module.
+
     Args:
         iterable (any): Any iterable.
         func (callable): will be called with one item from iterable.
@@ -107,7 +114,19 @@ def set_response_on_each(iterable, func):
     """
     Shorthand for set_response_when_completed(run_each(iterable, func)).
 
-    This was a common enough pattern to warrant a helper for clarity and brevity.
+    This was a common enough pattern to warrant a helper for clarity and brevity,
+    and is primarily for those using jgt_common's ResponseList and ResponseInfo objects.
+
+    Example:
+        Instead of writing::
+
+            for item in work_list:
+                item.response = client.do_work(item.input)
+
+        New code that parallelizes that work::
+
+            set_response_on_each(work_list, lambda item: client.do_work(item.input))
+
     """
 
     set_response_when_completed(run_each(iterable, func))
@@ -126,7 +145,7 @@ def set_each(iterable, field, func):
 
     Shorthand for set_when_completed(field, run_each(iterable, func)).
 
-    This was a common enough pattern to warrant a helper for clarity and brevity.
+    A more general form of set_response_on_each.
     """
 
     set_when_completed(field, run_each(iterable, func))
@@ -144,6 +163,9 @@ def result_from_each(iterable, func):
     Shorthand for as_completed_result(run_each(iterable, func)).
 
     This was a common enough pattern to warrant a helper for clarity and brevity.
+
+    When you want all the results from calling func on the items from the iterable,
+    but you don't need to know which result came from which item or in which order.
     """
 
     yield from as_completed_result(run_each(iterable, func))

@@ -32,7 +32,7 @@ Archicture:
 """
 
 from concurrent.futures import ThreadPoolExecutor as _ThreadPoolExecutor
-from concurrent.futures import as_completed  # noqa - imported for pass-through use.
+from concurrent.futures import as_completed  # imported for pass-through use.
 from concurrent.futures import wait  # noqa - imported for pass-through use.
 
 _THREADPOOL_EXECUTOR = None

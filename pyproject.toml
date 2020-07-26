@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jgt_common"
-version = "1.0.7"
+version = "1.1.0"
 description = "A library for helper functions across Jolly Good Toolbelt designed for larger consumption"
 authors = ["Doug Philips <dgou@mac.com>", "Lewis Franklin <github@brolewis.com>", "Ryan Casperson <casperson.ryan@gmail.com>", "Brad Brown <brad@bradsbrown.com>", "Shawn Dutton <Shawndutton1@gmail.com>"]
 license = "MIT"

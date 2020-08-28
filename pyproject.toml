@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jgt_common"
-version = "1.1.0"
+version = "1.1.1"
 description = "A library for helper functions across Jolly Good Toolbelt designed for larger consumption"
 authors = ["Doug Philips <dgou@mac.com>", "Lewis Franklin <github@brolewis.com>", "Ryan Casperson <casperson.ryan@gmail.com>", "Brad Brown <brad@bradsbrown.com>", "Shawn Dutton <Shawndutton1@gmail.com>"]
 license = "MIT"
@@ -15,14 +15,8 @@ requests = "*"
 wrapt = "*"
 
 [tool.poetry.dev-dependencies]
-pytest = "^4.6"
-pre-commit = "^1.15"
-sphinx = "^2.0"
-sphinx-rtd-theme = "^0.4.3"
-ghp-import = "^0.5.5"
 requests-mock = "^1.6"
-tomlkit = "^0.5.3"
-jgt_tools = "^0.2.3"
+jgt_tools = "^0.4.0"
 
 [tool.poetry.scripts]
 uuid-replacer = 'jgt_common.uuid_replacer:main'

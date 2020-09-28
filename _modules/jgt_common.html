@@ -1,0 +1,1632 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>jgt_common &mdash; jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption 1.1.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../jgt_common.html">jgt_common package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jgt_common.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jgt_common.html#module-jgt_common.assert_">jgt_common.assert_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jgt_common.html#module-jgt_common.check">jgt_common.check module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jgt_common.html#module-jgt_common.futures">jgt_common.futures module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jgt_common.html#module-jgt_common.http_helpers">jgt_common.http_helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jgt_common.html#module-jgt_common.tag_to_url">jgt_common.tag_to_url module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jgt_common.html#module-jgt_common.uuid_replacer">jgt_common.uuid_replacer module</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTORS.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>jgt_common</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for jgt_common</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">General helper functions.</span>
+
+<span class="sd">.. inheritance-diagram:: jgt_common</span>
+<span class="sd">   :parts: 1</span>
+
+<span class="sd">----</span>
+
+<span class="sd">The functions and classes in this module fall into several</span>
+<span class="sd">general categories:</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">ast</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">_itertools</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span> <span class="k">as</span> <span class="nn">_os</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">nan</span>
+
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">shutil</span> <span class="k">as</span> <span class="nn">_shutil</span>
+<span class="kn">import</span> <span class="nn">string</span> <span class="k">as</span> <span class="nn">_string</span>
+<span class="kn">import</span> <span class="nn">subprocess</span> <span class="k">as</span> <span class="nn">_subprocess</span>
+<span class="kn">import</span> <span class="nn">sys</span> <span class="k">as</span> <span class="nn">_sys</span>
+<span class="kn">import</span> <span class="nn">time</span> <span class="k">as</span> <span class="nn">_time</span>
+
+<span class="kn">import</span> <span class="nn">wrapt</span> <span class="k">as</span> <span class="nn">_wrapt</span>
+
+
+<span class="n">_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">_debug</span> <span class="o">=</span> <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span>
+
+
+<span class="n">_CLASSIFICATION_ATTRIBUTE</span> <span class="o">=</span> <span class="s2">&quot;classify_data&quot;</span>
+<span class="sd">&quot;&quot;&quot;Attribute used to store classification data on functions and classes.&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="classify"><a class="viewcode-back" href="../jgt_common.html#jgt_common.classify">[docs]</a><span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add glossary subject category classification meta-data to it&#39;s target.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">classifier</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">_CLASSIFICATION_ATTRIBUTE</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">target</span>
+
+    <span class="k">return</span> <span class="n">classifier</span></div>
+
+
+<span class="c1"># classify itself deserves to be classified.</span>
+<span class="c1"># Since it can&#39;t be used as a regular decorator on itself, handle it here:</span>
+<span class="n">classify</span> <span class="o">=</span> <span class="n">classify</span><span class="p">(</span><span class="s2">&quot;doc&quot;</span><span class="p">,</span> <span class="s2">&quot;meta-data&quot;</span><span class="p">)(</span><span class="n">classify</span><span class="p">)</span>
+
+<span class="n">class_lookup</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This dictionary is to allow code that needs to have very late binding of a class</span>
+<span class="sd">to look up the class here, and code that needs to control another module&#39;s use of a</span>
+<span class="sd">late bound class to set it in this dictionary.</span>
+
+<span class="sd">Code accessing this dictionary should use ``.get()`` with a default value so that</span>
+<span class="sd">`this` module doesn&#39;t have to import lots of things here to set up all the defaults.</span>
+<span class="sd">Code accessing this dictionary should publish which key(s) it will be using so that</span>
+<span class="sd">modules wishing to retarget those classes will know which keys to set.</span>
+
+<span class="sd">Code setting values in this dictionary so do so `before` importing modules that</span>
+<span class="sd">will use that value. Setting values in this dictionary is only needed when the</span>
+<span class="sd">default values need to be changed.</span>
+
+<span class="sd">(Motivation: the requests client logging code needs to be able to use a custom</span>
+<span class="sd">class instead of just ``requests.Session`` when being used by testing code</span>
+<span class="sd">with the Locust test runner, and it uses this dictionary to accomplish this.)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">SINGLE_QUOTE</span> <span class="o">=</span> <span class="s2">&quot;&#39;&quot;</span>
+<span class="n">DOUBLE_QUOTE</span> <span class="o">=</span> <span class="s1">&#39;&quot;&#39;</span>
+
+
+<span class="n">CHECK_UNTIL_TIMEOUT</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">CHECK_UNTIL_CYCLE_SECS</span> <span class="o">=</span> <span class="mi">5</span>
+
+
+<span class="n">_TICKET_INFO</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">iter_entry_points</span><span class="p">(</span><span class="s2">&quot;tag_to_url&quot;</span><span class="p">):</span>
+    <span class="n">_TICKET_INFO</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">())</span>
+
+
+<span class="n">OBSOLETE_TICKETING_SYSTEMS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">key</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">meta_data</span> <span class="ow">in</span> <span class="n">_TICKET_INFO</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">meta_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url_template&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="sd">&quot;&quot;&quot;Systems for which we still support identifying Tickets, but no longer can access.&quot;&quot;&quot;</span>
+
+
+<span class="c1"># Don&#39;t require user/embedder of this to use re.IGNORECASE</span>
+<span class="n">HEX_DIGIT_RE</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[\da-fA-F]&quot;</span>
+<span class="sd">&quot;&quot;&quot;Regular expression for matching a single hex digit.&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="re_for_hex_digits"><a class="viewcode-back" href="../jgt_common.html#jgt_common.re_for_hex_digits">[docs]</a><span class="k">def</span> <span class="nf">re_for_hex_digits</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return regular expression for matching exactly ``length`` hex digits.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">HEX_DIGIT_RE</span> <span class="o">+</span> <span class="s2">&quot;{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">length</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span></div>
+
+
+<span class="n">UUID_BASIC_RE</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">re_for_hex_digits</span><span class="p">,</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">]))</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Regular expression (RE) for matching UUID string forms.</span>
+
+<span class="sd">This RE is not anchored, or delimited, for maximum reuse.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">UUID_ISOLATED_RE</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\b</span><span class="si">{}</span><span class="s2">\b&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">UUID_BASIC_RE</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;RE for matching an UUID that is not part of a larger &quot;word&quot;.&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="no_op"><a class="viewcode-back" href="../jgt_common.html#jgt_common.no_op">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">no_op</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reusable no-op function.&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="always_true"><a class="viewcode-back" href="../jgt_common.html#jgt_common.always_true">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">always_true</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return True regardless of any provided arguments.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="always_false"><a class="viewcode-back" href="../jgt_common.html#jgt_common.always_false">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">always_false</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return False regardless of any provided arguments.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="identity"><a class="viewcode-back" href="../jgt_common.html#jgt_common.identity">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build simple identity function based on provided parameters.</span>
+
+<span class="sd">    A single parameter is returned as is, multiple parameters are returned as a tuple.</span>
+
+<span class="sd">    From https://stackoverflow.com/questions/8748036/is-there-a-builtin-identity-function-in-python  # noqa: E501</span>
+<span class="sd">    Not the top voted answer, but it handles both single and multiple parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,)</span> <span class="o">+</span> <span class="n">args</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="display_name"><a class="viewcode-back" href="../jgt_common.html#jgt_common.display_name">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;files&quot;</span><span class="p">,</span> <span class="s2">&quot;meta-data&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">display_name</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">package_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a human-readable name for a given project.</span>
+
+<span class="sd">    Determine the display name for a project given a path and (optional) package name.</span>
+<span class="sd">    If a display_name.txt file is found, the first line is returned. Otherwise, return a</span>
+<span class="sd">    title-cased string from either the base directory or package_name (if provided).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path (str): Path for searching</span>
+<span class="sd">        package_name (str): Sphinx-style, dot-delimited package name (optional)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: A display name for the provided path</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name_path</span> <span class="o">=</span> <span class="n">_os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;display_name.txt&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">name_path</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">name_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">name_fo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">name_fo</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">raw_name</span> <span class="o">=</span> <span class="n">package_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">package_name</span> <span class="k">else</span> <span class="n">_os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_string</span><span class="o">.</span><span class="n">capwords</span><span class="p">(</span><span class="n">raw_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="format_if"><a class="viewcode-back" href="../jgt_common.html#jgt_common.format_if">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">format_if</span><span class="p">(</span><span class="n">format_str</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a message string with a formatted value if any content value is present.</span>
+
+<span class="sd">    Useful for error-checking scenarios where you want a prepared error message</span>
+<span class="sd">    if failures are present (passed in via content), or no message if no failures.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        format_str (str): A message string with a single format brace to be filled</span>
+<span class="sd">        content (str): A value to be filled into the format_str if present</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: either the format_str with content included if content present,</span>
+<span class="sd">        or an empty string if no content.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">format_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span> <span class="k">if</span> <span class="n">content</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="default_if_none"><a class="viewcode-back" href="../jgt_common.html#jgt_common.default_if_none">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">default_if_none</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return ``default if value is None else value``.</span>
+
+<span class="sd">    Use because:</span>
+<span class="sd">      * no chance of the value stutter being mistyped, speeds up code reading time.</span>
+<span class="sd">      * easier to read when value or default are complex expressions.</span>
+<span class="sd">      * can save having to create local variable(s) to shorten the</span>
+<span class="sd">        ``if .. is None ...`` form.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">default</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="no_nones"><a class="viewcode-back" href="../jgt_common.html#jgt_common.no_nones">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;sequence&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">no_nones</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a list of the non-None values in iterable.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">iterable</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="truths_from"><a class="viewcode-back" href="../jgt_common.html#jgt_common.truths_from">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;sequence&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">truths_from</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a list of the truthy values in iterable.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">iterable</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="padded_list"><a class="viewcode-back" href="../jgt_common.html#jgt_common.padded_list">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;sequence&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">padded_list</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a fixed-length list from an iterable, padding as needed.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        iterable (iterable): Any iterable that needs padding</span>
+<span class="sd">        size (int): The length for the returned list</span>
+<span class="sd">        padding: Any value that should be used to pad an iterable that is too short</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: The iterable parameter converted to a list, up to size, padded as needed.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span>
+        <span class="n">_itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">_itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">_itertools</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">padding</span><span class="p">)),</span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_python_2_or_3_base_str_type</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">basestring</span>
+    <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span>
+
+
+<div class="viewcode-block" id="is_iterable"><a class="viewcode-back" href="../jgt_common.html#jgt_common.is_iterable">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">,</span> <span class="s2">&quot;sequence&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">is_iterable</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return True if item is iterable, False otherwise, using an iter(item) test.</span>
+
+<span class="sd">    From the Python documentation for class :py:class:`collections.abc.Iterable`:</span>
+
+<span class="sd">        Checking isinstance(obj, Iterable) detects classes that are registered as</span>
+<span class="sd">        Iterable or that have an __iter__() method, but it does not detect classes that</span>
+<span class="sd">        iterate with the __getitem__() method.</span>
+<span class="sd">        *The only reliable way to determine whether an object is iterable is to call</span>
+<span class="sd">        iter(obj)*.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">iter</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="list_from"><a class="viewcode-back" href="../jgt_common.html#jgt_common.list_from">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;sequence&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">list_from</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a list from a single item or an iterable.</span>
+
+<span class="sd">    Any item that is &quot;false-y&quot;, will result in an empty list. Strings and dictionaries</span>
+<span class="sd">    will be treated as single items, and not iterable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        item: A single item or an iterable.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: A list from the item.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; list_from(None)</span>
+<span class="sd">        []</span>
+<span class="sd">        &gt;&gt;&gt; list_from(&#39;abcd&#39;)</span>
+<span class="sd">        [&#39;abcd&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; list_from(1234)</span>
+<span class="sd">        [1234]</span>
+<span class="sd">        &gt;&gt;&gt; list_from({&#39;abcd&#39;: 1234})</span>
+<span class="sd">        [{&#39;abcd&#39;: 1234}]</span>
+<span class="sd">        &gt;&gt;&gt; list_from([&#39;abcd&#39;, 1234])</span>
+<span class="sd">        [&#39;abcd&#39;, 1234]</span>
+<span class="sd">        &gt;&gt;&gt; list_from({&#39;abcd&#39;, 1234})</span>
+<span class="sd">        [&#39;abcd&#39;, 1234]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">item</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="n">_python_2_or_3_base_str_type</span><span class="p">(),</span> <span class="nb">dict</span><span class="p">))</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">is_iterable</span><span class="p">(</span>
+        <span class="n">item</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">item</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="string_to_list"><a class="viewcode-back" href="../jgt_common.html#jgt_common.string_to_list">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;sequence&quot;</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">string_to_list</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;``.split()`` a string into a list and ``.strip()`` each piece.</span>
+
+<span class="sd">    For handling lists of things, from config files, etc.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        source (str): the source string to process</span>
+<span class="sd">        sep (str, optional): The ``.split`` ``sep`` (separator) to use.</span>
+<span class="sd">        maxsplit (int, optional): The ``.split`` ``maxsplit`` parameter to use.</span>
+<span class="sd">        chars (str, optional): The ``.strip`` ``chars`` parameter to use.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="n">maxsplit</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="cleanup_and_exit"><a class="viewcode-back" href="../jgt_common.html#jgt_common.cleanup_and_exit">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;exit&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">cleanup_and_exit</span><span class="p">(</span><span class="n">dir_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cleanup a directory tree that was created and exit.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dir_name (string): Full path to a directory to remove (optional)</span>
+<span class="sd">        status (int): Exit code to use for exit (optional)</span>
+<span class="sd">        message (string): Message to print to standard error (optional)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">dir_name</span><span class="p">:</span>
+        <span class="n">_shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
+    <span class="n">exit</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="safe_run"><a class="viewcode-back" href="../jgt_common.html#jgt_common.safe_run">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;exit&quot;</span><span class="p">,</span> <span class="s2">&quot;running commands&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">safe_run</span><span class="p">(</span><span class="n">commands</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run the given list of commands, only return if no error.</span>
+
+<span class="sd">    If there is an error in attempting or actually running the commands,</span>
+<span class="sd">    error messages are printed to stdout and ``sys.exit()`` will be called.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">_subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">commands</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error when trying to execute: &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">commands</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">_sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">status</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error </span><span class="si">{}</span><span class="s1"> from running: &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">commands</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">_sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">status</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="exit"><a class="viewcode-back" href="../jgt_common.html#jgt_common.exit">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;exit&quot;</span><span class="p">)</span>  <span class="c1"># noqa: A001</span>
+<span class="k">def</span> <span class="nf">exit</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa: A001</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exit the program and optionally print a message to standard error.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        status (int): Exit code to use for exit (optional)</span>
+<span class="sd">        message (string): Message to print to standard error (optional)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">message</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">_sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="n">_sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">status</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="error_if"><a class="viewcode-back" href="../jgt_common.html#jgt_common.error_if">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;exit&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">error_if</span><span class="p">(</span><span class="n">check</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exit the program if a provided check is true.</span>
+
+<span class="sd">    Exit the program if the check is true. If a status is provided, that code is used</span>
+<span class="sd">    for the exit code; otherwise the value from the check is used. An optional message</span>
+<span class="sd">    for standard error can also be provided.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        check: Anything with truthiness that can check if the program should exit or not</span>
+<span class="sd">        status (int): Exit code to use for exit (optional)</span>
+<span class="sd">        message (string): Message to print to standard error if check is True (optional)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">check</span><span class="p">:</span>
+        <span class="n">exit</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">status</span> <span class="ow">or</span> <span class="n">check</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="filter_dict"><a class="viewcode-back" href="../jgt_common.html#jgt_common.filter_dict">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;dict&quot;</span><span class="p">,</span> <span class="s2">&quot;filter&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">filter_dict</span><span class="p">(</span><span class="n">a_dict</span><span class="p">,</span> <span class="n">keep_key</span><span class="o">=</span><span class="n">always_true</span><span class="p">,</span> <span class="n">keep_value</span><span class="o">=</span><span class="n">always_true</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter a dictionary based on truthiness.</span>
+
+<span class="sd">    Return a new dict based on keeping only those keys _and_ values whose function</span>
+<span class="sd">    returns True.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a_dict (dict): A dictionary to filter values from.</span>
+<span class="sd">        keep_key (function): Return True if the key is to be kept.</span>
+<span class="sd">        keep_value (function): Return True if the value is to be kept.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A new dictionary with only the desired key, value pairs.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">a_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">keep_key</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="ow">and</span> <span class="n">keep_value</span><span class="p">(</span><span class="n">v</span><span class="p">)}</span></div>
+
+
+<div class="viewcode-block" id="dict_strip_value"><a class="viewcode-back" href="../jgt_common.html#jgt_common.dict_strip_value">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;dict&quot;</span><span class="p">,</span> <span class="s2">&quot;filter&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">dict_strip_value</span><span class="p">(</span><span class="n">a_dict</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a new dict based on stripping out any key with the given value.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The default value ``None`` is chosen because it is a common case.</span>
+<span class="sd">        Unlike other functions, value ``None`` is literally the value ``None``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a_dict (dict): A dictionary to strip values from.</span>
+<span class="sd">        value: Any value that should be stripped from the dictionary.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A new dictionary without key/value pairs for the given value.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">filter_dict</span><span class="p">(</span><span class="n">a_dict</span><span class="p">,</span> <span class="n">keep_value</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="o">!=</span> <span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="dict_transform"><a class="viewcode-back" href="../jgt_common.html#jgt_common.dict_transform">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;dict&quot;</span><span class="p">,</span> <span class="s2">&quot;filter&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">dict_transform</span><span class="p">(</span><span class="n">a_dict</span><span class="p">,</span> <span class="n">key_transform</span><span class="o">=</span><span class="n">identity</span><span class="p">,</span> <span class="n">value_transform</span><span class="o">=</span><span class="n">identity</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a new dict based on transforming the keys and/or values of ``a_dict``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a_dict (dict): the source dictionary to process</span>
+<span class="sd">        key_transform (function): Takes a key and returns a new key to use.</span>
+<span class="sd">        value_transform (function): Takes a value and returns a new value to use.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A new dictionary with keys and values as transformed.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">key_transform</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">value_transform</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">a_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span></div>
+
+
+<div class="viewcode-block" id="dict_from"><a class="viewcode-back" href="../jgt_common.html#jgt_common.dict_from">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;dict&quot;</span><span class="p">,</span> <span class="s2">&quot;filter&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">dict_from</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">key_transform</span><span class="o">=</span><span class="n">identity</span><span class="p">,</span> <span class="n">value_transform</span><span class="o">=</span><span class="n">identity</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build a new dict based on turning values from an iterable into key/value pairs.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        A common use case would be to build a dict from a list of values,</span>
+<span class="sd">        using the list values as keys,</span>
+<span class="sd">        and building dict values as a transform from the list values.::</span>
+
+<span class="sd">            &gt; l = [1, 2, 3, 4, 5]</span>
+<span class="sd">            &gt; result = dict_from(l, value_transform=lambda n: n**2)</span>
+<span class="sd">            # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        iterable (iterable): the source for the dictionary to be created</span>
+<span class="sd">        key_transform (function): Takes a key and returns a new key to use.</span>
+<span class="sd">        value_transform (function): Take a value and returns a new value to use.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A new dictionary with key and values as transformed.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">key_transform</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="n">value_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="ticketing_system_for"><a class="viewcode-back" href="../jgt_common.html#jgt_common.ticketing_system_for">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">,</span> <span class="s2">&quot;ticketing system&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">ticketing_system_for</span><span class="p">(</span><span class="n">ticket</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the Ticketing System/Type for the given ticket, or the empty string.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">ticket_system</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">_TICKET_INFO</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;pattern&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">ticket</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ticket_system</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="url_for_ticket"><a class="viewcode-back" href="../jgt_common.html#jgt_common.url_for_ticket">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">,</span> <span class="s2">&quot;ticketing system&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">url_for_ticket</span><span class="p">(</span><span class="n">ticketing_system</span><span class="p">,</span> <span class="n">ticket</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a URL for the given ticketing_system, ticket pair.</span>
+
+<span class="sd">    Does NOT validate that ticket string &quot;looks&quot; like a ticket for the ticketing system.</span>
+
+<span class="sd">    Raises if ticketing_system is not a supported system.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">system_dict</span> <span class="o">=</span> <span class="n">must_get_key</span><span class="p">(</span><span class="n">_TICKET_INFO</span><span class="p">,</span> <span class="n">ticketing_system</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">system_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url_template&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="url_if_ticket"><a class="viewcode-back" href="../jgt_common.html#jgt_common.url_if_ticket">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">,</span> <span class="s2">&quot;ticketing system&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">url_if_ticket</span><span class="p">(</span><span class="n">ticket</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a Ticket URL if a ticket is found.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ticket (string): Possible ticket ID</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        string: Either a URL if a string is found, otherwise an empty string.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ticket_system</span> <span class="o">=</span> <span class="n">ticketing_system_for</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ticket_system</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">url_for_ticket</span><span class="p">(</span><span class="n">ticket_system</span><span class="p">,</span> <span class="n">ticket</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="generate_random_string"><a class="viewcode-back" href="../jgt_common.html#jgt_common.generate_random_string">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;random&quot;</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">generate_random_string</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">choose_from</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a random string of the specified size.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prefix (str, optional): String to prepend to the beginning of the random string.</span>
+<span class="sd">        suffix (str, optional): String to append to the end of the random string.</span>
+<span class="sd">        size (int, optional): Number of characters the random string should have.</span>
+<span class="sd">            (defaults to 8)</span>
+<span class="sd">        choose_from (str): A string containing the characters from which the randomness</span>
+<span class="sd">            will be chosen. If not provided, it will choose from lowercase letters and</span>
+<span class="sd">            digits.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: A randomly generated string.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: if the given length is incompatible with prefix/suffix length</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; generate_random_string()</span>
+<span class="sd">        &#39;vng345jn&#39;</span>
+<span class="sd">        &gt;&gt;&gt; generate_random_string(prefix=&#39;Lbs-&#39;, suffix=&#39;-test&#39;, size=15)</span>
+<span class="sd">        &#39;Lbs-js7eh9-test&#39;</span>
+<span class="sd">        &gt;&gt;&gt; generate_random_string(prefix=&#39;Lbs-&#39;, size=15)</span>
+<span class="sd">        &#39;Lbs-js7eh98sfnk&#39;</span>
+<span class="sd">        &gt;&gt;&gt; generate_random_string(suffix=&#39;-test&#39;, size=15)</span>
+<span class="sd">        &#39;8sdfjs7eh9-test&#39;</span>
+<span class="sd">        &gt;&gt;&gt; generate_random_string(choose_from=&quot;aeiou&quot;)</span>
+<span class="sd">        &#39;uiiaueea&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">choose_from</span> <span class="o">=</span> <span class="n">default_if_none</span><span class="p">(</span><span class="n">choose_from</span><span class="p">,</span> <span class="n">_string</span><span class="o">.</span><span class="n">ascii_lowercase</span> <span class="o">+</span> <span class="n">_string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>
+    <span class="n">rand_string_length</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;&quot;size&quot; of </span><span class="si">{}</span><span class="s1"> too short with prefix </span><span class="si">{}</span><span class="s1"> and suffix </span><span class="si">{}</span><span class="s1">!&#39;</span>
+    <span class="k">assert</span> <span class="n">rand_string_length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
+    <span class="n">rand_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">choose_from</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rand_string_length</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">rand_string</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="index_or_default"><a class="viewcode-back" href="../jgt_common.html#jgt_common.index_or_default">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;sequence&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index_or_default</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">default</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the index of a value from a list, or a default if not found.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a_list (list): A list from which to find the index</span>
+<span class="sd">        value (any): the list item whose index is sought</span>
+<span class="sd">        default (any): the value to return if the value is not in the list</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int,any: an index value (int) for the list item, or default value (any)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">a_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">a_list</span> <span class="k">else</span> <span class="n">default</span></div>
+
+
+<div class="viewcode-block" id="must_be_in_virtual_environment"><a class="viewcode-back" href="../jgt_common.html#jgt_common.must_be_in_virtual_environment">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;exit&quot;</span><span class="p">,</span> <span class="s2">&quot;environment&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">must_be_in_virtual_environment</span><span class="p">(</span>
+    <span class="n">exit_code</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Must be running in a Python virtual environment, aborting!&quot;</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ensure the current process is running in a virtual environment.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        exit_code (int, optional): Exit code to use if not running in a virtual</span>
+<span class="sd">            environment.</span>
+<span class="sd">        message (string, optional): Message to print if not running in a virtual</span>
+<span class="sd">            environment.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;VIRTUAL_ENV&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+        <span class="n">exit</span><span class="p">(</span><span class="n">exit_code</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="must_get_key"><a class="viewcode-back" href="../jgt_common.html#jgt_common.must_get_key">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;dict&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">must_get_key</span><span class="p">(</span><span class="n">a_dict</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Either return the value for the key, or raise an exception.</span>
+
+<span class="sd">    The exception will indicate what the valid keys are.</span>
+<span class="sd">    Inspired by Gherkin steps so that a typo in the Gherkin</span>
+<span class="sd">    will result in a more helpful error message than the stock KeyError.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a_dict (dict): Dictionary with the values</span>
+<span class="sd">        key (str): The key whose value is desired</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The value found on the key</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        KeyError: if the given key is not present in the dictionary.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">a_dict</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is not one of: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">a_dict</span><span class="p">))))</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">a_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="must_get_keys"><a class="viewcode-back" href="../jgt_common.html#jgt_common.must_get_keys">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;dict&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">must_get_keys</span><span class="p">(</span><span class="n">a_dict</span><span class="p">,</span> <span class="o">*</span><span class="n">keys</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Either return the value found for the keys provided, or raise an exception.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a_dict (dict): Dictionary with the values</span>
+<span class="sd">        keys (str): The key or keys whose value is desired</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The value found on the final key</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        KeyError: if any of the given keys are not present in the dictionary.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+        <span class="n">a_dict</span> <span class="o">=</span> <span class="n">must_get_key</span><span class="p">(</span><span class="n">a_dict</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a_dict</span></div>
+
+
+<div class="viewcode-block" id="var_from_env"><a class="viewcode-back" href="../jgt_common.html#jgt_common.var_from_env">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;environment&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">var_from_env</span><span class="p">(</span><span class="n">var_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Try to get a value from an environment variable.</span>
+
+<span class="sd">    Get an environment variable and raise an error if not set / has an empty value.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The value of the environment variable.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: if the variable name is not set or has an empty value.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">envvar</span> <span class="o">=</span> <span class="n">_os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">var_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">envvar</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot; variable not found!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">var_name</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">envvar</span></div>
+
+
+<div class="viewcode-block" id="get_file_contents"><a class="viewcode-back" href="../jgt_common.html#jgt_common.get_file_contents">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;files&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_file_contents</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the contents of a file as a Python string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *paths: All paths that lead to the file whole contents are to be retrieved.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The contents of the file.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">_os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">)),</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="get_file_docstring"><a class="viewcode-back" href="../jgt_common.html#jgt_common.get_file_docstring">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;files&quot;</span><span class="p">,</span> <span class="s2">&quot;meta-data&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_file_docstring</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the full docstring of a given python file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_path (str): The path to the file whose docstring should</span>
+<span class="sd">            be gathered and returned.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The python file&#39;s docstring.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">get_file_contents</span><span class="p">(</span><span class="n">file_path</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">ast</span><span class="o">.</span><span class="n">get_docstring</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="filter_lines"><a class="viewcode-back" href="../jgt_common.html#jgt_common.filter_lines">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;files&quot;</span><span class="p">,</span> <span class="s2">&quot;filter&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">filter_lines</span><span class="p">(</span><span class="n">line_filter</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter the given lines based on the given filter function.</span>
+
+<span class="sd">    This function by default will return the same type that it is given.</span>
+<span class="sd">    If you&#39;d like, you may return a different type by providing the</span>
+<span class="sd">    ``return_type`` parameter.</span>
+
+<span class="sd">    The expected values for the the ``lines`` parameter type and the</span>
+<span class="sd">    ``return_type`` value are ``str`` and ``list``. Any other types/values</span>
+<span class="sd">    may cause unexpected behavior.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        line_filter (Callable): The callable function to be used to filter each line.</span>
+<span class="sd">            It should take a single string parameter and return a boolean.</span>
+<span class="sd">        lines (Union[str, List[str]]): Either a string with newline characters splitting</span>
+<span class="sd">            the lines, or a list of lines as strings.</span>
+<span class="sd">        return_type (type): The desired return type. If not provided, the type of the</span>
+<span class="sd">            ``lines`` parameter will be used.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Union[str, List[str]]: The filtered lines.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">return_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">return_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">_python_2_or_3_base_str_type</span><span class="p">()):</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">filtered_lines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">line_filter</span><span class="p">,</span> <span class="n">lines</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">filtered_lines</span> <span class="k">if</span> <span class="n">return_type</span> <span class="ow">is</span> <span class="nb">list</span> <span class="k">else</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filtered_lines</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="fib_or_max"><a class="viewcode-back" href="../jgt_common.html#jgt_common.fib_or_max">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fib_or_max</span><span class="p">(</span><span class="n">fib_number_index</span><span class="p">,</span> <span class="n">max_number</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the nth Fibonacci number or max_number, which ever is smaller.</span>
+
+<span class="sd">    This can be used for retrying failed operations with progressively longer</span>
+<span class="sd">    gaps between retries, cap&#39;d at the max_number paraemter if given.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">current</span><span class="p">,</span> <span class="n">next_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fib_number_index</span><span class="p">):</span>
+        <span class="n">current</span><span class="p">,</span> <span class="n">next_</span> <span class="o">=</span> <span class="n">next_</span><span class="p">,</span> <span class="n">current</span> <span class="o">+</span> <span class="n">next_</span>
+        <span class="k">if</span> <span class="n">max_number</span> <span class="ow">and</span> <span class="n">current</span> <span class="o">&gt;</span> <span class="n">max_number</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">max_number</span>
+    <span class="k">return</span> <span class="n">current</span></div>
+
+
+<span class="n">DEFAULT_MAX_RETRY_SLEEP</span> <span class="o">=</span> <span class="mi">30</span>
+
+
+<div class="viewcode-block" id="retry_on_exceptions"><a class="viewcode-back" href="../jgt_common.html#jgt_common.retry_on_exceptions">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;looping&quot;</span><span class="p">,</span> <span class="s2">&quot;exceptions&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">retry_on_exceptions</span><span class="p">(</span>
+    <span class="n">max_retry_count</span><span class="p">,</span> <span class="n">exceptions</span><span class="p">,</span> <span class="n">max_retry_sleep</span><span class="o">=</span><span class="n">DEFAULT_MAX_RETRY_SLEEP</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retry a function based on provided parameters.</span>
+
+<span class="sd">    A wrapper to retry a function max_retry_count times if any of the given exceptions</span>
+<span class="sd">    are raised.</span>
+
+<span class="sd">    In the event the exception/exceptions are raised, this code will sleep for ever</span>
+<span class="sd">    increasing amounts of time (using the fibonacci sequence) but capping at</span>
+<span class="sd">    max_retry_sleep seconds.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        max_retry_count (int): The maximum number of retries, must be &gt; 0..</span>
+<span class="sd">        exceptions (exception or tuple of exceptions): The exceptions to catch and</span>
+<span class="sd">            retry on.</span>
+<span class="sd">        max_retry_sleep (int, float): The maximum time to sleep between retries.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">exceptions</span><span class="p">,</span> <span class="s2">&quot;No exception(s) given&quot;</span>
+    <span class="k">assert</span> <span class="n">max_retry_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max_retry_count must be greater than 0&quot;</span>
+
+    <span class="nd">@_wrapt</span><span class="o">.</span><span class="n">decorator</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">error_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">error_count</span> <span class="o">&lt;=</span> <span class="n">max_retry_count</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">exceptions</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">error</span> <span class="o">=</span> <span class="n">e</span>
+                <span class="n">_debug</span><span class="p">(</span><span class="s1">&#39;Retry on exception: &quot;</span><span class="si">{}</span><span class="s1">&quot; encountered during call&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+                <span class="n">error_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">retry_sleep</span> <span class="o">=</span> <span class="n">fib_or_max</span><span class="p">(</span><span class="n">error_count</span><span class="p">,</span> <span class="n">max_number</span><span class="o">=</span><span class="n">max_retry_sleep</span><span class="p">)</span>
+                <span class="n">_debug</span><span class="p">(</span><span class="s2">&quot;...trying again after a sleep of </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">retry_sleep</span><span class="p">))</span>
+                <span class="n">_time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">retry_sleep</span><span class="p">)</span>
+        <span class="n">_debug</span><span class="p">(</span>
+            <span class="s2">&quot;Retry on exception: Max Retry Count of </span><span class="si">{}</span><span class="s2"> Exceeded&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_retry_count</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">error</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+<div class="viewcode-block" id="IncompleteAtTimeoutException"><a class="viewcode-back" href="../jgt_common.html#jgt_common.IncompleteAtTimeoutException">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;looping&quot;</span><span class="p">,</span> <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">IncompleteAtTimeoutException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exception for check_until results that timeout still pending validation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        msg (str): Human readable string describing the exception.</span>
+<span class="sd">        call_result (any): the final result of the call, which failed validation.</span>
+<span class="sd">        timeout (int,float): the timeout at which the result was still failing.</span>
+
+<span class="sd">    Atributes:</span>
+<span class="sd">        call_result (any): the final result of the call, which failed validation.</span>
+<span class="sd">        timeout (int,float): the timeout at which the result was still failing.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">call_result</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">call_result</span> <span class="o">=</span> <span class="n">call_result</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">IncompleteAtTimeoutException</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="check_until"><a class="viewcode-back" href="../jgt_common.html#jgt_common.check_until">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;looping&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_until</span><span class="p">(</span>
+    <span class="n">function_call</span><span class="p">,</span>
+    <span class="n">is_complete_validator</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="n">CHECK_UNTIL_TIMEOUT</span><span class="p">,</span>
+    <span class="n">cycle_secs</span><span class="o">=</span><span class="n">CHECK_UNTIL_CYCLE_SECS</span><span class="p">,</span>
+    <span class="n">logger</span><span class="o">=</span><span class="n">_logger</span><span class="p">,</span>
+    <span class="n">fn_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">fn_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Periodically call a function until its result validates or the timeout is exceeded.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        function_call (function): The function to be called</span>
+<span class="sd">        is_complete_validator (function): a fn that will accept the output from</span>
+<span class="sd">            function_call and return False if the call should continue repeating (still</span>
+<span class="sd">            pending result), or True if the checked result is complete and may be</span>
+<span class="sd">            returned.</span>
+<span class="sd">        timeout (int): maximum number of seconds to &quot;check until&quot; before raising an</span>
+<span class="sd">            exception.</span>
+<span class="sd">        cycle_secs (int): how long to wait (in seconds) in between calls to</span>
+<span class="sd">            function_call.</span>
+<span class="sd">        logger (logging.logger, optional): a logging instance to be used for debug info,</span>
+<span class="sd">            or ``None`` to suppress logging by this function.</span>
+<span class="sd">        fn_args (tuple, optional): tuple of positional args to be provided to</span>
+<span class="sd">            function_call</span>
+<span class="sd">        fn_kwargs (dict, optional): keyword args to be provided to function_call</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        any: the result of function_call when the is_complete_validator returns any True</span>
+<span class="sd">            value.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        jgt_common.IncompleteAtTimeoutException: if function_call&#39;s result never</span>
+<span class="sd">            satisfies the is_complete_validator before timeout is reached.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fn_args</span> <span class="o">=</span> <span class="n">fn_args</span> <span class="ow">or</span> <span class="p">()</span>
+    <span class="n">fn_kwargs</span> <span class="o">=</span> <span class="n">fn_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="n">debug</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">debug</span> <span class="k">if</span> <span class="n">logger</span> <span class="k">else</span> <span class="n">no_op</span>
+
+    <span class="n">check_start</span> <span class="o">=</span> <span class="n">_time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">_time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">function_call</span><span class="p">(</span><span class="o">*</span><span class="n">fn_args</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_complete_validator</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+            <span class="n">time_elapsed</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">_time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">check_start</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Final response achieved in </span><span class="si">{}</span><span class="s2"> seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time_elapsed</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">if</span> <span class="n">_time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">end_time</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">_time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">cycle_secs</span><span class="p">)</span>
+    <span class="c1"># If a result wasn&#39;t returned from within the while loop,</span>
+    <span class="c1"># we have reached timeout without a valid result.</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Response was still pending at timeout.&quot;</span>
+    <span class="n">debug</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="n">IncompleteAtTimeoutException</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">call_result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="assert_if_values"><a class="viewcode-back" href="../jgt_common.html#jgt_common.assert_if_values">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">,</span> <span class="s2">&quot;exceptions&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_if_values</span><span class="p">(</span><span class="n">format_if_format</span><span class="p">,</span> <span class="n">error_fun</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">truths_from</span><span class="p">(</span><span class="n">x</span><span class="p">))):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assert if any truthy values are returned (or yielded) from the decorated function.</span>
+
+<span class="sd">    Any values that the decorated function yields/returns are passed to ``error_fun``.</span>
+<span class="sd">    ``format_if_format``, and the result of the ``error_fun`` call,</span>
+<span class="sd">    are passed to ``format_if``.</span>
+<span class="sd">    The result of the ``format_if`` call is used for an assertion.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        format_if_format (str): the first parameter to format_if.</span>
+<span class="sd">        error_fun (callable): called on the results of the decorated function,</span>
+<span class="sd">            return value will be passed as the 2nd parameter to format_if.</span>
+<span class="sd">            The default function will only process truthy values.</span>
+<span class="sd">            That can be changed by passing in your own custom ``error_fun``</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None - If no values are returned, or yielded,</span>
+<span class="sd">        or the result of ``error_fun`` is falsey, return None.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: as described above.</span>
+
+<span class="sd">    This decorator is meant to simplify code that otherwise has to manually keep</span>
+<span class="sd">    track of a list of things to complain about::</span>
+
+<span class="sd">        errors = []</span>
+<span class="sd">        for thing in things:</span>
+<span class="sd">           if bad(thing):</span>
+<span class="sd">               errors.append(description_of(thing))</span>
+<span class="sd">        err_msg = format_if(&quot;blah blah blah: {}&quot;, &quot;&quot;.join(errors))</span>
+<span class="sd">        assert not err_msg, err_msg</span>
+
+<span class="sd">    into simpler code::</span>
+
+<span class="sd">        @assert_if_values(&quot;blah blah blah: {}&quot;)</span>
+<span class="sd">        ...</span>
+<span class="sd">            for thing in things:</span>
+<span class="sd">                if bad(thing):</span>
+<span class="sd">                    yield description_of(thing)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@_wrapt</span><span class="o">.</span><span class="n">decorator</span>
+    <span class="k">def</span> <span class="nf">helper</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">err_msg</span> <span class="o">=</span> <span class="n">format_if</span><span class="p">(</span><span class="n">format_if_format</span><span class="p">,</span> <span class="n">error_fun</span><span class="p">(</span><span class="n">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)))</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">err_msg</span><span class="p">,</span> <span class="n">err_msg</span>
+
+    <span class="k">return</span> <span class="n">helper</span></div>
+
+
+<div class="viewcode-block" id="accumulator_for"><a class="viewcode-back" href="../jgt_common.html#jgt_common.accumulator_for">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">,</span> <span class="s2">&quot;sequence&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">accumulator_for</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Accumulate the results of calling fun into a unique list, returning that list.</span>
+
+<span class="sd">    Everytime the decorated function is called, its results are appended</span>
+<span class="sd">    to a list, and that list is returned instead.</span>
+<span class="sd">    Each invocation of this function results in a wrapper that uses its own</span>
+<span class="sd">    unique list.</span>
+
+<span class="sd">    NOTE: If you use this is as a decorator on a function definition,</span>
+<span class="sd">    ALL invocations of the function will accumulate into a single list.</span>
+<span class="sd">    This is probably not what you want.</span>
+
+<span class="sd">    The intent is to use this decorator &quot;as needed&quot;::</span>
+
+<span class="sd">        def get_thing_when_stable():</span>
+<span class="sd">            &#39;&#39;&#39;</span>
+<span class="sd">            Get a thing when the API returns a stable result.</span>
+
+<span class="sd">            A stable result is when 3 consecutive payloads match.</span>
+<span class="sd">            If no stable result is achieved, an IncompleteAtTimeoutException exception</span>
+<span class="sd">            is raised.</span>
+<span class="sd">            &#39;&#39;&#39;</span>
+<span class="sd">            results = check_until(accumulator_for(api_get_thing), last_3_payloads_equal)</span>
+<span class="sd">            return get_thing_from_payload(results[-1])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># NOTE: Not using wrapt; it would add another level of nesting / complexity,</span>
+    <span class="c1">#       for dynamic run-time wrapping of a function.</span>
+    <span class="c1">#       If we find that this is used for decorating function definitions,</span>
+    <span class="c1">#       this decision about using wrapt can be changed without affecting</span>
+    <span class="c1">#       the users of this function.</span>
+
+    <span class="n">results_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">wrapped_fun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">results_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">results_list</span>
+
+    <span class="k">return</span> <span class="n">wrapped_fun</span></div>
+
+
+<div class="viewcode-block" id="only_item_of"><a class="viewcode-back" href="../jgt_common.html#jgt_common.only_item_of">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;sequence&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">only_item_of</span><span class="p">(</span><span class="n">item_sequence</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Assert item_sequence has only one item, and return that item.&quot;&quot;&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">label</span> <span class="ow">or</span> <span class="n">item_sequence</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">item_sequence</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> was not of length 1: &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">label</span><span class="p">,</span> <span class="n">item_sequence</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">item_sequence</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="NotEmptyList"><a class="viewcode-back" href="../jgt_common.html#jgt_common.NotEmptyList">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;sequence&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">NotEmptyList</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A list that fails to iterate if it is empty.</span>
+
+<span class="sd">    Iterating on this list will fail if the list is empty.</span>
+<span class="sd">    This simplifies code from having to check for empty lists everywhere.</span>
+<span class="sd">    Empty lists are a problem because ``for`` loop bodies don&#39;t execute on empyt lists.</span>
+<span class="sd">    thus any checks/tests/etc in a loop body would not run.</span>
+<span class="sd">    In a testing context, the loop would &quot;succeed&quot; by not doing anything</span>
+<span class="sd">    (it would fail to have checked anything) and that would be a false-positive.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="NotEmptyList.error_on_empty"><a class="viewcode-back" href="../jgt_common.html#jgt_common.NotEmptyList.error_on_empty">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">error_on_empty</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Is called to return the error message when the NotEmptyList is empty.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;list is empty!&quot;</span></div>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Iterate only if not empty.</span>
+
+<span class="sd">        Any loops that check items in the list could fail to fail for empty</span>
+<span class="sd">        lists becuase the loop body would never execute.</span>
+<span class="sd">        Help our clients by asserting if the list is empty so they don&#39;t have to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_on_empty</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">NotEmptyList</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CommonAttributeList"><a class="viewcode-back" href="../jgt_common.html#jgt_common.CommonAttributeList">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;sequence&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">CommonAttributeList</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A list for similar objects that can be operated on as a group.</span>
+
+<span class="sd">    Accessing an attribute on this list instead</span>
+<span class="sd">    returns a list of that attribute&#39;s value from each member.</span>
+<span class="sd">    (unless the attribute is defined here or in the base class)</span>
+<span class="sd">    If any member of this list does not have that attribute, ``AttributeError`` is</span>
+<span class="sd">    raised.</span>
+
+<span class="sd">    Setting an attribute on this list instead sets the attribute on each member.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the named attribute from all items in the list.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Attribute &quot;</span><span class="si">{}</span><span class="s1">&quot; not present on all list items.&#39;</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;On each item, set the give attribute to the given value.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CommonAttributeList.update_all"><a class="viewcode-back" href="../jgt_common.html#jgt_common.CommonAttributeList.update_all">[docs]</a>    <span class="k">def</span> <span class="nf">update_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update all attributes based on the provided kwargs.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ResponseInfo"><a class="viewcode-back" href="../jgt_common.html#jgt_common.ResponseInfo">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;requests&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ResponseInfo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Keep track of needed info about test operation responses (or any info really).</span>
+
+<span class="sd">    Originally created to augment/track info about ``requests&#39;`` responses, it&#39;s not</span>
+<span class="sd">    limited or bounded by that use case.</span>
+<span class="sd">    Please read ``response`` more generally as any kind of object useful for catpuring</span>
+<span class="sd">    some kind of response from the system under test.</span>
+<span class="sd">    In addition, arbitrary other attributes can be set on this object.</span>
+<span class="sd">    To make that easier, ``kwargs`` is processed as attribute / value pairs to be set on</span>
+<span class="sd">    the object, for whatever attributes make sense for your application.</span>
+
+<span class="sd">    Sometimes this object is keeping track of a response that is needed,</span>
+<span class="sd">    but isn&#39;t available yet.</span>
+<span class="sd">    In these cases, ``response_callback`` can be set to a parameter-less function that</span>
+<span class="sd">    can be called to obtain the response when the ``response_data`` property is used.</span>
+
+<span class="sd">    For ease of use, when the data is buried in the response or otherwise needs to be</span>
+<span class="sd">    decoded, ``response_data_extract`` can be used. It should take one parameter (the</span>
+<span class="sd">    response) and return the desired data from it. This function should not have any</span>
+<span class="sd">    side-effects. ``response_data_extract`` is also used by the ``response_data``</span>
+<span class="sd">    property, see that property documentation for details.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        response (any, optional): Whatever kind of response object needs tracking.</span>
+<span class="sd">        description (str, optional): Description of this particular response.</span>
+<span class="sd">        response_callback (function w/no parameters, optional):</span>
+<span class="sd">            A callback to use in place of the ``response`` field.</span>
+<span class="sd">        response_data_extract (function w/1 parameter, optional):</span>
+<span class="sd">            A callback used to extract wanted data from the response.</span>
+<span class="sd">        kwargs (dict, optional): any additional attributes to set on this object,</span>
+<span class="sd">            based on the name/value pairs in kwargs.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">response_callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">response_data_extract</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">ResponseInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="n">response</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response_callback</span> <span class="o">=</span> <span class="n">response_callback</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response_data_extract</span> <span class="o">=</span> <span class="n">response_data_extract</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ResponseInfo.run_response_callback"><a class="viewcode-back" href="../jgt_common.html#jgt_common.ResponseInfo.run_response_callback">[docs]</a>    <span class="k">def</span> <span class="nf">run_response_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the ``response_callback``, if any, and set ``response`` to the result.</span>
+
+<span class="sd">        Set ``response_callback`` to None so iit isn&#39;t run more than once.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">response_callback</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">response_callback</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">response_callback</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">response_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Property that returns the data from a response.</span>
+
+<span class="sd">        1. If ``response_callback`` is set, that is used to obtain the response,</span>
+<span class="sd">           otherwise the ``response`` attribute is used.</span>
+<span class="sd">           If the ``response_callback`` is called,</span>
+<span class="sd">           it&#39;s result is assigned to the ``.response`` attribute and</span>
+<span class="sd">           the ``response_callback`` attribute is set to None.</span>
+<span class="sd">           This is to prevent the callback from being invoked more than once.</span>
+<span class="sd">        2. If ``response_data_extract`` is set, it is called on the response</span>
+<span class="sd">           from step 1, and it&#39;s return value is the value of this property.</span>
+<span class="sd">           Otherwise the result of step 1 is returned as is.</span>
+<span class="sd">           Note that in this step the ``.response`` attribute is not changed,</span>
+<span class="sd">           the ``response_data_extract`` callback is expected to have no side-effects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_response_callback</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">response_data_extract</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">response_data_extract</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="ResponseList"><a class="viewcode-back" href="../jgt_common.html#jgt_common.ResponseList">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;requests&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ResponseList</span><span class="p">(</span><span class="n">NotEmptyList</span><span class="p">,</span> <span class="n">CommonAttributeList</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A list specialized for testing, w/ResponseInfo object items.</span>
+
+<span class="sd">    To best understand this class, it is important to have</span>
+<span class="sd">    a strong understanding of :py:class:`CommonAttributeList` and</span>
+<span class="sd">    :py:class:`ResponseInfo`.</span>
+<span class="sd">    The common workflow for ``ResponseList`` relies greatly on those other connected</span>
+<span class="sd">    pieces.</span>
+
+<span class="sd">    For example, you might utilize this class in a ways such as this::</span>
+
+<span class="sd">        &gt;&gt;&gt; responses = ResponseList()</span>
+<span class="sd">        &gt;&gt;&gt; responses.build_and_set(response=client.get_thing())</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # All the `.response` fields, see `CommonAttributeList`</span>
+<span class="sd">        &gt;&gt;&gt; for response in responses.response:</span>
+<span class="sd">        ...     assert response.json()[&quot;thing&quot;]</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; responses.set(</span>
+<span class="sd">        ...     ResponseInfo(response=client.get_thing(param),</span>
+<span class="sd">                             description=f&quot;Getting {param}...&quot;)</span>
+<span class="sd">        ...     for param in my_params</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ResponseList.set"><a class="viewcode-back" href="../jgt_common.html#jgt_common.ResponseList.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resp</span><span class="p">):</span>  <span class="c1"># noqa: A003</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clear and set the contents of this list to single object / iterator of objects.</span>
+
+<span class="sd">        Generators will be converted into a list to allow access more than once.</span>
+
+<span class="sd">        This method can be handy/useful when transforming this list&#39;s contents</span>
+<span class="sd">        from one form to another, such as:</span>
+
+<span class="sd">        &gt;&gt;&gt; x = CommonAttributeList()</span>
+<span class="sd">        &gt;&gt;&gt; ...</span>
+<span class="sd">        &gt;&gt;&gt; x.set(transform(thing, doo_dad) for thing in x)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">list_from</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">single_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Property - Assert this list has one item, and return that item.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">only_item_of</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ResponseList.build_and_set"><a class="viewcode-back" href="../jgt_common.html#jgt_common.ResponseList.build_and_set">[docs]</a>    <span class="k">def</span> <span class="nf">build_and_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create object and then set it on the list.</span>
+
+<span class="sd">        Create ResponseInfo object with args &amp; kwargs, then ``.set`` it on this</span>
+<span class="sd">        ResponseList.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ResponseInfo</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ResponseList.run_response_callbacks"><a class="viewcode-back" href="../jgt_common.html#jgt_common.ResponseList.run_response_callbacks">[docs]</a>    <span class="k">def</span> <span class="nf">run_response_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Call ``run_response_callback`` on each item of this ReponseList.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">resp_info</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="n">resp_info</span><span class="o">.</span><span class="n">run_response_callback</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="Flag"><a class="viewcode-back" href="../jgt_common.html#jgt_common.Flag">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Flag</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A settable, nameable Boolean flag.</span>
+
+<span class="sd">    Instances can be used in a boolean context (if/while/etc.)</span>
+
+<span class="sd">    Call the instance to set a new value, returning the previous value.</span>
+
+<span class="sd">    ``.value`` to access the value.</span>
+<span class="sd">    ``.name`` to access the name.</span>
+
+<span class="sd">    Motivation:</span>
+<span class="sd">    Importing a boolean value from another module makes a new binding;</span>
+<span class="sd">    changing the imported binding does not change the imported-from-modules value.</span>
+<span class="sd">    Additionally, this gives you a nice named value for str() and repr(),</span>
+<span class="sd">    and a clean way to handle assigning new values and toggling existing values.</span>
+
+<span class="sd">    Typical use might be::</span>
+
+<span class="sd">        limit_thing = Flag(initial_value=False, name=&quot;Limit size of thing&quot;)</span>
+
+<span class="sd">    In the Command line processing code::</span>
+
+<span class="sd">        limit_thing(args.limit_thing)</span>
+
+<span class="sd">    Off in some module::</span>
+
+<span class="sd">        def do_thing():</span>
+<span class="sd">            ...</span>
+<span class="sd">            loop_size = LIMITED_SIZE if limit_thing else MAX_SIZE</span>
+<span class="sd">            ...</span>
+
+<span class="sd">    Use an instance of this class where you want semantic control over code</span>
+<span class="sd">    without having to expose implementation details of that code</span>
+<span class="sd">    to the control point;</span>
+<span class="sd">    keeping the determination of, say, &quot;running smoke tests,&quot;</span>
+<span class="sd">    or &quot;running in a deployment pipeline,&quot; or &quot;running in a PR checker,&quot;</span>
+<span class="sd">    separate from how the code will react to that condition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_value</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Flag&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">initial_value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>  <span class="c1"># noqa: D102</span>
+        <span class="n">old_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">new_value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">old_value</span>
+
+<div class="viewcode-block" id="Flag.toggle"><a class="viewcode-back" href="../jgt_common.html#jgt_common.Flag.toggle">[docs]</a>    <span class="k">def</span> <span class="nf">toggle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Flip to the opposite value, return the old value.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa: D105</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">-&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa: D105</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;(initial_value=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">, name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">!r}</span><span class="s2">)&gt;&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Instances are useable in boolean contexts.</span>
+
+<span class="sd">        See https://docs.python.org/3/reference/datamodel.html#object.__bool__</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="first_line_of_doc_string"><a class="viewcode-back" href="../jgt_common.html#jgt_common.first_line_of_doc_string">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;doc&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">first_line_of_doc_string</span><span class="p">(</span><span class="n">thing</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the first non-empty line of the doc string for thing, if there is one.</span>
+
+<span class="sd">    If thing is a class and has no doc string,</span>
+<span class="sd">    return the first line of the __init__ method doc string if there is one.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">doc_string</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">thing</span><span class="p">,</span> <span class="s2">&quot;__doc__&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">doc_string</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">__init__method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">thing</span><span class="p">,</span> <span class="s2">&quot;__init__&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">__init__method</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">first_line_of_doc_string</span><span class="p">(</span><span class="n">__init__method</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">doc_string_lines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc_string</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">doc_string_lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="build_classification_rst_string"><a class="viewcode-back" href="../jgt_common.html#jgt_common.build_classification_rst_string">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;doc&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">build_classification_rst_string</span><span class="p">(</span><span class="n">from_dict</span><span class="p">,</span> <span class="n">for_module</span><span class="p">,</span> <span class="n">category_name_mappings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create rST for all the items in from_dict that are part of for_module.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        __doc__ += build_classification_rst_string(globals(), __name__, &lt;category</span>
+<span class="sd">                   mappings dict&gt;)</span>
+
+<span class="sd">        The ``for_module`` parameter is needed because often ``globals()``</span>
+<span class="sd">        contains symbols imported from other modules not be documented here.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        from_dict (dict): A dictionary of name to function/class mappings,</span>
+<span class="sd">            such as from locals() or globals()</span>
+<span class="sd">        for_module (str): The module for which rST documentation is desired.</span>
+<span class="sd">        category_name_mappings (str): Map from the short hand names used in the</span>
+<span class="sd">            :py:func:`classify` decorator to the desired category table label.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: multiline rST string.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">classification_mapping</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">from_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;__module__&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">!=</span> <span class="n">for_module</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">classify_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">_CLASSIFICATION_ATTRIBUTE</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">classify_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c1"># The built-in csv module doesn&#39;t expose any way to quote CSV data without</span>
+        <span class="c1"># writing it to a file, and certainly not in rST&#39;s csv table format, so we</span>
+        <span class="c1"># protect the CSV here with a simple quote-mark replacement if/until a better</span>
+        <span class="c1"># csv option comes along.</span>
+        <span class="n">csv_line</span> <span class="o">=</span> <span class="s1">&#39;   :py:func:`</span><span class="si">{}</span><span class="s1">`, &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">first_line_of_doc_string</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">DOUBLE_QUOTE</span><span class="p">,</span> <span class="n">SINGLE_QUOTE</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">classify_data</span><span class="p">:</span>
+            <span class="n">classification_mapping</span><span class="p">[</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">csv_line</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">classification_mapping</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;NO classifications were found&gt;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+    <span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">items</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">classification_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;.. csv-table:: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">category_name_mappings</span><span class="p">[</span><span class="n">category</span><span class="p">])</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;   :widths: auto</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">---------</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="percent_diff"><a class="viewcode-back" href="../jgt_common.html#jgt_common.percent_diff">[docs]</a><span class="nd">@classify</span><span class="p">(</span><span class="s2">&quot;misc&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">percent_diff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get percentage difference, out to ``precision`` places.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">nan</span>
+    <span class="c1"># It is debatable whether this is the correct choice for determining</span>
+    <span class="c1"># relative difference. min(), max(), and the mean all have a case to be made for</span>
+    <span class="c1"># them, both with and without abs(). See, e.g.:</span>
+    <span class="c1"># https://en.wikipedia.org/wiki/Relative_change_and_difference#Definitions</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span></div>
+
+
+<span class="c1"># Define this here because it is needed by the other scripts.</span>
+<div class="viewcode-block" id="execute_command_list"><a class="viewcode-back" href="../jgt_common.html#jgt_common.execute_command_list">[docs]</a><span class="k">def</span> <span class="nf">execute_command_list</span><span class="p">(</span><span class="n">commands_to_run</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Execute each command in the list.</span>
+
+<span class="sd">    If any command fails, print a helpful message and exit with that status.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">command</span> <span class="ow">in</span> <span class="n">commands_to_run</span><span class="p">:</span>
+        <span class="n">readable_command</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">readable_command</span><span class="p">)</span>
+            <span class="n">_subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">_subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot; - returned status code &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">readable_command</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">returncode</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">returncode</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot; - No such file/program: &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">readable_command</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+<span class="vm">__doc__</span> <span class="o">+=</span> <span class="n">build_classification_rst_string</span><span class="p">(</span>
+    <span class="nb">globals</span><span class="p">(),</span>
+    <span class="vm">__name__</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;Classes Defined in this Module&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dict&quot;</span><span class="p">:</span> <span class="s2">&quot;Dictionary related functions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;doc&quot;</span><span class="p">:</span> <span class="s2">&quot;Documentation support&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="s2">&quot;Environment related functions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">:</span> <span class="s2">&quot;Exceptions and exception handling&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;exit&quot;</span><span class="p">:</span> <span class="s2">&quot;Exitting the process&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="s2">&quot;File and file contents related functions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;filter&quot;</span><span class="p">:</span> <span class="s2">&quot;Filtering and Transforming functions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;looping&quot;</span><span class="p">:</span> <span class="s2">&quot;Looping / Retry related items&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;meta-data&quot;</span><span class="p">:</span> <span class="s2">&quot;Meta-data related functions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;misc&quot;</span><span class="p">:</span> <span class="s2">&quot;Miscellaneous functions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;random&quot;</span><span class="p">:</span> <span class="s2">&quot;Random data related functions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;requests&quot;</span><span class="p">:</span> <span class="s2">&quot;Classes/functions for working with the ``requests`` library&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;running commands&quot;</span><span class="p">:</span> <span class="s2">&quot;Subprocesses/Commands related functions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sequence&quot;</span><span class="p">:</span> <span class="s2">&quot;Sequences/Lists helper classes and functions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;string&quot;</span><span class="p">:</span> <span class="s2">&quot;String related functions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ticketing system&quot;</span><span class="p">:</span> <span class="s2">&quot;Ticketing System related functions&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Doug Philips, Lewis Franklin, Ryan Casperson, Brad Brown, Shawn Dutton
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/jgt_common/tree/5a1959152a58e1e6e5ff8b78566fe13fc4faf774">5a1959152a58e1e6e5ff8b78566fe13fc4faf774</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

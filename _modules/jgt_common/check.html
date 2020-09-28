@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>jgt_common.check &mdash; jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption 1.1.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../jgt_common.html">jgt_common package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.assert_">jgt_common.assert_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.check">jgt_common.check module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.futures">jgt_common.futures module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.http_helpers">jgt_common.http_helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.tag_to_url">jgt_common.tag_to_url module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.uuid_replacer">jgt_common.uuid_replacer module</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTORS.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../jgt_common.html">jgt_common</a> &raquo;</li>
+        
+      <li>jgt_common.check</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for jgt_common.check</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Convenience functions for doing checks with helpful names and helpful messages.</span>
+
+<span class="sd">All the functions in this module return the empty string(&quot;&quot;) when the check passes</span>
+<span class="sd">and a description of how the check has failed when it fails.</span>
+<span class="sd">This is intentional so that the truthyness of strings and falsyness of empty strings</span>
+<span class="sd">can be exploited for use with ``format_if`` or ``assert`` or ...</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># NOTE TO IMPLEMENTORS:</span>
+<span class="c1"># While this module is stand-alone, it is also intended to work with</span>
+<span class="c1"># sibling module ``assert_``.</span>
+<span class="c1"># As such a number of conventions are expected of the code here:</span>
+<span class="c1"># 1 Keep to the promise made in the doc string above about strings and truthyness.</span>
+<span class="c1"># 2 Use the word &quot;Check&quot; at the start of the doc string so that the ``assert_`` module</span>
+<span class="c1">#   can make a sensible substituion.</span>
+<span class="c1"># 3 Any function defined in this module without a leading underscore honors #1.</span>
+<span class="c1"># 4 Corrollary to #3, any function starting with a leading underscore is internal to</span>
+<span class="c1">#   this module.</span>
+<span class="c1"># 5 If any classes are defined in this module, they will not be processed by ``assert_``</span>
+<span class="c1">#   and may or may not need a hand written version in that module.</span>
+<span class="c1"># 6 If we ever switch to using __all__ for controlling what functions we export,</span>
+<span class="c1">#   the ``assert_`` module  will need to be changed.</span>
+<span class="c1"># 7 There are no direct self-tests for this module because everything here</span>
+<span class="c1">#   is tested via the ``assert_`` module&#39;s tests.</span>
+<span class="c1">#   New functions added here should have new assertion tests in tests/test_asserts.py</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">percent_diff</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">format_if</span> <span class="k">as</span> <span class="n">_format_if</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">isclose</span> <span class="k">as</span> <span class="n">_isclose</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># noqa E501 From: https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python/5595453</span>
+    <span class="k">def</span> <span class="nf">_isclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">rel_tol</span><span class="o">=</span><span class="mf">1e-09</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">max</span><span class="p">(</span><span class="n">rel_tol</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="n">abs_tol</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_msg_concat</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Join with a space if prefix isn&#39;t empty.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span> <span class="k">if</span> <span class="n">prefix</span> <span class="k">else</span> <span class="n">body</span>
+
+
+<div class="viewcode-block" id="not_eq"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.not_eq">[docs]</a><span class="k">def</span> <span class="nf">not_eq</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that the values are not equal.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">expected</span> <span class="o">!=</span> <span class="n">actual</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span>
+        <span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;Expected &#39;</span><span class="si">{}</span><span class="s2">&#39; to be not equal to actual &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="eq"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.eq">[docs]</a><span class="k">def</span> <span class="nf">eq</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that the values are equal.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">actual</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;Expected &#39;</span><span class="si">{}</span><span class="s2">&#39; == actual &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="less"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.less">[docs]</a><span class="k">def</span> <span class="nf">less</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that a &lt; b.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;Expected &#39;</span><span class="si">{}</span><span class="s2">&#39; &lt; &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="less_equal"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.less_equal">[docs]</a><span class="k">def</span> <span class="nf">less_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that a &lt;= b.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;Expected &#39;</span><span class="si">{}</span><span class="s2">&#39; &lt;= &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="greater"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.greater">[docs]</a><span class="k">def</span> <span class="nf">greater</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that a &gt; b.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;Expected &#39;</span><span class="si">{}</span><span class="s2">&#39; &gt; &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="greater_equal"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.greater_equal">[docs]</a><span class="k">def</span> <span class="nf">greater_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that a &gt;= b.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;Expected &#39;</span><span class="si">{}</span><span class="s2">&#39; &gt;= &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="is_in"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.is_in">[docs]</a><span class="k">def</span> <span class="nf">is_in</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that value is in the sequence.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;Expected: &#39;</span><span class="si">{}</span><span class="s2">&#39; to be in &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">sequence</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="any_in"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.any_in">[docs]</a><span class="k">def</span> <span class="nf">any_in</span><span class="p">(</span><span class="n">a_sequence</span><span class="p">,</span> <span class="n">b_sequence</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that at least one member of a_sequence is in b_sequence.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">a</span> <span class="ow">in</span> <span class="n">b_sequence</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">a_sequence</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span>
+        <span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;None of: &#39;</span><span class="si">{}</span><span class="s2">&#39; found in &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a_sequence</span><span class="p">,</span> <span class="n">b_sequence</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="not_in"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.not_in">[docs]</a><span class="k">def</span> <span class="nf">not_in</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that item is not in sequence.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;Did NOT Expect: &#39;</span><span class="si">{}</span><span class="s2">&#39; to be in &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">sequence</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="is_not_none"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.is_not_none">[docs]</a><span class="k">def</span> <span class="nf">is_not_none</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check a is not None.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; should not be None&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="is_not_empty"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.is_not_empty">[docs]</a><span class="k">def</span> <span class="nf">is_not_empty</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cheeck that sequence is not empty.</span>
+
+<span class="sd">    Semantically more descriptive than just testing sequence for truthyness.</span>
+
+<span class="sd">    Sequences and containers in python are False when empty, and True when not empty.</span>
+<span class="sd">    This helper reads better in the test code and in the error message.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">sequence</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; - should not be empty&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sequence</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="is_close"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.is_close">[docs]</a><span class="k">def</span> <span class="nf">is_close</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">isclose_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that math.isclose returns True based on the given values.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">_isclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">**</span><span class="n">isclose_kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span>
+        <span class="n">msg</span><span class="p">,</span>
+        <span class="s2">&quot;Expected &#39;</span><span class="si">{}</span><span class="s2">&#39; to be close to &#39;</span><span class="si">{}</span><span class="s2">&#39;, &quot;</span>
+        <span class="s2">&quot;but they differ by &#39;</span><span class="si">{}</span><span class="s2">&#39;, a difference of &#39;</span><span class="si">{}</span><span class="s2">%&#39;.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">a</span><span class="p">,</span>
+            <span class="n">b</span><span class="p">,</span>
+            <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">),</span>
+            <span class="n">percent_diff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+            <span class="n">_format_if</span><span class="p">(</span><span class="s2">&quot;: kwargs: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">isclose_kwargs</span><span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="almost_equal"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.almost_equal">[docs]</a><span class="k">def</span> <span class="nf">almost_equal</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">places</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that actual and expected are within `places` equal.&quot;&quot;&quot;</span>
+    <span class="c1"># Set relative tolerance to 0 because we don&#39;t want that messing up the places check</span>
+    <span class="n">relative_tolerance</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">absolute_tolerance</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">places</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_isclose</span><span class="p">(</span>
+        <span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">rel_tol</span><span class="o">=</span><span class="n">relative_tolerance</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="n">absolute_tolerance</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span>
+        <span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;Expected &#39;</span><span class="si">{}</span><span class="s2">&#39; to be almost equal to &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="is_singleton_list"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.is_singleton_list">[docs]</a><span class="k">def</span> <span class="nf">is_singleton_list</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">item_description</span><span class="o">=</span><span class="s2">&quot;something&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that the sequence has exactly one item (of item_description).&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span>
+        <span class="n">msg</span><span class="p">,</span>
+        <span class="s2">&quot;Expected to find a one item list of </span><span class="si">{}</span><span class="s2"> but found &#39;</span><span class="si">{}</span><span class="s2">&#39; instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">item_description</span><span class="p">,</span> <span class="n">sequence</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="is_instance"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.check.is_instance">[docs]</a><span class="k">def</span> <span class="nf">is_instance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">of_type</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that value is an instance of of_type.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">of_type</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_msg_concat</span><span class="p">(</span>
+        <span class="n">msg</span><span class="p">,</span>
+        <span class="s2">&quot;Got value &#39;</span><span class="si">{}</span><span class="s2">&#39; of type &#39;</span><span class="si">{}</span><span class="s2">&#39; when expecting something of type </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">value</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">of_type</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Doug Philips, Lewis Franklin, Ryan Casperson, Brad Brown, Shawn Dutton
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/jgt_common/tree/5a1959152a58e1e6e5ff8b78566fe13fc4faf774">5a1959152a58e1e6e5ff8b78566fe13fc4faf774</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>jgt_common.uuid_replacer &mdash; jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption 1.1.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../jgt_common.html">jgt_common package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.assert_">jgt_common.assert_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.check">jgt_common.check module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.futures">jgt_common.futures module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.http_helpers">jgt_common.http_helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.tag_to_url">jgt_common.tag_to_url module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.uuid_replacer">jgt_common.uuid_replacer module</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTORS.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../jgt_common.html">jgt_common</a> &raquo;</li>
+        
+      <li>jgt_common.uuid_replacer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for jgt_common.uuid_replacer</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Replace UUIDs helper.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">UUID_ISOLATED_RE</span>
+
+
+<span class="n">UUID_ISOLATED_MATCHER</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">UUID_ISOLATED_RE</span><span class="p">)</span>
+
+<span class="n">UUID_REPLACEMENT_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;,,UUID-</span><span class="si">{:03d}</span><span class="s2">,,&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Template used to generate shorter version for a UUID.</span>
+
+<span class="sd">Is expected to hold exaclty one numeric parameter substitution.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="UUIDLineReplacer"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.uuid_replacer.UUIDLineReplacer">[docs]</a><span class="k">class</span> <span class="nc">UUIDLineReplacer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Track and Replace UUIDs on a line-by-line basis.</span>
+
+<span class="sd">    Instances should be called with a line to process</span>
+<span class="sd">    and will return the substituted line.</span>
+
+<span class="sd">    When you are all done, if you want, you can call ``uuid_mappings``</span>
+<span class="sd">    to get a list of the substitutions that were made.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a new UUID replacer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            template (str): A ``.format`` template to use for generating</span>
+<span class="sd">                the UUID replacement values. It is expected to have a placeholder</span>
+<span class="sd">                to format one numeric parameter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">count</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uuid_map</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template</span> <span class="o">=</span> <span class="n">template</span> <span class="ow">or</span> <span class="n">UUID_REPLACEMENT_TEMPLATE</span>
+
+    <span class="k">def</span> <span class="nf">_add_uuid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uuid</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">uuid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">uuid_map</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uuid_map</span><span class="p">[</span><span class="n">uuid</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Replace all found UUIDs with markers.&quot;&quot;&quot;</span>
+        <span class="n">uuids_found</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">UUID_ISOLATED_MATCHER</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">uuid</span> <span class="ow">in</span> <span class="n">uuids_found</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_uuid</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">uuid</span> <span class="ow">in</span> <span class="n">uuids_found</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uuid_map</span><span class="p">[</span><span class="n">uuid</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">line</span>
+
+<div class="viewcode-block" id="UUIDLineReplacer.uuid_mappings"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.uuid_replacer.UUIDLineReplacer.uuid_mappings">[docs]</a>    <span class="k">def</span> <span class="nf">uuid_mappings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of lines of all the substitutions done.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s2">&quot;# </span><span class="si">{}</span><span class="s2"> -&gt; </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">replacement</span><span class="p">,</span> <span class="n">uuid</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">replacement</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">uuid_map</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="uuid_replace"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.uuid_replacer.uuid_replace">[docs]</a><span class="k">def</span> <span class="nf">uuid_replace</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">UUID_REPLACEMENT_TEMPLATE</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Replace UUIDs in all the lines in ``src`` and write to ``dest``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        src (file): a file opened for read</span>
+<span class="sd">        dest (file): a file opened for write.</span>
+
+<span class="sd">    After processing the contents of ``src`` into ``dest``, a glossary is then written</span>
+<span class="sd">    to ``dest.``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">replacer</span> <span class="o">=</span> <span class="n">UUIDLineReplacer</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">)</span>
+    <span class="n">dest</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">replacer</span><span class="p">,</span> <span class="n">src</span><span class="p">))</span>
+    <span class="n">dest</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">##########</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">dest</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">replacer</span><span class="o">.</span><span class="n">uuid_mappings</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.uuid_replacer.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Command-line interace for replacing UUIDs with placeholders.&quot;&quot;&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;Utility for replacing UUIDs in files with easier to read placeholders. &quot;</span>
+        <span class="s2">&quot;The output file will have a glossary appended to it that shows &quot;</span>
+        <span class="s2">&quot;each replacement string and the UUID it replaced. &quot;</span>
+        <span class="s2">&quot;The template must have at most one format string replacement field &quot;</span>
+        <span class="s2">&quot;which will be given a single numeric value. &quot;</span>
+        <span class="s2">&quot;The environment variable UUID_TEMPLATE can be used to override the &quot;</span>
+        <span class="s2">&quot;default value, and the `-t`/`-template` parameter can be used to &quot;</span>
+        <span class="s2">&quot;overrride the environment variable.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentDefaultsHelpFormatter</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;?&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">FileType</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdin</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;?&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">FileType</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--template&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-t&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;UUID replacement template&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;UUID_TEMPLATE&quot;</span><span class="p">,</span> <span class="n">UUID_REPLACEMENT_TEMPLATE</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">uuid_replace</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">template</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Doug Philips, Lewis Franklin, Ryan Casperson, Brad Brown, Shawn Dutton
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/jgt_common/tree/5a1959152a58e1e6e5ff8b78566fe13fc4faf774">5a1959152a58e1e6e5ff8b78566fe13fc4faf774</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

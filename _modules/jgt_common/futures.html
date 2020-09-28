@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>jgt_common.futures &mdash; jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption 1.1.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../jgt_common.html">jgt_common package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.assert_">jgt_common.assert_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.check">jgt_common.check module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.futures">jgt_common.futures module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.http_helpers">jgt_common.http_helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.tag_to_url">jgt_common.tag_to_url module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jgt_common.html#module-jgt_common.uuid_replacer">jgt_common.uuid_replacer module</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTORS.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../jgt_common.html">jgt_common</a> &raquo;</li>
+        
+      <li>jgt_common.futures</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for jgt_common.futures</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Helpful functions for using concurrent.futures with a shared thread pool executor.</span>
+
+<span class="sd">Terminology:</span>
+
+<span class="sd">  * fdict - futures dictionary - as in the examples for the concurrent.futures</span>
+<span class="sd">    module documentation, a dictionary whose keys are futures and whose values</span>
+<span class="sd">    are related to the work being done. See each function for details on what</span>
+<span class="sd">    the values will be.</span>
+
+<span class="sd">Purpose:</span>
+
+<span class="sd">   These helpers are meant to be used for &quot;spot&quot; parallelism,</span>
+<span class="sd">   not for whole application parallelism. In places where the code needs to do</span>
+<span class="sd">   a whole bunch of slow things that can be done in parallel (API calls, etc)</span>
+<span class="sd">   and then &quot;goes synchronous again.&quot;  (Testing is one such use case.)</span>
+
+
+<span class="sd">Archicture:</span>
+
+<span class="sd">   One executor thread pool is used by all of these functions.</span>
+<span class="sd">   To support the use of these functions in a &quot;library&quot; kind of way,</span>
+<span class="sd">   configuring the size of the thread pool and shutting it down (if ever used)</span>
+<span class="sd">   are done by calling separate functions. This is so an application can use</span>
+<span class="sd">   configuration data for the set up without having to spread knowledge of that</span>
+<span class="sd">   configuration data to any function(s) that want to use these functions.</span>
+
+<span class="sd">   The executor thread pool defined here is mainly meant for use by the other</span>
+<span class="sd">   functions defined here, but users of this module are free to use it themselves</span>
+<span class="sd">   directly as needed.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span> <span class="k">as</span> <span class="n">_ThreadPoolExecutor</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">as_completed</span>  <span class="c1"># imported for pass-through use.</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">wait</span>  <span class="c1"># noqa - imported for pass-through use.</span>
+
+<span class="n">_THREADPOOL_EXECUTOR</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">_MAX_WORKERS</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="set_thread_pool_size"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.futures.set_thread_pool_size">[docs]</a><span class="k">def</span> <span class="nf">set_thread_pool_size</span><span class="p">(</span><span class="n">max_workers</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set the size for the shared ThreadPoolExecutor.&quot;&quot;&quot;</span>
+
+    <span class="k">global</span> <span class="n">_MAX_WORKERS</span>
+    <span class="n">_MAX_WORKERS</span> <span class="o">=</span> <span class="n">max_workers</span></div>
+
+
+<span class="c1"># Implemenation note:</span>
+<span class="c1"># This function is _not_ memoized:</span>
+<span class="c1"># If no executor is ever created, the shutdown function doesn&#39;t need to do anything.</span>
+<span class="c1"># If the only way to get at the executor was via this function,</span>
+<span class="c1"># then shutdown might create an executor just to shut it down.</span>
+<div class="viewcode-block" id="get_executor"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.futures.get_executor">[docs]</a><span class="k">def</span> <span class="nf">get_executor</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the shared ThreadPoolExecutor.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ThreadPoolExecutor: the shared thread pool executor.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: if ``set_thread_pool_size()`` was not called first.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">global</span> <span class="n">_THREADPOOL_EXECUTOR</span>
+    <span class="k">if</span> <span class="n">_THREADPOOL_EXECUTOR</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">_MAX_WORKERS</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;set_thread_pool_size() has to be called first.&quot;</span><span class="p">)</span>
+        <span class="n">_THREADPOOL_EXECUTOR</span> <span class="o">=</span> <span class="n">_ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">_MAX_WORKERS</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_THREADPOOL_EXECUTOR</span></div>
+
+
+<div class="viewcode-block" id="shutdown_executor"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.futures.shutdown_executor">[docs]</a><span class="k">def</span> <span class="nf">shutdown_executor</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;If a ThreadPoolExecutor was started, shut it down.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">_THREADPOOL_EXECUTOR</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">_THREADPOOL_EXECUTOR</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="run_each"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.futures.run_each">[docs]</a><span class="k">def</span> <span class="nf">run_each</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Call ``func`` on each item in ``iterable``, using a future.</span>
+
+<span class="sd">    The returned fdict&#39;s futures (keys of the fdict) may or may not be completed</span>
+<span class="sd">    by the time this function returns. It is up to the caller to decide how to harvest</span>
+<span class="sd">    the results from the futures.</span>
+
+<span class="sd">    Can be used directly, but is mostly used under the covers</span>
+<span class="sd">    by the other functions in this module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        iterable (any): Any iterable.</span>
+<span class="sd">        func (callable): will be called with one item from iterable.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        fdict: Mapping from a future to the item from iterable used to make it.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">executor</span> <span class="o">=</span> <span class="n">get_executor</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="set_response_when_completed"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.futures.set_response_when_completed">[docs]</a><span class="k">def</span> <span class="nf">set_response_when_completed</span><span class="p">(</span><span class="n">fdict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set ``.response`` on each value from ``fdict`` to its future&#39;s result.&quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">as_completed</span><span class="p">(</span><span class="n">fdict</span><span class="p">):</span>
+        <span class="n">fdict</span><span class="p">[</span><span class="n">future</span><span class="p">]</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="set_response_on_each"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.futures.set_response_on_each">[docs]</a><span class="k">def</span> <span class="nf">set_response_on_each</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Shorthand for ``set_response_when_completed(run_each(iterable, func))``.</span>
+
+<span class="sd">    This is primarily for those using jgt_common&#39;s ``ResponseList`` and</span>
+<span class="sd">    ``ResponseInfo`` objects.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        Instead of writing::</span>
+
+<span class="sd">            for item in work_list:</span>
+<span class="sd">                item.response = client.do_work(item.input)</span>
+
+<span class="sd">        Parallelize that work::</span>
+
+<span class="sd">            set_response_on_each(work_list, lambda item: client.do_work(item.input))</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">set_response_when_completed</span><span class="p">(</span><span class="n">run_each</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">func</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="set_when_completed"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.futures.set_when_completed">[docs]</a><span class="k">def</span> <span class="nf">set_when_completed</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">fdict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set the given ``field`` on each value from ``fdict`` to its future&#39;s result.&quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">as_completed</span><span class="p">(</span><span class="n">fdict</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">fdict</span><span class="p">[</span><span class="n">future</span><span class="p">],</span> <span class="n">field</span><span class="p">,</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="set_each"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.futures.set_each">[docs]</a><span class="k">def</span> <span class="nf">set_each</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set ``field`` on each item from ``iterable`` to the value of ``func(item)``.</span>
+
+<span class="sd">    Shorthand for ``set_when_completed(field, run_each(iterable, func))``.</span>
+
+<span class="sd">    A more general form of ``set_response_on_each``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">set_when_completed</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">run_each</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">func</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="as_completed_result"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.futures.as_completed_result">[docs]</a><span class="k">def</span> <span class="nf">as_completed_result</span><span class="p">(</span><span class="n">futures</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Yield each futures ``.result()`` as each future in ``futures`` completes.</span>
+
+<span class="sd">    Because iterating over a dictionary iterates over it&#39;s keys,</span>
+<span class="sd">    ``futures`` can be an fdict, or a list of futures, ... any other</span>
+<span class="sd">    iterable of futures.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">as_completed</span><span class="p">(</span><span class="n">futures</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="result_from_each"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.futures.result_from_each">[docs]</a><span class="k">def</span> <span class="nf">result_from_each</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Shorthand for ``as_completed_result(run_each(iterable, func))``.</span>
+
+<span class="sd">    When you want all the results from calling ``func`` on the items from ``iterable``,</span>
+<span class="sd">    but you don&#39;t need to know which result came from which item or in which order.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">yield from</span> <span class="n">as_completed_result</span><span class="p">(</span><span class="n">run_each</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">func</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="as_completed_item_result"><a class="viewcode-back" href="../../jgt_common.html#jgt_common.futures.as_completed_item_result">[docs]</a><span class="k">def</span> <span class="nf">as_completed_item_result</span><span class="p">(</span><span class="n">fdict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Yield ``(item, future.result())`` from ``fdict``, as each future completes.</span>
+
+<span class="sd">    The order of values in the tuples allow this function</span>
+<span class="sd">    to be used to create a dict mapping from an item to its result::</span>
+
+<span class="sd">        futures = run_each(iterable, func)</span>
+<span class="sd">        results_map = dict(as_completed_item_result(futures))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">as_completed</span><span class="p">(</span><span class="n">fdict</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">fdict</span><span class="p">[</span><span class="n">future</span><span class="p">],</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Doug Philips, Lewis Franklin, Ryan Casperson, Brad Brown, Shawn Dutton
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/jgt_common/tree/5a1959152a58e1e6e5ff8b78566fe13fc4faf774">5a1959152a58e1e6e5ff8b78566fe13fc4faf774</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<map id="inheritanceebd2bbfcd3" name="inheritanceebd2bbfcd3">
+<area shape="rect" id="node1" href="#jgt_common.CommonAttributeList" target="_top" title="A list for similar objects that can be operated on as a group." alt="" coords="37,153,195,179"/>
+<area shape="rect" id="node6" href="#jgt_common.ResponseList" target="_top" title="A list specialized for testing, w/ResponseInfo object items." alt="" coords="275,179,380,204"/>
+<area shape="rect" id="node2" href="#jgt_common.Flag" target="_top" title="A settable, nameable Boolean flag." alt="" coords="80,104,152,129"/>
+<area shape="rect" id="node3" href="#jgt_common.IncompleteAtTimeoutException" target="_top" title="Exception for check_until results that timeout still pending validation." alt="" coords="5,55,227,80"/>
+<area shape="rect" id="node4" href="#jgt_common.NotEmptyList" target="_top" title="A list that fails to iterate if it is empty." alt="" coords="62,203,170,228"/>
+<area shape="rect" id="node5" href="#jgt_common.ResponseInfo" target="_top" title="Keep track of needed info about test operation responses (or any info really)." alt="" coords="63,5,169,31"/>
+</map>

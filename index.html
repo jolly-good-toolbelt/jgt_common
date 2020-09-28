@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>JGT Common Tools &mdash; jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption 1.1.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="jgt_common package" href="jgt_common.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="jgt_common.html">jgt_common package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#module-jgt_common.assert_">jgt_common.assert_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#module-jgt_common.check">jgt_common.check module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#module-jgt_common.futures">jgt_common.futures module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#module-jgt_common.http_helpers">jgt_common.http_helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#module-jgt_common.tag_to_url">jgt_common.tag_to_url module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#module-jgt_common.uuid_replacer">jgt_common.uuid_replacer module</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">jgt_common - A library for helper functions across Jolly Good Toolbelt designed for larger consumption</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>JGT Common Tools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="jgt-common-tools">
+<h1>JGT Common Tools<a class="headerlink" href="#jgt-common-tools" title="Permalink to this headline">¶</a></h1>
+<p>A collection of tools that are shared
+across multiple projects within Jolly Good Toolbelt
+but useful to anyone.</p>
+</div>
+<div class="section" id="beyond-the-quick-start">
+<h1>Beyond The Quick Start<a class="headerlink" href="#beyond-the-quick-start" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="jgt-common-how-to-use-it-module-documentation">
+<span id="api-documentation"></span><h2>jgt_common - How To Use It - Module Documentation<a class="headerlink" href="#jgt-common-how-to-use-it-module-documentation" title="Permalink to this headline">¶</a></h2>
+<p>For users of this package, the nitty gritty coding and configuration details.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="jgt_common.html">jgt_common package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#module-jgt_common.assert_">jgt_common.assert_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#module-jgt_common.check">jgt_common.check module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#module-jgt_common.futures">jgt_common.futures module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#module-jgt_common.http_helpers">jgt_common.http_helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#module-jgt_common.tag_to_url">jgt_common.tag_to_url module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jgt_common.html#module-jgt_common.uuid_replacer">jgt_common.uuid_replacer module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="command-line-utility-documentation">
+<span id="cli-docs"></span><h1>Command-Line/Utility Documentation<a class="headerlink" href="#command-line-utility-documentation" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">jgt_common</span></code> supplies command-line utilities:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">uuid-replacer</span></code>: Take a given file and replace all found UUIDs
+with easy-to-read placeholders and a glossary.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See the <code class="docutils literal notranslate"><span class="pre">--help</span></code> flag for full command arguments.</p>
+</div>
+</div>
+<div class="section" id="maintainer-s-documentation">
+<h1>Maintainer’s Documentation<a class="headerlink" href="#maintainer-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="jgt_common.html" class="btn btn-neutral float-right" title="jgt_common package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Doug Philips, Lewis Franklin, Ryan Casperson, Brad Brown, Shawn Dutton
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/jgt_common/tree/5a1959152a58e1e6e5ff8b78566fe13fc4faf774">5a1959152a58e1e6e5ff8b78566fe13fc4faf774</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
